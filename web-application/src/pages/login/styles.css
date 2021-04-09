@@ -7,12 +7,13 @@
 .container-login {
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .form-login {
-    padding: 90px 85px;
+    padding: 85px;
     max-width: 550px;
-    height: 640px;
+    height: 700px;
 
     flex-direction: column;
     justify-content: center;
@@ -43,6 +44,7 @@
 
 .form-login button {
     width: 100%;
+    min-height: 58px;
     height: 51px;
     color: #FAFAFC;
     border: none;
@@ -58,4 +60,16 @@
 
 .form-login button:hover {
     filter: brightness(1.2);
+}
+
+.container-singup {
+    margin-top: 40px;
+}
+
+.container-singup a {
+    width: auto;
+    height: fit-content;
+    text-align: left;
+    padding: 0 0 0 5px;
+    margin-bottom: 0px;
 }
