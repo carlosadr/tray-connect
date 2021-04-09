@@ -13,4 +13,9 @@ Desenvolver protótipo do projeto.
 Desenvolver Kanban em base do Protótipo.
 	- [ ]
 Desenvolver aplicação Web
+		- [x]
+	~~Estrutura de pastas.~~
 		- [ ]
+	Criação das branch.
+	
+#### O restante dos TO DO encontra-se dentro de [**Kanban**](https://github.com/carlosadr/tray-connect/projects/1).
