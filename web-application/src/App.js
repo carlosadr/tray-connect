@@ -1,6 +1,9 @@
+import React from 'react';
+import Routes from './services/routes';
+
 function App() {
   return (
-    <div/>
+    <Routes/>
   );
 }
 
