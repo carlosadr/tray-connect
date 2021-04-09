@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Tray Connect",
+  "name": "Seu sistema de gerenciamento.",
   "icons": [
     {
       "src": "favicon.ico",
