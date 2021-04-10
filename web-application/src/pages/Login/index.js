@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import logomarca from '../../assets/images/logo-marca.png';
 import separator from '../../assets/images/separator.png';
+
+import { Button, Inputs, TextButton } from '../../components'
 
 import './styles.css';
 
@@ -16,37 +17,41 @@ export default function Login () {
 
     return (
         <div className="container-body">
-            <div className="container-login">
+            <section className="container-login">
                 <form className="form-login" onSubmit={ handleLogin } >
                     <img src={logomarca} alt=""/>
                     
-                    <label>Endereço de e-mail</label>
-                    <input 
-                        type="email" 
+                    <Inputs
+                        label="Endereço de e-mail"
+                        type="email"
                         value={ user }
-                        placeholder="ex: email@exemplo.com.br" 
-                        onChange={ e => setUser(e.target.value) }
+                        placeholder="ex: email@exemplo.com.br"
+                        onChange={ e => setUser( e.target.value ) }
                     />
 
-                    <label>Senha</label>
-                    <input 
+                    <Inputs
+                        label="Senha"
                         type="password"
                         value={ password }
                         placeholder="Insira sua senha."
-                        onChange={ e => setPassword(e.target.value) }
+                        onChange={ e => setPassword( e.target.value ) }
                     />
-                    <Link to="/register" >Esqueu sua senha?</Link>
+
+                    <TextButton 
+                        to="/reset-password" 
+                        text="Esqueci minha senha." 
+                    />
 
                     <img style={{ width : "40%", height : "auto", marginBottom : "40px" }} src={separator} alt=""/>
 
-                    <button type="submit" >Entrar</button>
+                    <Button type="submit" >Entrar</Button>
 
                     <div className="container-singup">
-                        Se você ainda não é cadastrado, <Link to="/register">clique aqui</Link>.
+                        Se você ainda não é cadastrado, <TextButton to="/register" text="clique aqui"/>.
                     </div>
                 </form>
                 
-            </div>
+            </section>
             <div/>
         </div>
     )
