@@ -1,0 +1,9 @@
+.container-link-button {
+    color: #009DF5;
+    transition: linear 0.2s;
+}
+
+.container-link-button:hover {
+    color: #EB5757;
+    text-decoration: none;
+}
