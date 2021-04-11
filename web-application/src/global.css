@@ -22,6 +22,7 @@ body {
 button, a, input, input::placeholder {
     font: 400 16px Roboto, sans-serif;
     text-decoration: none;
+    box-sizing: border-box;
 }
 
 .container-body {

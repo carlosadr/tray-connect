@@ -11,7 +11,7 @@
 }
 
 .form-login {
-    padding: 85px;
+    padding: 50px;
     max-width: 550px;
     height: 700px;
 
@@ -29,17 +29,13 @@
 .form-login img {
     width: 100%;
     height: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
-.form-login label {
-    margin-top: 40px;
-}
 .form-login a {
     width: 100%;
-    box-sizing: border-box;
     text-align: right;
-    padding: 10px 25px;
-    margin-bottom: 40px;
 }
 
 .container-singup {

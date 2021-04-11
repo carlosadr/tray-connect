@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 
 import logomarca from '../../assets/images/logo-marca.png';
-import separator from '../../assets/images/separator.png';
 
-import { Button, Inputs, TextButton } from '../../components'
+import { Button, Inputs, Separator, TextButton } from '../../components'
 
 import './styles.css';
 
@@ -26,6 +25,7 @@ export default function Login () {
                         type="email"
                         value={ user }
                         placeholder="ex: email@exemplo.com.br"
+                        marginVertical="20px"
                         onChange={ e => setUser( e.target.value ) }
                     />
 
@@ -33,18 +33,24 @@ export default function Login () {
                         label="Senha"
                         type="password"
                         value={ password }
-                        placeholder="Insira sua senha."
+                        placeholder="insira sua senha."
+                        marginVertical="20px"
                         onChange={ e => setPassword( e.target.value ) }
                     />
 
                     <TextButton 
-                        to="/reset-password" 
+                        to="/reset-password"
                         text="Esqueci minha senha." 
                     />
 
-                    <img style={{ width : "40%", height : "auto", marginBottom : "40px" }} src={separator} alt=""/>
+                    <Separator marginVertical={"20px"} />
 
-                    <Button type="submit" >Entrar</Button>
+                    <Button 
+                        type="submit"
+                        marginVertical="20px"
+                    >
+                        Entrar
+                    </Button>
 
                     <div className="container-singup">
                         Se você ainda não é cadastrado, <TextButton to="/singup" text="clique aqui"/>.
