@@ -7,18 +7,30 @@ function Inputs ({
     type,
     value,
     placeholder,
-    onChange
+    onChange,
+    marginVertical,
+    marginHorizontal,
 }) {
     return (
         <>
-            <label className="container-label">{ label }</label>
-            <input 
+            <section
                 className="container-input"
-                type={ type }
-                value={ value }
-                placeholder={ placeholder }
-                onChange={ onChange }
-            />
+                style={{
+                    marginTop : marginVertical,
+                    marginBottom : marginVertical,
+                    marginLeft : marginHorizontal,
+                    marginRight : marginHorizontal,
+                }}
+            >
+                <label className="label">{ label }</label>
+                <input 
+                    className="input"
+                    type={ type }
+                    value={ value }
+                    placeholder={ placeholder }
+                    onChange={ onChange }
+                />
+            </section>
         </>
     )
 }
