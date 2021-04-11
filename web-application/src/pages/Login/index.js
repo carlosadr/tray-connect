@@ -47,7 +47,7 @@ export default function Login () {
                     <Button type="submit" >Entrar</Button>
 
                     <div className="container-singup">
-                        Se você ainda não é cadastrado, <TextButton to="/register" text="clique aqui"/>.
+                        Se você ainda não é cadastrado, <TextButton to="/singup" text="clique aqui"/>.
                     </div>
                 </form>
                 
