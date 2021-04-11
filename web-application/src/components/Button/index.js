@@ -3,14 +3,22 @@ import React from 'react';
 import './styles.css';
 
 function Button ({
-    onClick,
     type,
-    children
+    onClick,
+    children,
+    marginVertical,
+    marginHorizontal,
 }) {
     return (
         <>
             <button 
                 className="container-button"
+                style={{
+                    marginTop : marginVertical,
+                    marginBottom : marginVertical,
+                    marginLeft : marginHorizontal,
+                    marginRight : marginHorizontal,
+                }}
                 type={ type }
                 onClick={ () => onClick }
             >

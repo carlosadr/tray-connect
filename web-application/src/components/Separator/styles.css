@@ -1,0 +1,12 @@
+.container-separator {
+    flex: 1;
+    width: 100%;
+    max-height: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.separator { 
+    max-width : 40%; 
+    height : auto;
+}
