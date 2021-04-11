@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Login from '../pages/Login';
-import Register from '../pages/Register';
+import Singup from '../pages/Singup';
 import Home from '../pages/Home';
 import Development from '../pages/Development';
 import Commercial from '../pages/Commercial';
@@ -15,7 +15,7 @@ export default function Routes () {
         <BrowserRouter>
             <Switch>
                 <Route path="/" exact component={ Login } />
-                <Route path="/singup" component={ Register } />
+                <Route path="/singup" component={ Singup } />
                 <Route path="/home" component={ Home } />
                 <Route path="/development" component={ Development } />
                 <Route path="/commercial" component={ Commercial } />

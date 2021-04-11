@@ -1,0 +1,12 @@
+.container-checkbox {
+    margin: 0 auto;
+    margin-top: 40px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.container-checkbox label {
+    margin: 0 ;
+    margin-left: 16px;
+}
