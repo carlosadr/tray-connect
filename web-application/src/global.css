@@ -25,6 +25,11 @@ button, a, input, input::placeholder {
     box-sizing: border-box;
 }
 
+::selection {
+    color: #FAFAFC;
+    background: #44475A;
+}
+
 .container-body {
     margin: 16px;
 }
