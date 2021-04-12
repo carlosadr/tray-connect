@@ -78,7 +78,10 @@ function MenuGlobal () {
                 </NavLink>
             </div>
             <div className="container-singout" >
-                <Link className="button">
+                <Link
+                    to="/login"
+                    className="button"
+                >
                     <FiLogOut size={18} color={"#44475A"} />
                     <div>
                         Sair

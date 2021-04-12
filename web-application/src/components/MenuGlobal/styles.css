@@ -46,7 +46,7 @@
     color: #44475A;
     min-height: 40px;
     
-    background: none;
+    background: transparent;
     transition: linear 0.2s;
 }
 
@@ -55,14 +55,15 @@
     height: max-content;
     margin-left: 24px ;
     font-size: 14px;
-    transition: linear 0.2s;
+    transition: linear 0.1s;
 }
 
 .button:hover div {
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .button-active {
+    transition: all linear 0.1s;
     background: linear-gradient(262.96deg, #3417E6 0%, #009DF5 94.51%);
     color: #FAFAFC;
 }

@@ -13,7 +13,7 @@
 .form-login {
     padding: 50px;
     max-width: 550px;
-    height: 700px;
+    height: fit-content;
 
     flex-direction: column;
     justify-content: center;

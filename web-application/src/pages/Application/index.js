@@ -13,19 +13,21 @@ import { MenuGlobal } from '../../components';
 import './styles.css';
 
 function Application () {
-    const [ loggedIn, setLoggedIn ] = useState(false)
+    
+    const [ loggedIn, setLoggedIn ] = useState(true)
+
     return (
         <div className="container-body">
             <MenuGlobal />
             <div className="container-pages" >
                 <Switch>
-                <Route exact path="/" render={() => (
-                    loggedIn ? (
-                        <Redirect to="/home"/>
-                    ) : (
-                        <Redirect to="/login"/>
-                    )
-                )}/>
+                    <Route exact path="/" render={() => (
+                        loggedIn ? (
+                            <Redirect to="/home"/>
+                        ) : (
+                            <Redirect to="/login"/>
+                        )
+                    )}/>
                     <Route path="/home" component={ Home } />
                     <Route path="/development" component={ Development } />
                     <Route path="/commercial" component={ Commercial } />
