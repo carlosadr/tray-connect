@@ -12,7 +12,7 @@ function MenuGlobal () {
             <div className="container-buttons">
                 <img src={logo} alt="Tray Connect" className="container-img"/>
                 <NavLink 
-                    to="/#home"
+                    to="/home"
                     className="button"
                     activeClassName="button-active"
                 >

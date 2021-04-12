@@ -3,25 +3,15 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Login from '../pages/Login';
 import Singup from '../pages/Singup';
-import Home from '../pages/Home';
-import Development from '../pages/Development';
-import Commercial from '../pages/Commercial';
-import Storage from '../pages/Storage';
-import Production from '../pages/Production';
-import Financial from '../pages/Financial';
+import Application from '../pages/Application';
 
 export default function Routes () {
     return (
         <BrowserRouter>
             <Switch>
-                <Route path="/" exact component={ Login } />
-                <Route path="/singup" component={ Singup } />
-                <Route path="/home" component={ Home } />
-                <Route path="/development" component={ Development } />
-                <Route path="/commercial" component={ Commercial } />
-                <Route path="/storage" component={ Storage } />
-                <Route path="/production" component={ Production } />
-                <Route path="/financial" component={ Financial } />
+                <Route path="/login" exact component={ Login } />
+                <Route path="/singup" exact component={ Singup } />
+                <Route path="/" component={ Application } />
             </Switch>
         </BrowserRouter>
     )
