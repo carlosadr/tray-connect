@@ -1,0 +1,28 @@
+.container-tab-button {
+    display: flex;
+    flex: 1;
+    padding: 0 20px;
+    height: 100%;
+}
+
+.container-tab-button .tab-button {
+    display: flex;
+    flex: 1;
+    height: 100%;
+    color: #44475A;
+    background: none;
+    border: none;
+
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+    transition: linear 0.2s;
+}
+
+.container-tab-button .tab-button:hover {
+    color: #009DF5 !important;
+    cursor: pointer;
+
+    transition: linear 0.2s;
+}
