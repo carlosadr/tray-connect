@@ -21,7 +21,7 @@ function Footer({ user }) {
                     </div>
                     <div className="container-right">
                         <div className="container-version">
-                            Versão{" - "}{ version.version }
+                            Versão{"  "}{ version.version }
                         </div>
                     </div>
                 </div>

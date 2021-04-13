@@ -10,6 +10,10 @@
     margin-top: 16px;
 }
 
+.container-footer, .container-footer a {
+    font-size: small !important;
+}
+
 .container-footer .container-left {
     max-width: 60%;
     height: fit-content;

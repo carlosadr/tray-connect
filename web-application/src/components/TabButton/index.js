@@ -3,6 +3,7 @@ import React from 'react';
 import './styles.css';
 
 function TabButton({ 
+    id,
     text
 }) {
 
@@ -33,7 +34,7 @@ function TabButton({
     return (
         <>
             <div className="container-tab-button">
-                <button className="tab-button" onClick={ e => openPage( text, e.target ) } >
+                <button id={ id } className="tab-button" onClick={ e => openPage( text, e.target ) } >
                     { text }
                 </button>
             </div>

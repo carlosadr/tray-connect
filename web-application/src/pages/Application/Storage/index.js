@@ -11,6 +11,11 @@ import {
 import './styles.css';
 
 export default function Storage () {
+    setTimeout( 
+        () => document.getElementById('default').click(), //Função
+        30 //Timer
+    )
+
     return (
         <div className="body">
             <Header title="Estoque" notfications={""} />
@@ -19,7 +24,7 @@ export default function Storage () {
                 <TabsContainer 
                 renderButtons={
                     <>
-                        <TabButton text="Todos" />
+                        <TabButton text="Todos" id="default" />
                         <TabButton text="Clientes" />
                         <TabButton text="Fabrica" />
                     </>
