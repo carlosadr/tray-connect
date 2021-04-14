@@ -1,7 +1,10 @@
-.started, .reference, .roll, .type, .width-grid, .metric-unid, .review {
+.container-storage .started, .container-storage .reference,
+.container-storage .roll, .container-storage .type,
+.container-storage .width-grid,.container-storage .metric-unid,
+.container-storage .review {
     max-width: 70px;
 }
 
-.description {
+.container-storage .description {
     flex: 2 !important;
 }

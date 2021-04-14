@@ -7,7 +7,7 @@ import Application from '../pages/Application';
 
 export default function Routes () {
 
-    const loggedIn = false;
+    const loggedIn = true;
 
     return (
         <BrowserRouter>

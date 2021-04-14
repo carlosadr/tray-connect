@@ -17,7 +17,7 @@ export default function Development () {
     )
 
     return (
-        <div className="body">
+        <div className="body container-development">
             <Header title="Desenvolvimento" notfications={""} />
             
             <div className="contant-body">

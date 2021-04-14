@@ -17,7 +17,7 @@ export default function Storage () {
     )
 
     return (
-        <div className="body">
+        <div className="body container-storage">
             <Header title="Estoque" notfications={""} />
             
             <div className="contant-body">
