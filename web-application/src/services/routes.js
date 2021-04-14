@@ -1,17 +1,26 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import Login from '../pages/Login';
 import Singup from '../pages/Singup';
 import Application from '../pages/Application';
 
 export default function Routes () {
+
+    const loggedIn = false;
+
     return (
         <BrowserRouter>
             <Switch>
-                <Route path="/login" exact component={ Login } />
-                <Route path="/singup" exact component={ Singup } />
-                <Route path="/" component={ Application } />
+                { loggedIn ? (
+                    <Route path="/" component={ Application } />
+                ) : (
+                    <>
+                        <Redirect to='/login' />
+                        <Route path="/login" component={ Login } />
+                        <Route path="/singup" component={ Singup } />
+                    </>
+                )}
             </Switch>
         </BrowserRouter>
     )
