@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import firebase from 'firebase'
 
 import { Inputs, Button, Checkbox, Separator } from '../../components';
 
@@ -14,13 +15,20 @@ export default function Singup () {
     const [ checked, setChecked ] = useState(false);
 
     function handleSingup () {
-
+        console.log("executado")
+        
+        firebase.database().ref().child('users').push({
+            email : user,
+            password : password
+        })
+        .then(response => console.log(response))
+        .catch(err => console.log(err))
     }
 
     return (
         <div className="container-body">
             <section className="container-login">
-                <form className="form-login" onSubmit={ handleSingup } >
+                <form className="form-login" >
                     <img src={logomarca} alt=""/>
                     
                     <Inputs
@@ -61,8 +69,8 @@ export default function Singup () {
 
                     <Separator marginVertical="20px" />
 
-                    <Button type="submit" >Cadastrar</Button>
                 </form>
+                <button onClick={ () => handleSingup() } >Cadastrar</button>
             </section>
             <div/>
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Login from '../pages/Login';
 import Singup from '../pages/Singup';
@@ -7,7 +7,7 @@ import Application from '../pages/Application';
 
 export default function Routes () {
 
-    const loggedIn = true;
+    const loggedIn = false;
 
     return (
         <BrowserRouter>
@@ -16,8 +16,7 @@ export default function Routes () {
                     <Route path="/" component={ Application } />
                 ) : (
                     <>
-                        <Redirect to='/login' />
-                        <Route path="/login" component={ Login } />
+                        <Route exact path="/" component={ Login } />
                         <Route path="/singup" component={ Singup } />
                     </>
                 )}
