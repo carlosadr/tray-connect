@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './styles.css';
 
 function Button ({
-    type,
+    to,
     onClick,
     children,
     marginVertical,
@@ -11,7 +12,7 @@ function Button ({
 }) {
     return (
         <>
-            <button 
+            <Link 
                 className="container-button"
                 style={{
                     marginTop : marginVertical,
@@ -19,11 +20,11 @@ function Button ({
                     marginLeft : marginHorizontal,
                     marginRight : marginHorizontal,
                 }}
-                type={ type }
-                onClick={ () => onClick }
+                to={ to }
+                onClick={ onClick }
             >
                 { children }
-            </button>
+            </Link>
         </>
     )
 }

@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom'
+
+import firebase from 'firebase';
+import 'firebase/auth';
 
 import logomarca from '../../assets/images/logo-marca.png';
 
@@ -7,26 +11,33 @@ import { Button, Inputs, Separator, TextButton } from '../../components'
 import './styles.css';
 
 export default function Login () {
-    const [ user, setUser ] = useState("");
+    const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
+    const history = useHistory();
 
     function handleLogin() {
-        alert("Seu email: " + user + "\nSua senha: " + password);
+        firebase.auth().signInWithEmailAndPassword( email, password )
+        .then( response => {
+            console.log( response.user.refreshToken )
+            localStorage.setItem( 'tokenAuth', response.user.refreshToken );
+            history.go('/');
+        })
+        .catch( err => console.log( err ) );
     }
 
     return (
         <div className="container-body">
             <section className="container-login">
-                <form className="form-login" onSubmit={ handleLogin } >
+                <div className="form-login" >
                     <img src={logomarca} alt=""/>
                     
                     <Inputs
                         label="Endereço de e-mail"
                         type="email"
-                        value={ user }
+                        value={ email }
                         placeholder="ex: email@exemplo.com.br"
                         marginVertical="20px"
-                        onChange={ e => setUser( e.target.value ) }
+                        onChange={ e => setEmail( e.target.value ) }
                     />
 
                     <Inputs
@@ -46,8 +57,9 @@ export default function Login () {
                     <Separator marginVertical={"20px"} />
 
                     <Button 
-                        type="submit"
                         marginVertical="20px"
+                        to="/"
+                        onClick={ () => handleLogin() }
                     >
                         Entrar
                     </Button>
@@ -55,7 +67,7 @@ export default function Login () {
                     <div className="container-singup">
                         Se você ainda não é cadastrado, <TextButton to="/singup" text="clique aqui"/>.
                     </div>
-                </form>
+                </div>
                 
             </section>
             <div/>

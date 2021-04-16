@@ -1,43 +1,55 @@
 import React, { useState } from 'react';
 import firebase from 'firebase'
+import 'firebase/auth'
 
 import { Inputs, Button, Checkbox, Separator } from '../../components';
 
 import logomarca from '../../assets/images/logo-marca.png';
 
 import './styles.css';
+import { useHistory } from 'react-router-dom'
 
 export default function Singup () {
 
-    const [ user, setUser ] = useState("");
+    const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ confirmPassword, setConfirmPassword ] = useState("");
     const [ checked, setChecked ] = useState(false);
 
-    function handleSingup () {
-        console.log("executado")
-        
-        firebase.database().ref().child('users').push({
-            email : user,
-            password : password
-        })
-        .then(response => console.log(response))
-        .catch(err => console.log(err))
+    const history = useHistory();
+
+    async function handleSingup () {
+        password === confirmPassword && checked ?
+        await firebase.auth().createUserWithEmailAndPassword( email , password )
+        .then( response => {
+            const uid = response.user.uid
+
+            firebase.database().ref().child(`users/${ uid }`).set({
+                email : email,
+                password : password
+            })
+            alert("Parabens!\nCadastro realizado com sucesso, seja bem-vindo á Tray Connect.")
+
+            history.go("/");
+            
+        }).catch( err => alert( err ))
+        :
+        alert("Verifique suas informações e tente novamente mais tarde.")
     }
 
     return (
         <div className="container-body">
             <section className="container-login">
-                <form className="form-login" >
+                <div className="form-login" >
                     <img src={logomarca} alt=""/>
                     
                     <Inputs
                         label="Endereço de e-mail"
                         type="email"
-                        value={ user }
+                        value={ email }
                         placeholder="ex: email@exemplo.com.br"
                         marginVertical="20px"
-                        onChange={ e => setUser( e.target.value ) }
+                        onChange={ e => setEmail( e.target.value ) }
                     />
 
                     <Inputs
@@ -69,8 +81,13 @@ export default function Singup () {
 
                     <Separator marginVertical="20px" />
 
-                </form>
-                <button onClick={ () => handleSingup() } >Cadastrar</button>
+                    <Button
+                        to="/"
+                        onClick={ () => handleSingup() } 
+                    >
+                        Cadastrar
+                    </Button>
+                </div>
             </section>
             <div/>
         </div>

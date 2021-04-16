@@ -1,12 +1,24 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { FiDollarSign, FiHome, FiLayers, FiLayout, FiLogOut, FiPackage, FiTrello } from 'react-icons/fi'
+import { Link, NavLink, useHistory } from 'react-router-dom';
+import { FiDollarSign, FiHome, FiLayers, FiLayout, FiLogOut, FiPackage, FiTrello } from 'react-icons/fi';
+
+import firebase from 'firebase';
+import 'firebase/auth';
 
 import logo from '../../assets/images/logo.png'
 
 import './styles.css';
 
 function MenuGlobal () {
+    const history = useHistory()
+    
+    function handleSingout() {
+        firebase.auth().signOut().then( () => {
+            localStorage.clear();
+            history.go('/')
+        })
+    }
+
     return (
         <nav className="container-nav">
             <div className="container-buttons">
@@ -79,8 +91,9 @@ function MenuGlobal () {
             </div>
             <div className="container-singout" >
                 <Link
-                    to="/login"
+                    to="/"
                     className="button"
+                    onClick={ () => handleSingout() }
                 >
                     <FiLogOut size={18} color={"#44475A"} />
                     <div>
