@@ -1,18 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import firebase from 'firebase'
+import 'firebase/auth'
 
 import Login from '../pages/Login';
 import Singup from '../pages/Singup';
 import Application from '../pages/Application';
 
 export default function Routes () {
+    const [ loginAuth, setLoginAuth ] = useState( false )
 
-    const loggedIn = localStorage.getItem('tokenAuth');
+    firebase.auth().onAuthStateChanged( user => {
+        if ( user ) {
+            setLoginAuth(true)
+        } else {
+            setLoginAuth(false)
+        }
+    })
 
     return (
         <BrowserRouter>
             <Switch>
-                { loggedIn ? (
+                { loginAuth ? (
                     <Route path="/" component={ Application } />
                 ) : (
                     <>

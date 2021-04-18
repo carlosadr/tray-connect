@@ -16,7 +16,7 @@
     border-radius: 35px;
 }
 
-.body {
+.body, .contant-body {
     flex: 1;
     flex-direction: column;
     width: 100%;
@@ -70,4 +70,8 @@
     box-sizing: border-box;
     align-items: center;
     justify-content: center;
+}
+
+.col-id {
+    display: none;
 }

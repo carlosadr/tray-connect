@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import firebase from 'firebase'
 import 'firebase/auth'
 
@@ -7,7 +8,6 @@ import { Inputs, Button, Checkbox, Separator } from '../../components';
 import logomarca from '../../assets/images/logo-marca.png';
 
 import './styles.css';
-import { useHistory } from 'react-router-dom'
 
 export default function Singup () {
 
@@ -16,26 +16,47 @@ export default function Singup () {
     const [ confirmPassword, setConfirmPassword ] = useState("");
     const [ checked, setChecked ] = useState(false);
 
-    const history = useHistory();
-
     async function handleSingup () {
         password === confirmPassword && checked ?
+
         await firebase.auth().createUserWithEmailAndPassword( email , password )
         .then( response => {
             const uid = response.user.uid
-
-            firebase.database().ref().child(`users/${ uid }`).set({
+            firebase.database().ref().child("superusers").child(uid).set({
                 email : email,
-                password : password
+                name : "Usuário",
+                permissions : { all : true },
+                company : {}
+            }).then(() => {
+                alert("Parabens!\nCadastro realizado com sucesso, seja bem-vindo á Tray Connect.")
             })
-            alert("Parabens!\nCadastro realizado com sucesso, seja bem-vindo á Tray Connect.")
-
-            history.go("/");
-            
         }).catch( err => alert( err ))
         :
         alert("Verifique suas informações e tente novamente mais tarde.")
     }
+
+    //#region 
+    /* 
+        "company_Name" : {
+            "company_data" : {
+                "cpf_cnpj" : 12345678900,
+                "name_cnpj" : "",
+                "contact" : ""
+            },
+            "users" : {
+                "ID" : {
+                    "uid" : "",
+                    "email" : "",
+                    "display_name" : "",
+                    "permissions" : {}
+                }
+            },
+            "storage" : {},
+            "orders" : {},
+            "faturaments" : {}
+        }
+    */
+   //#endregion
 
     return (
         <div className="container-body">

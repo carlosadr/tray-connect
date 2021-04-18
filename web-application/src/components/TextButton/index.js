@@ -6,6 +6,7 @@ import './styles.css';
 function TextButton ({
     to,
     text,
+    onClick,
     marginVertical,
     marginHorizontal,
 }) {
@@ -20,6 +21,7 @@ function TextButton ({
                     marginRight : marginHorizontal,
                 }}
                 to={to}
+                onClick={ onClick }
             >
                 { text }
             </Link>

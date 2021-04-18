@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import version from '../../../package.json';
+
+import firebase from 'firebase'
+import 'firebase/auth'
 
 import { Separator, TextButton } from '../';
 
 import './styles.css';
 
-function Footer({ user }) {
+function Footer() {
+    const uid = firebase.auth().currentUser.uid;
+    const [user, setUser] = useState("")
+
+    async function getUserData() {
+
+        await firebase.database().ref(`superusers/${uid}`)
+        .once('value')
+        .then( snapshot => setUser( 
+            !snapshot.child('name').val() ? "Usuário" : //Default Value
+            snapshot.child('name').val() //Get Value in Data.
+        ))
+        .catch( error => console.error( error ) )
+    }
+
+    useEffect(() =>{
+        getUserData();
+    })
+
     return(
         <>
             <footer className="container-footer">

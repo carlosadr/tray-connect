@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 import firebase from 'firebase';
 import 'firebase/auth';
@@ -13,16 +13,20 @@ import './styles.css';
 export default function Login () {
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
-    const history = useHistory();
 
-    function handleLogin() {
-        firebase.auth().signInWithEmailAndPassword( email, password )
-        .then( response => {
-            console.log( response.user.refreshToken )
-            localStorage.setItem( 'tokenAuth', response.user.refreshToken );
-            history.go('/');
+    async function handleLogin() {
+        firebase.auth().signInWithEmailAndPassword( email, password ).then( () => {
+            return <Redirect to="/" />
+        }).catch ( error => {
+            alert( error )
         })
-        .catch( err => console.log( err ) );
+    }
+
+    async function handleResetPassword() {
+        await firebase.auth().sendPasswordResetEmail( email )
+        .then( () => {
+            alert( "Consulte seu email para alterar sua senha." )
+        })
     }
 
     return (
@@ -50,7 +54,8 @@ export default function Login () {
                     />
 
                     <TextButton 
-                        to="/reset-password"
+                        to="#"
+                        onClick={ () => handleResetPassword() }
                         text="Esqueci minha senha." 
                     />
 

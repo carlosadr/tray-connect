@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import Home from './Home';
 import Development from './Development';
@@ -18,12 +18,7 @@ function Application () {
             <MenuGlobal />
             <div className="container-pages" >
                 <Switch>
-                    <Route exact path="/" render={ () =>
-                        (
-                            <Redirect to='/home' />
-                        )
-                    } />
-                    <Route path="/home" component={ Home } />
+                    <Route exact path="/" component={ Home } />
                     <Route path="/development" component={ Development } />
                     <Route path="/commercial" component={ Commercial } />
                     <Route path="/storage" component={ Storage } />

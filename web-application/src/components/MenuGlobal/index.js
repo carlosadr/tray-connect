@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink, useHistory } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { FiDollarSign, FiHome, FiLayers, FiLayout, FiLogOut, FiPackage, FiTrello } from 'react-icons/fi';
 
 import firebase from 'firebase';
@@ -10,13 +10,8 @@ import logo from '../../assets/images/logo.png'
 import './styles.css';
 
 function MenuGlobal () {
-    const history = useHistory()
-    
     function handleSingout() {
-        firebase.auth().signOut().then( () => {
-            localStorage.clear();
-            history.go('/')
-        })
+        firebase.auth().signOut()
     }
 
     return (
@@ -24,7 +19,8 @@ function MenuGlobal () {
             <div className="container-buttons">
                 <img src={logo} alt="Tray Connect" className="container-img"/>
                 <NavLink 
-                    to="/home"
+                    to="/"
+                    exact
                     className="button"
                     activeClassName="button-active"
                 >
