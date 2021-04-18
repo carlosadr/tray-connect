@@ -11,6 +11,7 @@ import './styles.css';
 
 export default function Singup () {
 
+    const [ displayName, setDisplayName ] = useState("");
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ confirmPassword, setConfirmPassword ] = useState("");
@@ -24,45 +25,30 @@ export default function Singup () {
             const uid = response.user.uid
             firebase.database().ref().child("superusers").child(uid).set({
                 email : email,
-                name : "Usuário",
-                permissions : { all : true },
-                company : {}
-            }).then(() => {
-                alert("Parabens!\nCadastro realizado com sucesso, seja bem-vindo á Tray Connect.")
+                displayName : displayName,
+                permissions : { all : true }
+            }).then( () => {
+                localStorage.setItem("uid", uid)
             })
         }).catch( err => alert( err ))
         :
         alert("Verifique suas informações e tente novamente mais tarde.")
     }
 
-    //#region 
-    /* 
-        "company_Name" : {
-            "company_data" : {
-                "cpf_cnpj" : 12345678900,
-                "name_cnpj" : "",
-                "contact" : ""
-            },
-            "users" : {
-                "ID" : {
-                    "uid" : "",
-                    "email" : "",
-                    "display_name" : "",
-                    "permissions" : {}
-                }
-            },
-            "storage" : {},
-            "orders" : {},
-            "faturaments" : {}
-        }
-    */
-   //#endregion
-
     return (
         <div className="container-body">
             <section className="container-login">
                 <div className="form-login" >
                     <img src={logomarca} alt=""/>
+
+                    <Inputs
+                        label="Nome"
+                        type="text"
+                        value={ displayName }
+                        placeholder="ex: Antonio Lucas"
+                        marginVertical="20px"
+                        onChange={ e => setDisplayName( e.target.value ) }
+                    />
                     
                     <Inputs
                         label="Endereço de e-mail"
@@ -103,14 +89,13 @@ export default function Singup () {
                     <Separator marginVertical="20px" />
 
                     <Button
-                        to="/"
+                        to="/create-company"
                         onClick={ () => handleSingup() } 
                     >
                         Cadastrar
                     </Button>
                 </div>
             </section>
-            <div/>
         </div>
     )
 }

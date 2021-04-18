@@ -73,9 +73,7 @@ export default function Login () {
                         Se você ainda não é cadastrado, <TextButton to="/singup" text="clique aqui"/>.
                     </div>
                 </div>
-                
             </section>
-            <div/>
         </div>
     )
 }

@@ -13,13 +13,9 @@ function Footer() {
     const [user, setUser] = useState("")
 
     async function getUserData() {
-
         await firebase.database().ref(`superusers/${uid}`)
         .once('value')
-        .then( snapshot => setUser( 
-            !snapshot.child('name').val() ? "Usuário" : //Default Value
-            snapshot.child('name').val() //Get Value in Data.
-        ))
+        .then( snapshot => setUser( snapshot.child('displayName').val()))
         .catch( error => console.error( error ) )
     }
 
