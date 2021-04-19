@@ -65,21 +65,32 @@ function Rows ( key, value ) {
 }
 
 export default function Storage () {
+
+    // Captura o UID (ou ID) do usuario autenticado com Firebase;
     const uid = firebase.auth().currentUser.uid
+
+    // Constante de referencia para rota mestre;
     const ref = firebase.database().ref(`superusers/${uid}/company`)
+
+    // Captura do localStorage a variavel com nome da empresa do usuario autenticado;
     const companyName = localStorage.getItem("companyName")
     
+    //Iguinora kkkk
     setTimeout( () => document.getElementById('default').click(), 30 )
     
+    // Funçao que chama os valores de dentro do Estoque (storage) da Empresa (companyName)
     ref.child(companyName).child('storage').on('value', snapshot => {
         setTimeout(() => {
             let tableStorage = document.getElementById("storage");
             tableStorage.innerHTML = "";
 
+            // Funçao para montar os objetos na tela;
             snapshot.forEach( item => {
+                // Recupera o ID unico do Firebase do Objeto X
                 let key = item.key;
+                // Recupera o Objeto do ID;
                 let value = item.val()
-                
+                // Monta na tela;
                 tableStorage.insertAdjacentHTML( 'beforeend', Rows( key, value ))
             })
         }, 50) 
@@ -191,8 +202,6 @@ export default function Storage () {
                 </TabsContainer>
                 
             </div>
-
-            <Footer />
         </div>
     )
 }

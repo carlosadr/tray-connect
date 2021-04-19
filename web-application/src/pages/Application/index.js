@@ -8,7 +8,7 @@ import Storage from './Storage';
 import Production from './Production';
 import Financial from './Financial';
 
-import { MenuGlobal } from '../../components';
+import { MenuGlobal, Footer } from '../../components';
 
 import './styles.css';
 
@@ -25,6 +25,8 @@ function Application () {
                     <Route path="/production" component={ Production } />
                     <Route path="/financial" component={ Financial } />
                 </Switch>
+
+                <Footer />
             </div>
         </div>
     )

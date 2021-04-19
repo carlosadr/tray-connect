@@ -94,8 +94,6 @@ export default function Development () {
                 </TabsContainer>
                 
             </div>
-
-            <Footer user={"Fulano Pregador"} />
         </div>
     )
 }
