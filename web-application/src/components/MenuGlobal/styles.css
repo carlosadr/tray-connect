@@ -2,8 +2,8 @@
     display: flex;
     flex: 1;
     flex-direction: column;
+    position: relative;
     height: 100%;
-    max-width: 240px;
     
     box-sizing: border-box;
     padding: 16px;
@@ -19,6 +19,30 @@
     border-radius: 35px;
 }
 
+.button-expander {
+    display: flex;
+    flex: 1;
+    
+    cursor: pointer;
+
+    position: absolute;
+    right: -10px;
+    bottom: 100px;
+
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 15px;
+
+    /* white */
+    background: #FAFAFC;
+    /* shadow-container */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+
+    align-items: center;
+    justify-content: center;
+}
+
 .container-buttons {
     flex: 1;
     flex-direction: column;
@@ -26,7 +50,6 @@
 }
 
 .container-buttons img {
-    width: 40%;
     margin: 0 auto;
     margin-bottom: 20px;
     padding: 8px 0;
