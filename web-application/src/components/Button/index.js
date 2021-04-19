@@ -6,6 +6,7 @@ import './styles.css';
 function Button ({
     to,
     onClick,
+    style,
     children,
     marginVertical,
     marginHorizontal,
@@ -14,12 +15,14 @@ function Button ({
         <>
             <Link 
                 className="container-button"
-                style={{
+                style={[
+                    style,
+                {
                     marginTop : marginVertical,
                     marginBottom : marginVertical,
                     marginLeft : marginHorizontal,
                     marginRight : marginHorizontal,
-                }}
+                }]}
                 to={ to }
                 onClick={ onClick }
             >

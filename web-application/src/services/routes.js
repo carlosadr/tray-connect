@@ -15,8 +15,14 @@ export default function Routes () {
     firebase.auth().onAuthStateChanged( user => {
         user ? firebase.database().ref(`superusers/${firebase.auth().currentUser.uid}`).once("value").then(snapshot => {
             setLoginAuth( snapshot.child("company").exists() )
+            if ( snapshot.child("company").exists() ){
+                snapshot.child('company').forEach( item => {
+                    localStorage.setItem( "companyName", item.key )
+                } )
+            }
         })
-        : setLoginAuth(false)
+        :
+        setLoginAuth(false)
     })
 
     return (
