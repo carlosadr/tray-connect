@@ -20,7 +20,7 @@ Componentes desenvolvidos para serem reutilizados durante todo processo de desen
 >   <Button 
 >       to="/"
 >   >
->       Ir para Link
+>       Texto
 >   </Button>
 >   ```
 ---
