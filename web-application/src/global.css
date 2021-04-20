@@ -19,7 +19,7 @@ body {
     background-size: cover;
 }
 
-button, a, input, input::placeholder {
+button, a, input, input::placeholder, select {
     font: 400 16px Roboto, sans-serif;
     text-decoration: none;
     align-items: center;

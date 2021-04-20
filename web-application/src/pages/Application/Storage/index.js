@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import firebase from 'firebase';
 import 'firebase/auth'
 
-import { FiSearch } from 'react-icons/fi'
-
 import { 
     Header,
-    Footer,
     TabButton,
     TabContant, 
     TabsContainer,
-    Button
+    Button,
+    Search
 } from '../../../components';
 
 import './styles.css';
@@ -65,16 +63,16 @@ function Rows ( key, value ) {
 }
 
 export default function Storage () {
-
     // Captura o UID (ou ID) do usuario autenticado com Firebase;
     const uid = firebase.auth().currentUser.uid
-
     // Constante de referencia para rota mestre;
     const ref = firebase.database().ref(`superusers/${uid}/company`)
-
     // Captura do localStorage a variavel com nome da empresa do usuario autenticado;
     const companyName = localStorage.getItem("companyName")
-    
+
+    const [ pesquisa, setPesquisa ] = useState("");
+    const [ campo, setCampo ] = useState("");
+
     //Iguinora kkkk
     setTimeout( () => document.getElementById('default').click(), 30 )
     
@@ -95,6 +93,25 @@ export default function Storage () {
             })
         }, 50) 
     })
+
+    function handleFilter( ) {
+        ref.child(companyName).child('storage').orderByChild( campo ).equalTo( pesquisa ).on("value", snapshot => {
+            setTimeout(() => {
+                let tableStorage = document.getElementById("storage");
+                tableStorage.innerHTML = "";
+    
+                // Funçao para montar os objetos na tela;
+                snapshot.forEach( item => {
+                    // Recupera o ID unico do Firebase do Objeto X
+                    let key = item.key;
+                    // Recupera o Objeto do ID;
+                    let value = item.val()
+                    // Monta na tela;
+                    tableStorage.insertAdjacentHTML( 'beforeend', Rows( key, value ))
+                })
+            }, 50 )
+        })
+    }
     
     function handleAddRows () {
         ref.child(companyName).child('storage').push({
@@ -119,15 +136,26 @@ export default function Storage () {
             
             <div className="contant-body">
                 <div className="container-search">
-                    <section className="component-search" >
-                        <input className="search-input" type="text" placeholder="Pesquise aqui."/>
-                        <button className="search-button" onClick={ () => {} }>
-                            <FiSearch size={18} color={"#FAFAFC"} />
-                        </button>
-                    </section>
+
+                    <Search 
+                        onChangeSelect={ e => setCampo( e.target.value ) } 
+                        onChangeInput={ e => setPesquisa( e.target.value ) }
+                        onClick={ () => handleFilter() }
+                        renderOptions={(
+                            <>
+                                <option value="num_started" >Numero de Entrada</option>
+                                <option value="client" >Clientes</option>
+                                <option value="ref" >Referência</option>
+                                <option value="type_fabric" >Tipo de Tecido</option>
+                                <option value="color_fabric" >Cor do Tecido</option>
+                            </>
+                        )}
+                    />
+
                     <Button onClick={ () => handleAddRows() }>
                         Adicionar
                     </Button>
+                    
                 </div>
 
                 <TabsContainer 
