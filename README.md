@@ -5,6 +5,7 @@ Projeto em desenvolvimento, para gerenciamento e gestão de empresas do ramo de 
 - ##	Links importantes.
 	- Protótipo no [**Figma**](https://www.figma.com/file/5YoWlIdb0j8BS8pD0OQPgk/Tray-Connect).
 	- [**Kanban**](https://github.com/carlosadr/tray-connect/projects/1).
+	- [**Components**](https://github.com/carlosadr/tray-connect/blob/main/web-application/src/components/COMPONENTS.md)
 
 - ## TO DO.
 	- [x]
