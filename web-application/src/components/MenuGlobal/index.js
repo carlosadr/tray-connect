@@ -10,9 +10,10 @@ import logo from '../../assets/images/logo.png'
 import './styles.css';
 
 function MenuGlobal () {
-    const [visible, setVisible] = useState('none');
+    const [opacity, setOpacity] = useState(0);
+    const [visible, setVisible] = useState('0px');
+    const [margin, setMargin] = useState('0px');
     const [maxWidth, setMaxWidth] = useState('82px');
-    const [widthImag, setWidthImag] = useState('100%');
     const [rotate, setRotate] = useState('rotate(0deg)');
 
     function handleSingout() {
@@ -21,16 +22,25 @@ function MenuGlobal () {
     }
     
     function handleExpander () {
-        visible === 'none' ? setVisible('flex') : setVisible('none');
         maxWidth === '82px' ? setMaxWidth('240px') : setMaxWidth('82px');
-        widthImag === '100%' ? setWidthImag('40%') : setWidthImag('100%');
         rotate === 'rotate(0deg)' ? setRotate('rotate(180deg)') : setRotate('rotate(0deg)');
+        if( opacity=== 0 ){
+            setTimeout( () => {
+                opacity === 0 ? setOpacity(1) : setOpacity(0);
+                visible === '0px' ? setVisible('auto') : setVisible('0px');
+                margin === '24px' ? setMargin('0px') : setMargin('24px');
+            }, 50 )
+        } else {
+            opacity === 0 ? setOpacity(1) : setOpacity(0);
+            visible === '0px' ? setVisible('auto') : setVisible('0px');
+            margin === '24px' ? setMargin('0px') : setMargin('24px');
+        }
     }
 
     return (
-        <nav style={{ maxWidth : maxWidth }} className="container-nav">
+        <nav style={{ maxWidth : maxWidth, transition: 'linear 0.2s' }} className="container-nav">
             <div className="container-buttons">
-                <img style={{ width : widthImag }} src={ logo } alt="Tray Connect" className="container-img"/>
+                <img src={ logo } alt="Tray Connect" className="container-img"/>
                 <NavLink 
                     to="/"
                     exact
@@ -38,7 +48,7 @@ function MenuGlobal () {
                     activeClassName="button-active"
                 >
                     <FiHome size={18} />
-                    <div style={{ display : visible }} >
+                    <div style={{ width : visible, marginLeft : margin, opacity : opacity, transition: 'linear 0.2s' }} >
                         Pagina Inicial
                     </div>
                 </NavLink>
@@ -49,7 +59,7 @@ function MenuGlobal () {
                     activeClassName="button-active"
                 >
                     <FiPackage size={18} />
-                    <div style={{ display : visible }} >
+                    <div style={{ width : visible, marginLeft : margin, opacity : opacity, transition: 'linear 0.2s' }} >
                         Estoque
                     </div>
                 </NavLink>
@@ -60,7 +70,7 @@ function MenuGlobal () {
                     activeClassName="button-active"
                 >
                     <FiLayers size={18} />
-                    <div style={{ display : visible }} >
+                    <div style={{ width : visible, marginLeft : margin, opacity : opacity, transition: 'linear 0.2s' }} >
                         Desenvolvimento
                     </div>
                 </NavLink>
@@ -71,7 +81,7 @@ function MenuGlobal () {
                     activeClassName="button-active"
                 >
                     <FiLayout size={18} />
-                    <div style={{ display : visible }} >
+                    <div style={{ width : visible, marginLeft : margin, opacity : opacity, transition: 'linear 0.2s' }} >
                         Comercial
                     </div>
                 </NavLink>
@@ -82,7 +92,7 @@ function MenuGlobal () {
                     activeClassName="button-active"
                 >
                     <FiTrello size={18} />
-                    <div style={{ display : visible }} >
+                    <div style={{ width : visible, marginLeft : margin, opacity : opacity, transition: 'linear 0.2s' }} >
                         Produção
                     </div>
                 </NavLink>
@@ -93,7 +103,7 @@ function MenuGlobal () {
                     activeClassName="button-active"
                 >
                     <FiDollarSign size={18} />
-                    <div style={{ display : visible }} >
+                    <div style={{ width : visible, marginLeft : margin, opacity : opacity, transition: 'linear 0.2s' }} >
                         Financeiro
                     </div>
                 </NavLink>
@@ -105,12 +115,12 @@ function MenuGlobal () {
                     onClick={ () => handleSingout() }
                 >
                     <FiLogOut size={18} color={"#44475A"} />
-                    <div style={{ display : visible }} >
+                    <div style={{ width : visible, marginLeft : margin, opacity : opacity, transition: 'linear 0.2s' }} >
                         Sair
                     </div>
                 </Link>
             </div>
-            <button style={{ transform : rotate }} className="button-expander" onClick={ () => handleExpander() }>
+            <button style={{ transform : rotate, transition: 'linear 0.2s' }} className="button-expander" onClick={ () => handleExpander() }>
                 <FiChevronRight size={16} color={'#000'} />
             </button>
         </nav>

@@ -53,6 +53,7 @@
     margin: 0 auto;
     margin-bottom: 20px;
     padding: 8px 0;
+    max-height: 25px;
 }
 
 .button {
@@ -76,7 +77,6 @@
 .button div {
     width: max-content;
     height: max-content;
-    margin-left: 24px ;
     font-size: 14px;
     transition: linear 0.1s;
 }
