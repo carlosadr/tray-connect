@@ -8,14 +8,14 @@ Projeto em desenvolvimento, para gerenciamento e gestão de empresas do ramo de 
 
 - ## TO DO.
 	- [ ]
-Desenvolver protótipo do projeto.
-	- [ ]
-Desenvolver Kanban em base do Protótipo.
+Desenvolver protótipo do projeto. ( Em andamento)
+	- [x]
+~~Desenvolver Kanban em base do Protótipo.~~
 	- [ ]
 Desenvolver aplicação Web
 		- [x]
 	~~Estrutura de pastas.~~
-		- [ ]
-	Criação das branch.
+		- [x]
+	~~Criação das branch.~~
 	
 #### O restante dos TO DO encontra-se dentro de [**Kanban**](https://github.com/carlosadr/tray-connect/projects/1).
