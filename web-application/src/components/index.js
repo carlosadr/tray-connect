@@ -6,6 +6,7 @@ import TextButton from './TextButton';
 import Inputs from './Inputs';
 import Checkbox from './Checkbox';
 import Separator from './Separator';
+import Search from './Search';
 
 import TabButton from './TabButton';
 import TabContant from './TabContant';
@@ -13,7 +14,6 @@ import TabsContainer from './TabsContainer';
 
 // TODO
 // import Dropdown from './Dropdown';
-// import Search from './Search';
 
 export {
     MenuGlobal,
@@ -23,9 +23,9 @@ export {
     TextButton,
     Inputs,
     Checkbox,
-    // TODO : Dropdown,
-    // TODO : Search,
     Separator,
+    Search,
+    // TODO : Dropdown,
 
     // Tabs Components
     TabButton,

@@ -1,0 +1,67 @@
+.component-search, 
+.component-search .search-input, 
+.component-search .search-button,
+.component-search .search-select  {
+    display: flex;
+    flex: 1;
+    max-height: 51px;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+}
+
+.component-search {
+    position: relative;
+    min-width: 80%;
+    margin-right: 16px;
+    border-radius: 8px;
+    /* white */
+    background: #FAFAFC;
+    /* shadow-inputs */
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+.component-search .search-select-chevron {
+    position: absolute;
+    left: 186px;
+    z-index: 0;
+}
+
+.component-search .search-select {
+    color: #44475A;
+    max-width: 216px;
+    padding: 0 16px;
+    background: none;
+    z-index: 1;
+    border: none;
+}
+
+.component-search .search-select option:disabled {
+    color: #C5C8D9
+}
+
+.component-search .search-input {
+    padding: 0px 16px;
+    border: none;
+    border-left: solid 1px #C5C8D9;
+
+    /* white */
+    background: none;
+    z-index: 2;
+}
+
+.component-search .search-button {
+    max-width: 51px;
+    cursor: pointer;
+    background-color: #009DF5;
+    border : none;
+    border-radius: 0px 8px 8px 0px;
+    transition: linear 0.2s;
+}
+
+.component-search .search-button:hover {
+    background-color: #3417E6;
+}
