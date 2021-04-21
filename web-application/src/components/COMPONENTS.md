@@ -3,7 +3,7 @@ Componentes desenvolvidos para serem reutilizados durante todo processo de desen
 
 ## Exemplos de aplicação:
 ---
-### Button:
+## Button:
 >   ```javascript
 >   import { Button } from '../components';
 > 
@@ -23,8 +23,8 @@ Componentes desenvolvidos para serem reutilizados durante todo processo de desen
 >       Texto
 >   </Button>
 >   ```
----
-### Checkbox:
+
+## Checkbox:
 >   ```javascript
 >   import { Checkbox } from '../components';
 > 
@@ -37,3 +37,13 @@ Componentes desenvolvidos para serem reutilizados durante todo processo de desen
 >       Texto
 >   </Checkbox>
 >   ```
+
+## Header and Footer
+> ```reactjs
+> import { Header, Footer }
+> <Header title=“Título do Cabeçalho”/>
+> <div>
+>        Corpo do site ou componente
+> </div>
+> <Footer />
+> ```
