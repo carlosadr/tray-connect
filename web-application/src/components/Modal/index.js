@@ -14,7 +14,9 @@ export default function Modal ({
         <>
             <span 
                 className="container-modal"
-                style={{ display: showModal ? 'flex' : 'none' }} 
+                style={{ 
+                    display: showModal ? 'flex' : 'none',
+                }} 
             >
                 <section className="container-title">
                     <h1 className="modal-title">
