@@ -8,6 +8,8 @@ import Checkbox from './Checkbox';
 import Separator from './Separator';
 import Search from './Search';
 
+import Modal from './Modal';
+
 import TabButton from './TabButton';
 import TabContant from './TabContant';
 import TabsContainer from './TabsContainer';
@@ -26,6 +28,9 @@ export {
     Separator,
     Search,
     // TODO : Dropdown,
+
+    // Modal Component
+    Modal,
 
     // Tabs Components
     TabButton,
