@@ -8,7 +8,8 @@ import {
     TabContant, 
     TabsContainer,
     Button,
-    Search
+    Search,
+    Modal
 } from '../../../components';
 
 import './styles.css';
@@ -72,6 +73,7 @@ export default function Storage () {
 
     const [ pesquisa, setPesquisa ] = useState("");
     const [ campo, setCampo ] = useState("");
+    const [ openModal, setOpenModal ] = useState( false )
 
     //Iguinora kkkk
     setTimeout( () => document.getElementById('default').click(), 30 )
@@ -113,21 +115,8 @@ export default function Storage () {
         })
     }
     
-    function handleAddRows () {
-        ref.child(companyName).child('storage').push({
-            num_started : 554,
-            roll : 2,
-            date_started : new Date().getUTCDate(),
-            client : "Dissole",
-            ref : "S5403_V2",
-            description : "-",
-            type_unit : "MT",
-            type_fabric : "Crepe Barbie",
-            color_fabric : "Off White",
-            width_grid : 1.54,
-            quant : 55.5,
-            review : "Não"
-        })
+    function handleOpenAddRows () {
+        openModal ? setOpenModal(false) : setOpenModal( true )
     }
 
     return (
@@ -152,7 +141,7 @@ export default function Storage () {
                         )}
                     />
 
-                    <Button onClick={ () => handleAddRows() }>
+                    <Button onClick={ () => handleOpenAddRows() }>
                         Adicionar
                     </Button>
                     
@@ -229,6 +218,16 @@ export default function Storage () {
                     </TabContant>
                 </TabsContainer>
                 
+
+                <Modal
+                    title="Titulo Modal"
+                    showModal={ openModal }
+                    onClick={ () => handleOpenAddRows() }
+                >
+                    <div>
+                        Olá mundo!
+                    </div>
+                </Modal>
             </div>
         </div>
     )
