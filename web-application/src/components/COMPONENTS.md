@@ -1,11 +1,44 @@
 # Componentes
 Componentes desenvolvidos para serem reutilizados durante todo processo de desenvolvimento da aplicação, no intuito de agilizar e padronizar os elementos.
 
-## Exemplos de aplicação:
----
-## Button:
+## Componente de composiçao de layouts.
+
+> ### Menu Global
 >   ```javascript
->   import { Button } from '../components';
+>   import { MenuGlobal } from '../components';
+>
+>   <MenuGlobal />
+>   ```
+
+> ### Header and Footer
+>   ```javascript
+>   import { Header, Footer } from '../components';
+>
+>   // Header requer um titulo para exibção;
+>   <Header 
+>       title=“Título do Cabeçalho”
+>   />
+>   
+>   <div>
+>       Corpo do site ou componente
+>   </div>
+>
+>   // Traz automaticamen nome do usuário.
+>   <Footer />
+>   ```
+
+> ### Separator
+>   ```javascript
+>   import { Separator } from '../components';
+>
+>   <Separator />
+>   ```
+
+## Componentes Básicos
+
+> ### Buttons:
+>   ```javascript
+>   import { Button, TextButton } from '../components';
 > 
 >   // Exemplo de Botao simples:
 >   <Button 
@@ -22,9 +55,16 @@ Componentes desenvolvidos para serem reutilizados durante todo processo de desen
 >   >
 >       Texto
 >   </Button>
+>
+>   // Exemplo de Botao de Texto:
+>   <TextButton 
+>       to="/"
+>   >
+>       Texto
+>   </Button>
 >   ```
 
-## Checkbox:
+> ### Checkbox:
 >   ```javascript
 >   import { Checkbox } from '../components';
 > 
@@ -38,12 +78,3 @@ Componentes desenvolvidos para serem reutilizados durante todo processo de desen
 >   </Checkbox>
 >   ```
 
-## Header and Footer
-> ```reactjs
-> import { Header, Footer }
-> <Header title=“Título do Cabeçalho”/>
-> <div>
->        Corpo do site ou componente
-> </div>
-> <Footer />
-> ```
