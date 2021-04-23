@@ -97,22 +97,24 @@ export default function Storage () {
     })
 
     function handleFilter( ) {
-        ref.child(companyName).child('storage').orderByChild( campo ).equalTo( pesquisa ).on("value", snapshot => {
-            setTimeout(() => {
-                let tableStorage = document.getElementById("storage");
-                tableStorage.innerHTML = "";
-    
-                // Funçao para montar os objetos na tela;
-                snapshot.forEach( item => {
-                    // Recupera o ID unico do Firebase do Objeto X
-                    let key = item.key;
-                    // Recupera o Objeto do ID;
-                    let value = item.val()
-                    // Monta na tela;
-                    tableStorage.insertAdjacentHTML( 'beforeend', Rows( key, value ))
-                })
-            }, 50 )
-        })
+        if ( pesquisa ) {
+            ref.child(companyName).child('storage').orderByChild( campo ).equalTo( pesquisa ).on("value", snapshot => {
+                setTimeout(() => {
+                    let tableStorage = document.getElementById("storage");
+                    tableStorage.innerHTML = "";
+        
+                    // Funçao para montar os objetos na tela;
+                    snapshot.forEach( item => {
+                        // Recupera o ID unico do Firebase do Objeto X
+                        let key = item.key;
+                        // Recupera o Objeto do ID;
+                        let value = item.val()
+                        // Monta na tela;
+                        tableStorage.insertAdjacentHTML( 'beforeend', Rows( key, value ))
+                    })
+                }, 50 )
+            })
+        }
     }
     
     function handleOpenAddRows () {
@@ -157,49 +159,51 @@ export default function Storage () {
                 }>
                     <TabContant id="Todos">
                         <table className="container-table">
-                            <thead className="header-table">
-                                <td className="col-id">
-                                    ID
-                                </td>
-                                <td className="col started">
-                                    Entrada
-                                </td>
-                                <td className="col roll">
-                                    Rolo
-                                </td>
-                                <td className="col date-started">
-                                    Data de entrada
-                                </td>
-                                <td className="col client">
-                                    Cliente
-                                </td>
-                                <td className="col reference">
-                                    Referencia
-                                </td>
-                                <td className="col description">
-                                    Descrição
-                                </td>
-                                <td className="col type">
-                                    Tipo
-                                </td>
-                                <td className="col type-fabtic">
-                                    Tipo do Tecido
-                                </td>
-                                <td className="col color-fabric">
-                                    Cor do Tecido
-                                </td>
-                                <td className="col width-grid">
-                                    Largura / Grade
-                                </td>
-                                <td className="col metric-unid">
-                                    Quantidade
-                                </td>
-                                <td className="col review">
-                                    Revisão
-                                </td>
-                                <td className="col actions">
-                                    Ações
-                                </td>
+                            <thead>
+                                <tr className="header-table">
+                                    <td className="col-id">
+                                        ID
+                                    </td>
+                                    <td className="col started">
+                                        Entrada
+                                    </td>
+                                    <td className="col roll">
+                                        Rolo
+                                    </td>
+                                    <td className="col date-started">
+                                        Data de entrada
+                                    </td>
+                                    <td className="col client">
+                                        Cliente
+                                    </td>
+                                    <td className="col reference">
+                                        Referencia
+                                    </td>
+                                    <td className="col description">
+                                        Descrição
+                                    </td>
+                                    <td className="col type">
+                                        Tipo
+                                    </td>
+                                    <td className="col type-fabtic">
+                                        Tipo do Tecido
+                                    </td>
+                                    <td className="col color-fabric">
+                                        Cor do Tecido
+                                    </td>
+                                    <td className="col width-grid">
+                                        Largura / Grade
+                                    </td>
+                                    <td className="col metric-unid">
+                                        Quantidade
+                                    </td>
+                                    <td className="col review">
+                                        Revisão
+                                    </td>
+                                    <td className="col actions">
+                                        Ações
+                                    </td>
+                                </tr>
                             </thead>
                             <tbody id="storage" className="container-table-body">
                                 
@@ -225,7 +229,162 @@ export default function Storage () {
                     onClick={ () => handleOpenAddRows() }
                 >
                     <div>
-                        Olá mundo!
+                    <table className="container-table">
+                            <thead>
+                                <tr className="header-table">
+                                    <td className="col-id">
+                                        ID
+                                    </td>
+                                    <td className="col started">
+                                        Entrada
+                                    </td>
+                                    <td className="col roll">
+                                        Rolo
+                                    </td>
+                                    <td className="col date-started">
+                                        Data de entrada
+                                    </td>
+                                    <td className="col client">
+                                        Cliente
+                                    </td>
+                                    <td className="col reference">
+                                        Referencia
+                                    </td>
+                                    <td className="col description">
+                                        Descrição
+                                    </td>
+                                    <td className="col type">
+                                        Tipo
+                                    </td>
+                                    <td className="col type-fabtic">
+                                        Tipo do Tecido
+                                    </td>
+                                    <td className="col color-fabric">
+                                        Cor do Tecido
+                                    </td>
+                                    <td className="col width-grid">
+                                        Largura / Grade
+                                    </td>
+                                    <td className="col metric-unid">
+                                        Quantidade
+                                    </td>
+                                    <td className="col review">
+                                        Revisão
+                                    </td>
+                                    <td className="col actions">
+                                        Ações
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody id="add-storage" className="container-table-body">
+                                <tr class="table-rows" >
+                                    <td className="col-id">
+                                        <input 
+                                            id="" 
+                                            className=""
+                                            type="text" 
+                                        />
+                                    </td>
+                                    <td className="col started">
+                                        <input 
+                                            id="" 
+                                            className=""
+                                            type="text" 
+                                        />
+                                    </td>
+                                    <td className="col roll">
+                                        <input 
+                                            id="" 
+                                            className=""
+                                            type="text" 
+                                        />
+                                    </td>
+                                    <td className="col date-started">
+                                        <input 
+                                            id="" 
+                                            className=""
+                                            type="text" 
+                                        />
+                                    </td>
+                                    <td className="col client">
+                                        <input 
+                                            id="" 
+                                            className=""
+                                            type="text" 
+                                        />
+                                    </td>
+                                    <td className="col reference">
+                                        <input 
+                                            id="" 
+                                            className=""
+                                            type="text" 
+                                        />
+                                    </td>
+                                    <td className="col description">
+                                        <input 
+                                            id="" 
+                                            className=""
+                                            type="text" 
+                                        />
+                                    </td>
+                                    <td className="col type">
+                                        <input 
+                                            id="" 
+                                            className=""
+                                            type="text" 
+                                        />
+                                    </td>
+                                    <td className="col type-fabtic">
+                                        <input 
+                                            id="" 
+                                            className=""
+                                            type="text" 
+                                        />
+                                    </td>
+                                    <td className="col color-fabric">
+                                        <input 
+                                            id="" 
+                                            className=""
+                                            type="text" 
+                                        />
+                                    </td>
+                                    <td className="col width-grid">
+                                        <input 
+                                            id="" 
+                                            className=""
+                                            type="text" 
+                                        />
+                                    </td>
+                                    <td className="col metric-unid">
+                                        <input 
+                                            id="" 
+                                            className=""
+                                            type="text" 
+                                        />
+                                    </td>
+                                    <td className="col review">
+                                        <input 
+                                            id="" 
+                                            className=""
+                                            type="text" 
+                                        />
+                                    </td>
+                                    <td className="col actions">
+                                        <input 
+                                            id="" 
+                                            className=""
+                                            type="text" 
+                                        />
+                                    </td>
+                                </tr>
+
+                                <tr class="table-rows" >
+                                    <button>
+                                        Adicionar nova linha
+                                    </button>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </Modal>
             </div>

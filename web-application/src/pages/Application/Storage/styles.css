@@ -10,7 +10,7 @@
     flex-direction: row;
     margin-bottom: 20px;
     height: fit-content;
-    max-height: fit-content;
+    max-height: 51px;
 }
 
 .container-storage .description {
