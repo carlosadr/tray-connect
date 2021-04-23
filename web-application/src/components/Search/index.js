@@ -5,9 +5,9 @@ import './styles.css';
 export default function Search ({ renderOptions, onChangeSelect, onChangeInput, onClick }) {
     return (
         <section className="component-search" >
-            <select onChange={ onChangeSelect } className="search-select" >
-                <option value="" disabled selected> Selecione tipo de filtro </option>
-                <option value="" disabled > ------------------------------------ </option>
+            <select defaultValue="" onChange={ onChangeSelect } className="search-select" >
+                <option value="" disabled> Selecione tipo de filtro </option>
+                <option value="---" disabled > ------------------------------------ </option>
                 { renderOptions }
             </select>
             <FiChevronDown size={20} color={"#44475A"} className="search-select-chevron" />
