@@ -11,18 +11,22 @@ function Button ({
     marginVertical,
     marginHorizontal,
 }) {
+
+    let styles = Object.assign({},
+        style,
+        {
+            marginTop : marginVertical,
+            marginBottom : marginVertical,
+            marginLeft : marginHorizontal,
+            marginRight : marginHorizontal,
+        }
+    )
+
     return (
         <>
             <Link 
                 className="container-button"
-                style={[
-                    style,
-                {
-                    marginTop : marginVertical,
-                    marginBottom : marginVertical,
-                    marginLeft : marginHorizontal,
-                    marginRight : marginHorizontal,
-                }]}
+                style={ styles }
                 to={ to }
                 onClick={ onClick }
             >
