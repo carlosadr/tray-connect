@@ -14,8 +14,7 @@ import TabButton from './TabButton';
 import TabContant from './TabContant';
 import TabsContainer from './TabsContainer';
 
-// TODO
-// import Dropdown from './Dropdown';
+import Dropdown from './Dropdown';
 
 export {
     MenuGlobal,
@@ -27,7 +26,7 @@ export {
     Checkbox,
     Separator,
     Search,
-    // TODO : Dropdown,
+    Dropdown,
 
     // Modal Component
     Modal,
