@@ -24,7 +24,7 @@ function Inputs ({
             >
                 <label className="label">{ label }</label>
                 <input 
-                    className="input"
+                    className="input innershadow"
                     type={ type }
                     value={ value }
                     placeholder={ placeholder }

@@ -8,11 +8,7 @@ import {
     TabContant, 
     TabsContainer,
     Button,
-    Search,
-    Modal,
-    Inputs,
-    Separator,
-    Dropdown
+    Search
 } from '../../../components';
 
 import './styles.css';
@@ -76,8 +72,7 @@ export default function Storage () {
 
     const [ pesquisa, setPesquisa ] = useState("");
     const [ campo, setCampo ] = useState("");
-    const [ openModal, setOpenModal ] = useState( false )
-
+    
     //Iguinora kkkk
     setTimeout( () => document.getElementById('default').click(), 30 )
     
@@ -119,10 +114,6 @@ export default function Storage () {
             })
         }
     }
-    
-    function handleOpenAddRows () {
-        openModal ? setOpenModal(false) : setOpenModal( true )
-    }
 
     return (
         <div className="body container-storage">
@@ -146,7 +137,7 @@ export default function Storage () {
                         )}
                     />
 
-                    <Button onClick={ () => handleOpenAddRows() }>
+                    <Button to="/storage/add">
                         Adicionar
                     </Button>
                     
@@ -224,159 +215,6 @@ export default function Storage () {
                         </h1>
                     </TabContant>
                 </TabsContainer>
-                
-
-                <Modal
-                    title="Titulo Modal"
-                    showModal={ openModal }
-                    onClick={ () => handleOpenAddRows() }
-                >
-                    <div style={{ flexDirection: "column" }}>
-                        <div>
-                            <Dropdown 
-                                label="Tipo de entrada"
-                                marginHorizontal={ "8px" }
-                                marginVertical={ "8px" }
-                                options={(
-                                    <>
-                                        <option value="service" >Prestação de serviço</option>
-                                        <option value="sell_fabric" >Venda de tecidos</option>
-                                    </>
-                                )}
-                            />
-                            <Inputs 
-                                label="Cliente"
-                                type="text"
-                                value={""}
-                                placeholder="ex: Tray Connect"
-                                marginHorizontal={ "8px" }
-                                marginVertical={ "8px" }
-                            />
-                            <Inputs 
-                                label="OC / Nota Fiscal"
-                                type="text"
-                                value={""}
-                                placeholder="ex: 1450022"
-                                marginHorizontal={ "8px" }
-                                marginVertical={ "8px" }
-                            />
-                        </div>
-                        <div>
-                            <Dropdown 
-                                label="Unidade"
-                                marginHorizontal={ "8px" }
-                                marginVertical={ "8px" }
-                                options={(
-                                    <>
-                                        <option value="mt" >Metros</option>
-                                        <option value="unit" >Peças</option>
-                                    </>
-                                )}
-                            />
-                            <Inputs 
-                                label="Nome do Tecido"
-                                type="text"
-                                value={""}
-                                placeholder="ex: Tactel"
-                                marginHorizontal={ "8px" }
-                                marginVertical={ "8px" }
-                            />
-                            <Inputs 
-                                label="Cor do Tecido"
-                                type="text"
-                                value={""}
-                                placeholder="ex: Branco"
-                                marginHorizontal={ "8px" }
-                                marginVertical={ "8px" }
-                            />
-                        </div>
-                    </div>
-
-                    <Separator marginVertical={ "16px" } />
-
-                    <table className="container-table">
-                        <thead>
-                            <tr className="add-storage header-table">
-                                <td className="col roll">
-                                    Rolo
-                                </td>
-                                <td className="col reference">
-                                    Referencia
-                                </td>
-                                <td className="col description">
-                                    Descrição
-                                </td>
-                                <td className="col width-grid">
-                                    Largura / Grade
-                                </td>
-                                <td className="col metric-unid">
-                                    Quantidade
-                                </td>
-                                <td className="col review">
-                                    Revisado
-                                </td>
-                                <td className="col actions">
-                                    Ações
-                                </td>
-                            </tr>
-                        </thead>
-                        <tbody id="add-storage" className="add-storage container-table-body">
-                            <tr class="table-rows" >
-                                <td className="col roll">
-                                    <input 
-                                        id="" 
-                                        defaultValue={1}
-                                        className="col roll"
-                                        type="number"
-                                        disabled
-                                    />
-                                </td>
-                                <td className="col reference">
-                                    <input 
-                                        id="" 
-                                        className="col reference"
-                                        type="text" 
-                                    />
-                                </td>
-                                <td className="col description">
-                                    <input 
-                                        id="" 
-                                        className="col description"
-                                        type="text" 
-                                    />
-                                </td>
-                                <td className="col width-grid">
-                                    <input 
-                                        id="" 
-                                        className="col width-grid"
-                                        type="number" 
-                                    />
-                                </td>
-                                <td className="col metric-unid">
-                                    <input 
-                                        id="" 
-                                        className="col metric-unid"
-                                        type="number" 
-                                    />
-                                </td>
-                                <td className="col review">
-                                    <input 
-                                        id="" 
-                                        className="col review"
-                                        type="text" 
-                                    />
-                                </td>
-                                <td className="col actions"/>
-                            </tr>
-
-                            <tr class="table-rows" >
-                                <button>
-                                    Adicionar nova linha
-                                </button>
-                            </tr>
-                        </tbody>
-                    </table>
-                </Modal>
             </div>
         </div>
     )

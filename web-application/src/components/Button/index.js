@@ -25,7 +25,7 @@ function Button ({
     return (
         <>
             <Link 
-                className="container-button"
+                className="container-button innershadow linear-gradient"
                 style={ styles }
                 to={ to }
                 onClick={ onClick }

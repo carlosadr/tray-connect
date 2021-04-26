@@ -7,6 +7,7 @@ import Commercial from './Commercial';
 import Storage from './Storage';
 import Production from './Production';
 import Financial from './Financial';
+import StorageAdd from './StorageAdd';
 
 import { MenuGlobal, Footer } from '../../components';
 
@@ -16,12 +17,13 @@ function Application () {
     return (
         <div className="container-body">
             <MenuGlobal />
-            <div className="container-pages" >
+            <div className="container-pages bg-white dropshadow" >
                 <Switch>
                     <Route exact path="/" component={ Home } />
                     <Route path="/development" component={ Development } />
                     <Route path="/commercial" component={ Commercial } />
-                    <Route path="/storage" component={ Storage } />
+                    <Route exact path="/storage" component={ Storage } />
+                    <Route path="/storage/add" component={ StorageAdd } />
                     <Route path="/production" component={ Production } />
                     <Route path="/financial" component={ Financial } />
                 </Switch>

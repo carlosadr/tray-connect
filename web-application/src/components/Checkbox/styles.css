@@ -5,6 +5,12 @@
     align-items: center;
 }
 
+.container-checkbox input {
+    width: fit-content;
+    -webkit-appearance: checkbox !important;
+    box-sizing: border-box;
+}
+
 .container-checkbox label {
     margin: 0 ;
     margin-left: 16px;

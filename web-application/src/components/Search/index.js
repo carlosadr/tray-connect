@@ -4,7 +4,7 @@ import './styles.css';
 
 export default function Search ({ renderOptions, onChangeSelect, onChangeInput, onClick }) {
     return (
-        <section className="component-search" >
+        <section className="component-search bg-white innershadow" >
             <select defaultValue="" onChange={ onChangeSelect } className="search-select" >
                 <option value="" disabled> Selecione tipo de filtro </option>
                 <option value="---" disabled > ------------------------------------ </option>

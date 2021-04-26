@@ -8,13 +8,6 @@
     border-radius: 15px !important;
     margin-left: 16px;
     padding: 16px;
-
-    /* white */
-    background: #FAFAFC;
-
-    /* shadow-container */
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
-    border-radius: 35px;
 }
 
 .body, .contant-body {
@@ -42,7 +35,6 @@
 
 .header-table, .table-rows {
     display: flex;
-    /* flex: 1; */
     width: 100%;
     height: fit-content;
     min-height: 30px;
@@ -62,7 +54,6 @@
 
 .table-rows:hover {
     color: #009DF5;
-    cursor: pointer;
 }
 
 .col {

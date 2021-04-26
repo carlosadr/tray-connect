@@ -13,10 +13,6 @@
     
     /* white */
     background: #FAFAFC;
-
-    /* shadow-container */
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
-    border-radius: 35px;
 }
 
 .button-expander {

@@ -14,7 +14,8 @@ Componentes desenvolvidos para serem reutilizados durante todo processo de desen
 >   ```javascript
 >   import { Header, Footer } from '../components';
 >
->   // Header requer um titulo para exibção;
+>   /*  Header requer um titulo para exibção;
+>       podesse habilitar o goBack para voltar uma rota; */
 >   <Header 
 >       title=“Título do Cabeçalho”
 >   />

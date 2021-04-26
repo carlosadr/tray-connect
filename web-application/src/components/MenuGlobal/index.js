@@ -24,12 +24,12 @@ function MenuGlobal () {
     function handleExpander () {
         maxWidth === '82px' ? setMaxWidth('240px') : setMaxWidth('82px');
         rotate === 'rotate(0deg)' ? setRotate('rotate(180deg)') : setRotate('rotate(0deg)');
-        if( opacity=== 0 ){
+        if( opacity === 0 ){
             setTimeout( () => {
                 opacity === 0 ? setOpacity(1) : setOpacity(0);
                 visible === '0px' ? setVisible('auto') : setVisible('0px');
                 margin === '24px' ? setMargin('0px') : setMargin('24px');
-            }, 50 )
+            }, 400 )
         } else {
             opacity === 0 ? setOpacity(1) : setOpacity(0);
             visible === '0px' ? setVisible('auto') : setVisible('0px');
@@ -38,7 +38,10 @@ function MenuGlobal () {
     }
 
     return (
-        <nav style={{ maxWidth : maxWidth, transition: 'linear 0.2s' }} className="container-nav">
+        <nav 
+            style={{ maxWidth : maxWidth, transition: 'linear 0.6s' }} 
+            className="container-nav dropshadow"
+        >
             <div className="container-buttons">
                 <img src={ logo } alt="Tray Connect" className="container-img"/>
                 <NavLink 
