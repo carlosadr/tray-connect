@@ -1,15 +1,75 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { FiPrinter } from 'react-icons/fi';
 
 import { 
     Header, 
     Dropdown, 
     Inputs, 
-    Separator 
+    Separator, 
+    Button,
+    TextButton
 } from '../../../components'
 
 import './styles.css';
 
 export default function StorageAdd () {
+    const [count, setCount] = useState(1)
+
+    function addRows() {
+        let tableStorage = document.getElementById("add-storage");
+
+        tableStorage.insertAdjacentHTML( 'beforebegin' , 
+            `<tr class="table-rows" >
+                <td class="col roll">
+                    <input 
+                        id=""
+                        value=${count}
+                        class="col roll"
+                        type="number"
+                        disabled
+                    />
+                </td>
+                <td class="col reference">
+                    <input 
+                        id="" 
+                        class="col reference"
+                        type="text" 
+                    />
+                </td>
+                <td class="col description">
+                    <input 
+                        id="" 
+                        class="col description"
+                        type="text" 
+                    />
+                </td>
+                <td class="col width-grid">
+                    <input 
+                        id="" 
+                        class="col width-grid"
+                        type="number" 
+                    />
+                </td>
+                <td class="col metric-unid">
+                    <input 
+                        id="" 
+                        class="col metric-unid"
+                        type="number" 
+                    />
+                </td>
+                <td class="col review">
+                    <input 
+                        id="" 
+                        class="col review"
+                        type="text" 
+                    />
+                </td>
+                <td class="col actions"/>
+            </tr> `
+        )
+        setCount( count + 1 )
+    }
+
     return(
         <>
             <Header
@@ -109,63 +169,34 @@ export default function StorageAdd () {
                             </td>
                         </tr>
                     </thead>
-                    <tbody id="add-storage" className="add-storage container-table-body">
-                        <tr class="table-rows" >
-                            <td className="col roll">
-                                <input 
-                                    id="" 
-                                    defaultValue={1}
-                                    className="col roll"
-                                    type="number"
-                                    disabled
-                                />
-                            </td>
-                            <td className="col reference">
-                                <input 
-                                    id="" 
-                                    className="col reference"
-                                    type="text" 
-                                />
-                            </td>
-                            <td className="col description">
-                                <input 
-                                    id="" 
-                                    className="col description"
-                                    type="text" 
-                                />
-                            </td>
-                            <td className="col width-grid">
-                                <input 
-                                    id="" 
-                                    className="col width-grid"
-                                    type="number" 
-                                />
-                            </td>
-                            <td className="col metric-unid">
-                                <input 
-                                    id="" 
-                                    className="col metric-unid"
-                                    type="number" 
-                                />
-                            </td>
-                            <td className="col review">
-                                <input 
-                                    id="" 
-                                    className="col review"
-                                    type="text" 
-                                />
-                            </td>
-                            <td className="col actions"/>
-                        </tr>
-
-                        <tr class="table-rows" >
-                            <button>
+                    <tbody className="add-storage container-table-body">
+                        <tr id="add-storage" class="table-rows" >
+                            <button onClick={ () => addRows() }>
                                 Adicionar nova linha
                             </button>
                         </tr>
                     </tbody>
                 </table>
 
+                <div style={{ alignItems: 'center', maxHeight: 'fit-content' }}>
+                    <TextButton
+                        marginHorizontal={'8px'}
+                        marginVertical={'16px'}
+                        text={(
+                            <>
+                                <FiPrinter style={{ marginRight: "16px" }} />
+                                Imprimir etiquetas
+                            </>
+                        )}
+                    />
+                    
+                    <Button
+                        marginHorizontal={'8px'}
+                        marginVertical={'16px'}
+                    >
+                        Salvar
+                    </Button>
+                </div>
             </div>
         </>
     )

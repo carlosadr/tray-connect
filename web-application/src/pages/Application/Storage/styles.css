@@ -16,16 +16,3 @@
 .container-storage .description {
     flex: 2 !important;
 }
-
-.add-storage .started, .add-storage .reference,
-.add-storage .roll, .add-storage .type,
-.add-storage .width-grid,.add-storage .metric-unid,
-.add-storage .review {
-    max-width: 170px !important;
-    text-align: center;
-}
-
-.add-storage .description {
-    flex: 2 !important;
-    text-align: center;
-}
