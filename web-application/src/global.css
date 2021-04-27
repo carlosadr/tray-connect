@@ -9,6 +9,10 @@ div, form, body, section, h1, h2, h3, h4, h5 {
     box-sizing: border-box;
 }
 
+a:hover {
+    cursor: pointer !important;
+}
+
 body {
     font: 400 16px Roboto, sans-serif;
     color: #44475A;

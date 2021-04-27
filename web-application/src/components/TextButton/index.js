@@ -6,6 +6,7 @@ import './styles.css';
 function TextButton ({
     to,
     text,
+    center,
     onClick,
     marginVertical,
     marginHorizontal,
@@ -19,11 +20,14 @@ function TextButton ({
                     marginBottom : marginVertical,
                     marginLeft : marginHorizontal,
                     marginRight : marginHorizontal,
+                    margin : center ? 'auto' : '0',
                 }}
                 to={to}
                 onClick={ onClick }
             >
-                { text }
+                <div className="contant">
+                    { text }
+                </div>
             </Link>
         </>
     )

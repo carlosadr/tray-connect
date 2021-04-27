@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import firebase from 'firebase';
-import 'firebase/auth'
+
+import api from '../../../services/api';
 
 import { 
     Header,
@@ -63,21 +63,13 @@ function Rows ( key, value ) {
 }
 
 export default function Storage () {
-    // Captura o UID (ou ID) do usuario autenticado com Firebase;
-    const uid = firebase.auth().currentUser.uid
-    // Constante de referencia para rota mestre;
-    const ref = firebase.database().ref(`superusers/${uid}/company`)
-    // Captura do localStorage a variavel com nome da empresa do usuario autenticado;
-    const companyName = localStorage.getItem("companyName")
-
     const [ pesquisa, setPesquisa ] = useState("");
     const [ campo, setCampo ] = useState("");
     
-    //Iguinora kkkk
-    setTimeout( () => document.getElementById('default').click(), 30 )
+    setTimeout( () => document.getElementById('default').click(), 50 )
     
     // Funçao que chama os valores de dentro do Estoque (storage) da Empresa (companyName)
-    ref.child(companyName).child('storage').on('value', snapshot => {
+    api('storage').on('value', snapshot => {
         setTimeout(() => {
             let tableStorage = document.getElementById("storage");
             tableStorage.innerHTML = "";
@@ -96,7 +88,7 @@ export default function Storage () {
 
     function handleFilter( ) {
         if ( pesquisa ) {
-            ref.child(companyName).child('storage').orderByChild( campo ).equalTo( pesquisa ).on("value", snapshot => {
+            api('storage').orderByChild( campo ).equalTo( pesquisa ).on("value", snapshot => {
                 setTimeout(() => {
                     let tableStorage = document.getElementById("storage");
                     tableStorage.innerHTML = "";

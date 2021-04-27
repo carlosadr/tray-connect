@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FiPrinter } from 'react-icons/fi';
 
+import api from '../../../services/api';
+
 import { 
     Header, 
     Dropdown, 
@@ -13,9 +15,12 @@ import {
 import './styles.css';
 
 export default function StorageAdd () {
-    const [count, setCount] = useState(1)
+    const [ count, setCount ] = useState(1)
 
     function addRows() {
+
+        api('storage')
+
         let tableStorage = document.getElementById("add-storage");
 
         tableStorage.insertAdjacentHTML( 'beforebegin' , 
@@ -23,7 +28,7 @@ export default function StorageAdd () {
                 <td class="col roll">
                     <input 
                         id=""
-                        value=${count}
+                        value=${ count }
                         class="col roll"
                         type="number"
                         disabled
@@ -180,11 +185,12 @@ export default function StorageAdd () {
 
                 <div style={{ alignItems: 'center', maxHeight: 'fit-content' }}>
                     <TextButton
+                        center
                         marginHorizontal={'8px'}
                         marginVertical={'16px'}
                         text={(
                             <>
-                                <FiPrinter style={{ marginRight: "16px" }} />
+                                <FiPrinter size={18} style={{ marginRight: "22px" }} />
                                 Imprimir etiquetas
                             </>
                         )}
