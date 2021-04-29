@@ -18,6 +18,12 @@
     text-align: center;
 }
 
+.add-storage .review select, .add-storage .review select option {
+    width: max-content;
+    box-sizing: content-box;
+    padding : 0 16px;
+}
+
 .add-storage .description {
     flex: 2 !important;
     text-align: center;

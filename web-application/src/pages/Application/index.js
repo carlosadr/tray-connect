@@ -22,8 +22,8 @@ function Application () {
                     <Route exact path="/" component={ Home } />
                     <Route path="/development" component={ Development } />
                     <Route path="/commercial" component={ Commercial } />
-                    <Route exact path="/storage" component={ Storage } />
-                    <Route path="/storage/add" component={ StorageAdd } />
+                    <Route path="/storage" component={ Storage } />
+                    <Route path="/add-storage" component={ StorageAdd } />
                     <Route path="/production" component={ Production } />
                     <Route path="/financial" component={ Financial } />
                 </Switch>

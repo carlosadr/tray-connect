@@ -32,7 +32,7 @@ function Rows ( key, value ) {
                 ${ value.client }
             </td>
             <td class="col reference">
-                ${ value.ref }
+                ${ value.reference }
             </td>
             <td class="col description">
                 ${ value.description }
@@ -50,7 +50,7 @@ function Rows ( key, value ) {
                 ${ value.width_grid }
             </td>
             <td class="col metric-unid">
-                ${ value.quant }
+                ${ value.metric_unid }
             </td>
             <td class="col review">
                 ${ value.review }
@@ -65,30 +65,36 @@ function Rows ( key, value ) {
 export default function Storage () {
     const [ pesquisa, setPesquisa ] = useState("");
     const [ campo, setCampo ] = useState("");
+    const [ loadPage, setLoadPage ] = useState( false );
     
-    setTimeout( () => document.getElementById('default').click(), 50 )
-    
+    setTimeout( () => document.getElementById('default').click(), 100 )
+
     // Funçao que chama os valores de dentro do Estoque (storage) da Empresa (companyName)
-    api('storage').on('value', snapshot => {
+    api('storage').once('value', snapshot => {
         setTimeout(() => {
-            let tableStorage = document.getElementById("storage");
-            tableStorage.innerHTML = "";
+            if( loadPage ) {
+                let tableStorage = document.getElementById("storage");
+                tableStorage.innerHTML = "";
 
-            // Funçao para montar os objetos na tela;
-            snapshot.forEach( item => {
-                // Recupera o ID unico do Firebase do Objeto X
-                let key = item.key;
-                // Recupera o Objeto do ID;
-                let value = item.val()
-                // Monta na tela;
-                tableStorage.insertAdjacentHTML( 'beforeend', Rows( key, value ))
-            })
-        }, 50) 
+                // Funçao para montar os objetos na tela;
+                snapshot.forEach( item => {
+                    // Recupera o ID unico do Firebase do Objeto X
+                    let key = item.key;
+                    // Recupera o Objeto do ID;
+                    let value = item.val()
+
+                    // Monta na tela;
+                    tableStorage.insertAdjacentHTML( 'beforeend', Rows( key, value ))
+                })
+            }
+        }, 50)
+    }).then( () => {
+        setLoadPage( false )
     })
-
+    
     function handleFilter( ) {
         if ( pesquisa ) {
-            api('storage').orderByChild( campo ).equalTo( pesquisa ).on("value", snapshot => {
+            api('storage').orderByChild( campo ).equalTo( pesquisa ).once("value", snapshot => {
                 setTimeout(() => {
                     let tableStorage = document.getElementById("storage");
                     tableStorage.innerHTML = "";
@@ -108,10 +114,11 @@ export default function Storage () {
     }
 
     return (
-        <div className="body container-storage">
+        <div className="body container-storage" onLoad={ () => setLoadPage( true ) } >
+
             <Header title="Estoque" notfications={""} />
             
-            <div className="contant-body">
+            <div className="contant-body" onLoad={ () => setLoadPage( true ) }>
                 <div className="container-search">
 
                     <Search 
@@ -129,7 +136,7 @@ export default function Storage () {
                         )}
                     />
 
-                    <Button to="/storage/add">
+                    <Button to="/add-storage">
                         Adicionar
                     </Button>
                     

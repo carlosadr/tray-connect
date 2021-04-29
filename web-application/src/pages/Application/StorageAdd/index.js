@@ -13,66 +13,103 @@ import {
 } from '../../../components'
 
 import './styles.css';
+import { useHistory } from 'react-router';
 
 export default function StorageAdd () {
     const [ count, setCount ] = useState(1)
+    const [ typeService, setTypeService ] = useState('')
+    const [ client, setClient ] = useState('')
+    const [ note, setNote ] = useState('')
+    const [ typeUnit, setTypeUnit ] = useState('')
+    const [ typeFabric, setTypeFabric ] = useState('')
+    const [ colorFabric, setColorFabric ] = useState('')
+
+    const history = useHistory()
 
     function addRows() {
-
-        api('storage')
-
         let tableStorage = document.getElementById("add-storage");
 
         tableStorage.insertAdjacentHTML( 'beforebegin' , 
-            `<tr class="table-rows" >
+            `<tr id="dataRows" name="dataRows" class="table-rows" >
                 <td class="col roll">
-                    <input 
-                        id=""
+                    <input
                         value=${ count }
+                        name='input-${ count }'
                         class="col roll"
                         type="number"
                         disabled
                     />
                 </td>
                 <td class="col reference">
-                    <input 
-                        id="" 
+                    <input
+                        name='input-${ count }'
                         class="col reference"
-                        type="text" 
+                        type="text"
                     />
                 </td>
                 <td class="col description">
-                    <input 
-                        id="" 
+                    <input
+                        name='input-${ count }'
                         class="col description"
                         type="text" 
                     />
                 </td>
                 <td class="col width-grid">
-                    <input 
-                        id="" 
+                    <input
+                        name='input-${ count }'
                         class="col width-grid"
                         type="number" 
                     />
                 </td>
                 <td class="col metric-unid">
-                    <input 
-                        id="" 
+                    <input
+                        name='input-${ count }'
                         class="col metric-unid"
                         type="number" 
                     />
                 </td>
                 <td class="col review">
-                    <input 
-                        id="" 
+                    <select
+                        name='select'
                         class="col review"
-                        type="text" 
-                    />
+                    >
+                        <option value="não" selected > Não </option>
+                        <option value="sim" > Sim </option>
                 </td>
-                <td class="col actions"/>
+                <td class="col action"/>
             </tr> `
         )
         setCount( count + 1 )
+    }
+    
+    function handleSave () {
+        let row = document.getElementsByName('dataRows');
+        
+        row.forEach( value => {
+            const inputs = value.getElementsByTagName('input')
+            const select = value.getElementsByTagName('select')
+
+            api('storage').push({
+                date_started : new Date().toLocaleString(),
+                type_service : typeService,
+                client : client,
+                note : note,
+                type_unit: typeUnit.toUpperCase(),
+                type_fabric : typeFabric.toUpperCase(),
+                color_fabric : colorFabric.toUpperCase(),
+
+                roll : inputs[0].valueAsNumber,
+                reference : inputs[1].value.toUpperCase(),
+                description : inputs[2].value,
+                width_grid : inputs[3].valueAsNumber,
+                metric_unid : inputs[4].valueAsNumber,
+                review : select[0].value.toUpperCase()
+            })
+        })
+
+        alert("Entrada registrada com sucesso!")
+
+        history.push('/storage');
     }
 
     return(
@@ -91,6 +128,7 @@ export default function StorageAdd () {
                             label="Tipo de entrada"
                             marginHorizontal={ "8px" }
                             marginVertical={ "8px" }
+                            onChange={ event => setTypeService( event.target.value ) }
                             options={(
                                 <>
                                     <option value="service" >Prestação de serviço</option>
@@ -101,7 +139,8 @@ export default function StorageAdd () {
                         <Inputs 
                             label="Cliente"
                             type="text"
-                            value={""}
+                            value={ client }
+                            onChange={ event => setClient( event.target.value ) }
                             placeholder="ex: Tray Connect"
                             marginHorizontal={ "8px" }
                             marginVertical={ "8px" }
@@ -109,7 +148,8 @@ export default function StorageAdd () {
                         <Inputs 
                             label="OC / Nota Fiscal"
                             type="text"
-                            value={""}
+                            value={ note }
+                            onChange={ event => setNote( event.target.value ) }
                             placeholder="ex: 1450022"
                             marginHorizontal={ "8px" }
                             marginVertical={ "8px" }
@@ -120,6 +160,7 @@ export default function StorageAdd () {
                             label="Unidade"
                             marginHorizontal={ "8px" }
                             marginVertical={ "8px" }
+                            onChange={ event => setTypeUnit( event.target.value ) }
                             options={(
                                 <>
                                     <option value="mt" >Metros</option>
@@ -130,7 +171,8 @@ export default function StorageAdd () {
                         <Inputs 
                             label="Nome do Tecido"
                             type="text"
-                            value={""}
+                            value={ typeFabric }
+                            onChange={ event => setTypeFabric( event.target.value ) }
                             placeholder="ex: Tactel"
                             marginHorizontal={ "8px" }
                             marginVertical={ "8px" }
@@ -138,7 +180,8 @@ export default function StorageAdd () {
                         <Inputs 
                             label="Cor do Tecido"
                             type="text"
-                            value={""}
+                            value={ colorFabric }
+                            onChange={ event => setColorFabric( event.target.value ) }
                             placeholder="ex: Branco"
                             marginHorizontal={ "8px" }
                             marginVertical={ "8px" }
@@ -199,6 +242,7 @@ export default function StorageAdd () {
                     <Button
                         marginHorizontal={'8px'}
                         marginVertical={'16px'}
+                        onClick={ () => handleSave() }
                     >
                         Salvar
                     </Button>

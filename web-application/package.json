@@ -1,6 +1,6 @@
 {
   "name": "tray-connect",
-  "version": "0.1.53",
+  "version": "0.1.54",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
