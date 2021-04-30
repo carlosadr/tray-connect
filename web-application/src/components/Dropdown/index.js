@@ -26,8 +26,9 @@ function Dropdown ({
                 <select 
                     className="select innershadow"
                     onChange={ onChange }
+                    defaultValue={ "" }
                 >
-                    <option value="" selected disabled>Selecione uma opção</option>
+                    <option value="" >Selecione uma opção</option>
                     <option value="---" disabled > ------------------------------------ </option>
                     { options }
                 </select>

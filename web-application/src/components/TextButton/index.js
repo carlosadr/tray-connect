@@ -22,7 +22,7 @@ function TextButton ({
                     marginRight : marginHorizontal,
                     margin : center ? 'auto' : '0',
                 }}
-                to={to}
+                to={ to ? to : "" }
                 onClick={ onClick }
             >
                 <div className="contant">

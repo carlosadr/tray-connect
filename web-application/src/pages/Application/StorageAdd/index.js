@@ -220,10 +220,12 @@ export default function StorageAdd () {
                         </tr>
                     </thead>
                     <tbody id='tbody' className="add-storage container-table-body">
-                        <tr id="add-storage" class="table-rows" >
-                            <button onClick={ () => addRows() }>
-                                Adicionar nova linha
-                            </button>
+                        <tr id="add-storage" className="table-rows" >
+                            <td className="table-row-button">
+                                <button onClick={ () => addRows() }>
+                                    Adicionar nova linha
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

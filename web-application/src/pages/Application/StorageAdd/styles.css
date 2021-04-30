@@ -33,3 +33,7 @@
     color: tomato;
     cursor: pointer;
 }
+
+.table-row-button {
+    flex: 1;
+}
