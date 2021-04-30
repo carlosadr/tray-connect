@@ -30,7 +30,7 @@
 
 .container-table-body {
     overflow: auto;
-    max-height: 64vh;
+    max-height: calc( 100vh - 340px );
 }
 
 .header-table, .table-rows {
@@ -50,6 +50,7 @@
 .table-rows {
     font-size: 12px;
     text-align: center;
+    min-height: 40px;
 }
 
 .table-rows:hover {

@@ -80,6 +80,8 @@ export default function StorageAdd () {
             </tr> `
         )
         setCount( count + 1 )
+
+        document.getElementById('tbody').scrollTo( 0 , 10000 )
     }
     
     function handleSave () {
@@ -92,7 +94,7 @@ export default function StorageAdd () {
             api('storage').push({
                 date_started : new Date().toLocaleString(),
                 type_service : typeService,
-                client : client,
+                client : client.toUpperCase(),
                 note : note,
                 type_unit: typeUnit.toUpperCase(),
                 type_fabric : typeFabric.toUpperCase(),
@@ -100,7 +102,7 @@ export default function StorageAdd () {
 
                 roll : inputs[0].valueAsNumber,
                 reference : inputs[1].value.toUpperCase(),
-                description : inputs[2].value,
+                description : inputs[2].value.toUpperCase(),
                 width_grid : inputs[3].valueAsNumber,
                 metric_unid : inputs[4].valueAsNumber,
                 review : select[0].value.toUpperCase()
@@ -132,7 +134,7 @@ export default function StorageAdd () {
                             options={(
                                 <>
                                     <option value="service" >Prestação de serviço</option>
-                                    <option value="sell_fabric" >Venda de tecidos</option>
+                                    <option value="fabric" >Venda de tecidos</option>
                                 </>
                             )}
                         />
@@ -217,7 +219,7 @@ export default function StorageAdd () {
                             </td>
                         </tr>
                     </thead>
-                    <tbody className="add-storage container-table-body">
+                    <tbody id='tbody' className="add-storage container-table-body">
                         <tr id="add-storage" class="table-rows" >
                             <button onClick={ () => addRows() }>
                                 Adicionar nova linha

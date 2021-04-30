@@ -6,8 +6,7 @@
 }
 
 .add-storage {
-    max-height: 49.5vh !important;
-    overflow: auto;
+    max-height: 40vh !important;
 }
 
 .add-storage .started, .add-storage .reference,

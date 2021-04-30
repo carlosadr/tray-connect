@@ -33,8 +33,8 @@ function TabButton({
 
     return (
         <>
-            <div className="container-tab-button">
-                <button id={ id } className="tab-button" onClick={ e => openPage( text, e.target ) } >
+            <div className="container-tab-button" >
+                <button id={ id } className="tab-button" onClick={ ( e ) => openPage( text, e.target ) } >
                     { text }
                 </button>
             </div>

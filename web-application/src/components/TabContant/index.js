@@ -5,7 +5,7 @@ import './styles.css'
 function TabContant({ id, children }) {
     return (
         <>
-            <div id={ id } className="contant-tabs">
+            <div id={ id } className="contant-tabs" >
                 { children }
             </div>
         </>
