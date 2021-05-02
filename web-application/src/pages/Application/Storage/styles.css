@@ -16,3 +16,27 @@
 .container-storage .description {
     flex: 2 !important;
 }
+
+.container-storage .actions {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-storage .actions button {
+    margin: 0 4px;
+    max-width: fit-content;
+    transition: linear 0.2s;
+    cursor: pointer;
+}
+
+.container-storage .actions button:hover {
+    color: #009DF5;
+}
+
+.container-storage .actions .trash:hover {
+    color: tomato !important;
+}
