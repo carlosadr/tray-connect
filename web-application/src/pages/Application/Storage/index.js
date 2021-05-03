@@ -18,16 +18,13 @@ export default function Storage () {
     const [ campo, setCampo ] = useState("");
     const [ keys, setKeys ] = useState( new Array([]) );
     const [ values, setValues ] = useState( new Array([]) );
-    const [ loadPage, setLoadPage ] = useState( true )
+    const [ loadPage, setLoadPage ] = useState( true );
 
     useEffect ( () => {
         if( loadPage ){
-            document.getElementById('default').click()
-            setLoadPage( false )
-            
             let dataKeys = new Array([])
             let dataValues = new Array([])
-            
+                        
             api('storage').once('value', snapshot => {
                 let key, value, i = 0;
                 // Funçao para montar os objetos na tela;
@@ -45,21 +42,27 @@ export default function Storage () {
                 setKeys( dataKeys )
                 setValues( dataValues )
             })
+            document.getElementById('default').click();
+
+            setLoadPage( false )
         }
     }, [ keys, values, loadPage ] )
 
     // Funçao para deletar um objeto do firebase;
-    function handleDelete( key ) {
-        console.log( key )
+    function handleDelete( value ) {
+        const response = window.confirm(`Deseja excluir este rolo?\n
+        > Entrada: ${value.num_started ? value.num_started : "#" } - Rolo: ${value.roll} - Metragem: ${value.quant}`)
 
-        api('storage').child( key ).remove()
-        .then ( () => {
-            alert( "Objeto removido com sucesso!" )
-            setLoadPage( true )
-        })
-        .catch ( err => {
-            alert( "Ocorreu um erro ao tentar excluir o objeto. \n \n Erro: " + err )
-        } )
+        if( response ) {
+            api('storage').child( value.key ).remove()
+            .then ( () => {
+                alert( "Objeto removido com sucesso!" )
+                setLoadPage( true )
+            })
+            .catch ( err => {
+                alert( "Ocorreu um erro ao tentar excluir o objeto. \n \n Erro: " + err )
+            })
+        }
     }
 
     // Filtro de Pesquisa
@@ -199,7 +202,12 @@ export default function Storage () {
                                             <button>
                                                 <FiEdit size={ 18 } />
                                             </button>
-                                            <button className="trash" onClick={ () => handleDelete( keys[index] ) }>
+                                            <button className="trash" onClick={ () => handleDelete({ 
+                                                key : keys[index],
+                                                num_started : value.num_started,
+                                                roll : value.roll,
+                                                quant : value.metric_unid
+                                                } ) }>
                                                 <FiTrash2 size={ 18 } />
                                             </button>
                                         </td>
