@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FiPrinter } from 'react-icons/fi';
+import { FiPrinter, FiTrash2 } from 'react-icons/fi';
 
 import api from '../../../services/api';
 
@@ -16,69 +16,20 @@ import './styles.css';
 import { useHistory } from 'react-router';
 
 export default function StorageAdd () {
-    const [ count, setCount ] = useState(1)
-    const [ typeService, setTypeService ] = useState('')
-    const [ client, setClient ] = useState('')
-    const [ note, setNote ] = useState('')
-    const [ typeUnit, setTypeUnit ] = useState('')
-    const [ typeFabric, setTypeFabric ] = useState('')
-    const [ colorFabric, setColorFabric ] = useState('')
+    const [ count, setCount ] = useState(1);
+    const [ line, setLine ] = useState([]);
+
+    const [ typeService, setTypeService ] = useState('');
+    const [ client, setClient ] = useState('');
+    const [ note, setNote ] = useState('');
+    const [ typeUnit, setTypeUnit ] = useState('');
+    const [ typeFabric, setTypeFabric ] = useState('');
+    const [ colorFabric, setColorFabric ] = useState('');
 
     const history = useHistory()
 
     function addRows() {
-        let tableStorage = document.getElementById("add-storage");
-
-        tableStorage.insertAdjacentHTML( 'beforebegin' , 
-            `<tr id="dataRows" name="dataRows" class="table-rows" >
-                <td class="col roll">
-                    <input
-                        value=${ count }
-                        name='input-${ count }'
-                        class="col roll"
-                        type="number"
-                        disabled
-                    />
-                </td>
-                <td class="col reference">
-                    <input
-                        name='input-${ count }'
-                        class="col reference"
-                        type="text"
-                    />
-                </td>
-                <td class="col description">
-                    <input
-                        name='input-${ count }'
-                        class="col description"
-                        type="text" 
-                    />
-                </td>
-                <td class="col width-grid">
-                    <input
-                        name='input-${ count }'
-                        class="col width-grid"
-                        type="number" 
-                    />
-                </td>
-                <td class="col metric-unid">
-                    <input
-                        name='input-${ count }'
-                        class="col metric-unid"
-                        type="number" 
-                    />
-                </td>
-                <td class="col review">
-                    <select
-                        name='select'
-                        class="col review"
-                    >
-                        <option value="não" selected > Não </option>
-                        <option value="sim" > Sim </option>
-                </td>
-                <td class="col action"/>
-            </tr> `
-        )
+        setLine([ ...line, count ])
         setCount( count + 1 )
 
         document.getElementById('tbody').scrollTo( 0 , 10000 )
@@ -220,6 +171,63 @@ export default function StorageAdd () {
                         </tr>
                     </thead>
                     <tbody id='tbody' className="add-storage container-table-body">
+                        { line.map( ( value, index ) => {
+                            return (
+                                <tr id="dataRows" name="dataRows" class="table-rows" >
+                                    <td className="col roll">
+                                        <input
+                                            value={ value }
+                                            name={`input-${ value }`}
+                                            className="col roll"
+                                            type="number"
+                                            disabled
+                                        />
+                                    </td>
+                                    <td className="col reference">
+                                        <input
+                                            name={ `input-${ value }` }
+                                            className="col reference"
+                                            type="text"
+                                        />
+                                    </td>
+                                    <td className="col description">
+                                        <input
+                                            name={`input-${ value }`}
+                                            className="col description"
+                                            type="text" 
+                                        />
+                                    </td>
+                                    <td className="col width-grid">
+                                        <input
+                                            name={`input-${ value }`}
+                                            className="col width-grid"
+                                            type="number" 
+                                        />
+                                    </td>
+                                    <td className="col metric-unid">
+                                        <input
+                                            name={`input-${ value }`}
+                                            className="col metric-unid"
+                                            type="number" 
+                                        />
+                                    </td>
+                                    <td className="col review">
+                                        <select
+                                            name='select'
+                                            className="col review"
+                                        >
+                                            <option value="não" selected > Não </option>
+                                            <option value="sim" > Sim </option>
+                                        </select>
+                                    </td>
+                                    <td className="col actions">
+                                        <button className="trash" onClick={ () => { } }>
+                                            <FiTrash2 size={ 18 } />
+                                        </button>
+                                    </td>
+                                </tr>
+                            )})
+                        }
                         <tr id="add-storage" className="table-rows" >
                             <td className="table-row-button">
                                 <button onClick={ () => addRows() }>
