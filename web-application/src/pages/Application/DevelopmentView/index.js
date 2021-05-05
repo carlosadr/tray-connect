@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
-// import { useHistory } from 'react-router';
-
 import api from '../../../services/api';
+
+import {
+    FiCheckCircle,
+    FiPauseCircle,
+    FiPlayCircle,
+    FiXCircle
+} from 'react-icons/fi';
 
 import {
     Header, 
@@ -12,15 +17,12 @@ import {
 } from '../../../components'
 
 import './styles.css';
-import { FiCheckCircle, FiPauseCircle, FiPlayCircle, FiStopCircle, FiXCircle } from 'react-icons/fi';
 
 export default function DevelopmentView ( key ) {
     const [ keyDevelopment ] = useState( key.location.state );
     const [ development, setDevelopment ] = useState({});
     const [ state /*, setState*/ ] = useState("");
     const [ designer, setDesigner ] = useState("");
-
-    // const history = useHistory()
     
     useEffect ( () => {
         api("request_development").child( keyDevelopment ).on('value', snapshot => {
