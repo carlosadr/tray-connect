@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
+// import { useHistory } from 'react-router';
 
 import api from '../../../services/api';
 
@@ -12,14 +12,15 @@ import {
 } from '../../../components'
 
 import './styles.css';
-import { Link } from 'react-router-dom';
+import { FiCheckCircle, FiPauseCircle, FiPlayCircle, FiStopCircle, FiXCircle } from 'react-icons/fi';
 
 export default function DevelopmentView ( key ) {
     const [ keyDevelopment ] = useState( key.location.state );
     const [ development, setDevelopment ] = useState({});
-    const [ state, setState ] = useState("");
+    const [ state /*, setState*/ ] = useState("");
     const [ designer, setDesigner ] = useState("");
 
+    // const history = useHistory()
     
     useEffect ( () => {
         api("request_development").child( keyDevelopment ).on('value', snapshot => {
@@ -27,8 +28,6 @@ export default function DevelopmentView ( key ) {
         })
     }, [ keyDevelopment ])
 
-    const history = useHistory()
-    
     function handleSave () {
         api('request_development').child( key ).update({
             state : state,
@@ -102,11 +101,26 @@ export default function DevelopmentView ( key ) {
                         marginHorizontal={ "8px" }
                         marginVertical={ "8px" }
                     />
+                    { /* TODO: Botoes de açoes para cada atividade.*/ }
+                    <div
+                        style={{
+                            display: 'flex',
+                            flex: 1,
+                            marginTop: 22,
+                            alignItems: 'center',
+                            justifyContent: 'space-evenly'
+                        }}
+                    >
+                        <FiPlayCircle className="btn-play" size={ 24 } />
+                        <FiPauseCircle className="btn-pause" size={ 24 } />
+                        <FiCheckCircle className="btn-conclusion" size={ 24 } />
+                        <FiXCircle className="btn-cancel" size={ 24 } />
+                    </div>
                 </div>
 
                 <div>
                     <div 
-                        className="container-image innershadow"
+                        className="container-image inner-shadow"
                         style={{ 
                             background: `url(${ development.urlImage })`
                         }}
@@ -118,7 +132,7 @@ export default function DevelopmentView ( key ) {
                         </div>
                     </div>
                     <div 
-                        className="container-image innershadow"
+                        className="container-image inner-shadow"
                         style={{ 
                             background: `url(${ development.urlImageRef })`
                         }}

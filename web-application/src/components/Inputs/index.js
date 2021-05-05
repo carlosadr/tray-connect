@@ -25,7 +25,7 @@ function Inputs ({
                 <label className="label">{ label }</label>
                 {type !== "textarea" ? 
                     <input 
-                        className="input innershadow"
+                        className="input inner-shadow"
                         type={ type }
                         value={ value }
                         placeholder={ placeholder }
@@ -33,7 +33,7 @@ function Inputs ({
                     />
                 :
                     <textarea 
-                        className="input-textarea innershadow"
+                        className="input-textarea inner-shadow"
                         type={ type }
                         value={ value }
                         placeholder={ placeholder }

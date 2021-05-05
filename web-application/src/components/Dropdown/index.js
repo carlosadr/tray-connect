@@ -24,7 +24,7 @@ function Dropdown ({
             >
                 <label className="label">{ label }</label>
                 <select 
-                    className="select innershadow"
+                    className="select inner-shadow"
                     onChange={ onChange }
                     defaultValue={ "" }
                 >

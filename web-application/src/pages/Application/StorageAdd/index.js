@@ -144,7 +144,7 @@ export default function StorageAdd () {
 
                 <Separator marginVertical={ "16px" } />
 
-                <table className="container-table innershadow">
+                <table className="container-table inner-shadow">
                     <thead>
                         <tr className="add-storage header-table">
                             <td className="col roll">
