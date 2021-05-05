@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 
 import { 
     Button,
@@ -18,12 +19,14 @@ export default function Development () {
     const [ values, setValues ] = useState( new Array([]) );
     const [ loadPage, setLoadPage ] = useState( true );
 
+    const history = useHistory()
+
     useEffect ( () => {
         if( loadPage ){
             let dataKeys = new Array([])
             let dataValues = new Array([])
                         
-            api('development').once('value', snapshot => {
+            api('request_development').once('value', snapshot => {
                 let key, value, i = 0;
                 // Funçao para montar os objetos na tela;
                 snapshot.forEach( item => {
@@ -77,31 +80,36 @@ export default function Development () {
         }
     }
 
+    function goToDevelopmentView( key ) {
+        history.push( {
+            pathname : 'view-development',
+            state : key
+        } )
+    }
 
     return (
         <div className="body container-development">
             <Header title="Desenvolvimento" notfications={""} />
             
-                <div className="container-search">
+            <div className="container-search">
 
-                    <Search 
-                        onChangeSelect={ e => setCampo( e.target.value ) } 
-                        onChangeInput={ e => handleFilter( e.target.value ) }
-                        onClick={ () => handleFilter() }
-                        renderOptions={(
-                            <>
-                                <option value="client" >Clientes</option>
-                                <option value="reference" >Referência</option>
-                                <option value="designer" >Designer</option>
-                            </>
-                        )}
-                    />
+                <Search 
+                    onChangeSelect={ e => setCampo( e.target.value ) } 
+                    onChangeInput={ e => handleFilter( e.target.value ) }
+                    onClick={ () => handleFilter() }
+                    renderOptions={(
+                        <>
+                            <option value="client" >Clientes</option>
+                            <option value="reference" >Referência</option>
+                            <option value="designer" >Designer</option>
+                        </>
+                    )}
+                />
 
-                    <Button to="/add-development">
-                        Adicionar
-                    </Button>
-                    
-                </div>
+                <Button to="/add-development">
+                    Adicionar
+                </Button>
+            </div>
 
             <div className="contant-body">
                 <TabsContainer 
@@ -109,7 +117,7 @@ export default function Development () {
                     <>
                         <TabButton text="Todos" id="default" />
                         <TabButton text="Clientes" />
-                        <TabButton text="Studio" />
+                        <TabButton text="Studio / Interno" />
                         <TabButton text="Finalizados" />
                     </>
                 }>
@@ -126,11 +134,8 @@ export default function Development () {
                                     <td className="col client">
                                         Cliente
                                     </td>
-                                    <td className="col reference">
-                                        Referência
-                                    </td>
                                     <td className="col description">
-                                        Descrição
+                                        Observação
                                     </td>
                                     <td className="col status">
                                         Status
@@ -141,15 +146,14 @@ export default function Development () {
                                 </tr>
                             </thead>
 
-                            <tbody id="storage" className="container-table-body">
+                            <tbody id="development" className="container-table-body">
                                 { values.map(( value, index ) => { return (
-                                    <tr key={index} className="table-rows" >
+                                    <tr key={index} className="table-rows" onClick={() => goToDevelopmentView( keys[index] ) } >
                                         <td className="col-id">{ keys[index] }</td>
                                         <td className="col date-started">{ value.date_started  }</td>
                                         <td className="col client">{ value.client }</td>
-                                        <td className="col reference">{ value.reference }</td>
-                                        <td className="col description">{ value.description }</td>
-                                        <td className="col status">{ value.status }</td>
+                                        <td className="col description">{ value.observation }</td>
+                                        <td className="col status">{ value.state }</td>
                                         <td className="col designer">{ value.designer }</td>
                                     </tr>
                                 )})
@@ -170,11 +174,8 @@ export default function Development () {
                                     <td className="col client">
                                         Cliente
                                     </td>
-                                    <td className="col reference">
-                                        Referência
-                                    </td>
                                     <td className="col description">
-                                        Descrição
+                                        Observação
                                     </td>
                                     <td className="col status">
                                         Status
@@ -185,7 +186,7 @@ export default function Development () {
                                 </tr>
                             </thead>
 
-                            <tbody id="storage" className="container-table-body">
+                            <tbody id="development" className="container-table-body">
                                 { values.map(( value, index ) => {
                                     if( value.type_service === 'client' ) {
                                         return (
@@ -193,9 +194,8 @@ export default function Development () {
                                                 <td className="col-id">{ keys[index] }</td>
                                                 <td className="col date-started">{ value.date_started  }</td>
                                                 <td className="col client">{ value.client }</td>
-                                                <td className="col reference">{ value.reference }</td>
-                                                <td className="col description">{ value.description }</td>
-                                                <td className="col status">{ value.status }</td>
+                                                <td className="col description">{ value.observation }</td>
+                                                <td className="col status">{ value.state }</td>
                                                 <td className="col designer">{ value.designer }</td>
                                             </tr>
                                         )
@@ -205,7 +205,7 @@ export default function Development () {
                             </tbody>
                         </table>
                     </TabContant>
-                    <TabContant id="Studio">
+                    <TabContant id="Studio / Interno">
                         <table className="container-table" >
                             <thead>
                                 <tr className="header-table">
@@ -218,11 +218,8 @@ export default function Development () {
                                     <td className="col client">
                                         Cliente
                                     </td>
-                                    <td className="col reference">
-                                        Referência
-                                    </td>
                                     <td className="col description">
-                                        Descrição
+                                        Observação
                                     </td>
                                     <td className="col status">
                                         Status
@@ -233,7 +230,7 @@ export default function Development () {
                                 </tr>
                             </thead>
 
-                            <tbody id="storage" className="container-table-body">
+                            <tbody id="development" className="container-table-body">
                                 { values.map(( value, index ) => { 
                                     if(value.type_service === 'studio') {
                                         return (
@@ -241,9 +238,8 @@ export default function Development () {
                                                 <td className="col-id">{ keys[index] }</td>
                                                 <td className="col date-started">{ value.date_started  }</td>
                                                 <td className="col client">{ value.client }</td>
-                                                <td className="col reference">{ value.reference }</td>
-                                                <td className="col description">{ value.description }</td>
-                                                <td className="col status">{ value.status }</td>
+                                                <td className="col description">{ value.observation }</td>
+                                                <td className="col status">{ value.state }</td>
                                                 <td className="col designer">{ value.designer }</td>
                                             </tr>
                                         )
@@ -266,11 +262,8 @@ export default function Development () {
                                     <td className="col client">
                                         Cliente
                                     </td>
-                                    <td className="col reference">
-                                        Referência
-                                    </td>
                                     <td className="col description">
-                                        Descrição
+                                        Observação
                                     </td>
                                     <td className="col status">
                                         Status
@@ -281,7 +274,7 @@ export default function Development () {
                                 </tr>
                             </thead>
 
-                            <tbody id="storage" className="container-table-body">
+                            <tbody id="development" className="container-table-body">
                                 { values.map(( value, index ) => { 
                                     if(value.status === 'finalizado') {
                                         return (
@@ -289,9 +282,8 @@ export default function Development () {
                                                 <td className="col-id">{ keys[index] }</td>
                                                 <td className="col date-started">{ value.date_started  }</td>
                                                 <td className="col client">{ value.client }</td>
-                                                <td className="col reference">{ value.reference }</td>
-                                                <td className="col description">{ value.description }</td>
-                                                <td className="col status">{ value.status }</td>
+                                                <td className="col description">{ value.observation }</td>
+                                                <td className="col status">{ value.state }</td>
                                                 <td className="col designer">{ value.designer }</td>
                                             </tr>
                                         )

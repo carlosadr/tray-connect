@@ -25,3 +25,15 @@ export default function api ( value ) {
     // Retorna função para utilizaçao do realtime-database;
     return ref.child(companyName).child(value)
 }
+
+export function storage ( value ) {
+    // Captura o UID (ou ID) do usuario autenticado com Firebase;
+    const uid = firebase.auth().currentUser.uid
+    // Constante de referencia para rota mestre;
+    const ref = firebase.storage().ref(`superusers/${uid}/company`)
+    // Captura do localStorage a variavel com nome da empresa do usuario autenticado;
+    const companyName = localStorage.getItem("companyName")
+
+    // Retorna função para utilizaçao do realtime-database;
+    return ref.child(companyName).child(value)
+}

@@ -23,13 +23,23 @@ function Inputs ({
                 }}
             >
                 <label className="label">{ label }</label>
-                <input 
-                    className="input innershadow"
-                    type={ type }
-                    value={ value }
-                    placeholder={ placeholder }
-                    onChange={ onChange }
-                />
+                {type !== "textarea" ? 
+                    <input 
+                        className="input innershadow"
+                        type={ type }
+                        value={ value }
+                        placeholder={ placeholder }
+                        onChange={ onChange }
+                    />
+                :
+                    <textarea 
+                        className="input-textarea innershadow"
+                        type={ type }
+                        value={ value }
+                        placeholder={ placeholder }
+                        onChange={ onChange }
+                    />
+                }
             </section>
         </>
     )

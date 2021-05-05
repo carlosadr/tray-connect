@@ -3,11 +3,13 @@ import { Route, Switch } from 'react-router-dom'
 
 import Home from './Home';
 import Development from './Development';
+import DevelopmentAdd from './DevelopmentAdd';
+import DevelopmentView from './DevelopmentView';
 import Commercial from './Commercial';
 import Storage from './Storage';
+import StorageAdd from './StorageAdd';
 import Production from './Production';
 import Financial from './Financial';
-import StorageAdd from './StorageAdd';
 
 import { MenuGlobal, Footer } from '../../components';
 
@@ -21,6 +23,8 @@ function Application () {
                 <Switch>
                     <Route exact path="/" component={ Home } />
                     <Route path="/development" component={ Development } />
+                    <Route path="/add-development" component={ DevelopmentAdd } />
+                    <Route path="/view-development" component={ DevelopmentView } />
                     <Route path="/commercial" component={ Commercial } />
                     <Route path="/storage" component={ Storage } />
                     <Route path="/add-storage" component={ StorageAdd } />

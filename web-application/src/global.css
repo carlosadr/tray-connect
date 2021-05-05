@@ -23,7 +23,7 @@ body {
     background-size: cover;
 }
 
-button, a, input, input::placeholder, select {
+button, a, input, input::placeholder, select, textarea {
     font: 400 14px Roboto, sans-serif;
     color: #44475A;
     width: 100%;
@@ -36,6 +36,25 @@ button, a, input, input::placeholder, select {
     -webkit-appearance: none;
     border: none;
     background: none;
+}
+
+progress[value] {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    margin: 16px auto;
+    height: 8px;
+    width: 70%;
+    border: none;
+}
+
+progress[value]::-webkit-progress-bar {
+    background-color: #C5C8D9;
+    border-radius: 8px;
+}
+
+progress[value]::-webkit-progress-value {
+    background-color: #009DF5;
+    border-radius: 8px;
 }
 
 ::selection {
