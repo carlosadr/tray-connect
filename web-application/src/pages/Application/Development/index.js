@@ -147,17 +147,21 @@ export default function Development () {
                             </thead>
 
                             <tbody id="development" className="container-table-body">
-                                { values.map(( value, index ) => { return (
-                                    <tr key={index} className="table-rows" onClick={() => goToDevelopmentView( keys[index] ) } >
-                                        <td className="col-id">{ keys[index] }</td>
-                                        <td className="col date-started">{ value.date_started  }</td>
-                                        <td className="col client">{ value.client }</td>
-                                        <td className="col description">{ value.observation }</td>
-                                        <td className="col status">{ value.state }</td>
-                                        <td className="col designer">{ value.designer }</td>
-                                    </tr>
-                                )})
-                                }
+                            { values.map(( value, index ) => {
+                                    if( value.length !== 0 ) {
+                                        return (
+                                            <tr key={index} className="table-rows" onClick={ () => goToDevelopmentView( keys[index] ) } >
+                                                <td className="col-id">{ keys[index] }</td>
+                                                <td className="col date-started">{ value.date_started  }</td>
+                                                <td className="col client">{ value.client }</td>
+                                                <td className="col description">{ value.observation }</td>
+                                                <td className="col status">{ value.state }</td>
+                                                <td className="col designer">{ value.designer }</td>
+                                            </tr>
+                                        )
+                                    }
+                                    return null
+                                })}
                             </tbody>
                         </table>
                     </TabContant>
@@ -188,9 +192,9 @@ export default function Development () {
 
                             <tbody id="development" className="container-table-body">
                                 { values.map(( value, index ) => {
-                                    if( value.type_service === 'client' ) {
+                                    if( value.type_development === 'CLIENTE' ) {
                                         return (
-                                            <tr key={index} className="table-rows" >
+                                            <tr key={index} className="table-rows" onClick={ () => goToDevelopmentView( keys[index] ) } >
                                                 <td className="col-id">{ keys[index] }</td>
                                                 <td className="col date-started">{ value.date_started  }</td>
                                                 <td className="col client">{ value.client }</td>
@@ -232,9 +236,9 @@ export default function Development () {
 
                             <tbody id="development" className="container-table-body">
                                 { values.map(( value, index ) => { 
-                                    if(value.type_service === 'studio') {
+                                    if( value.type_development === 'INTERNO' ) {
                                         return (
-                                            <tr key={index} className="table-rows" >
+                                            <tr key={index} className="table-rows" onClick={ () => goToDevelopmentView( keys[index] ) } >
                                                 <td className="col-id">{ keys[index] }</td>
                                                 <td className="col date-started">{ value.date_started  }</td>
                                                 <td className="col client">{ value.client }</td>
@@ -276,9 +280,9 @@ export default function Development () {
 
                             <tbody id="development" className="container-table-body">
                                 { values.map(( value, index ) => { 
-                                    if(value.status === 'finalizado') {
+                                    if(value.state === 'FINALIZADO') {
                                         return (
-                                            <tr key={index} className="table-rows" >
+                                            <tr key={index} className="table-rows" onClick={ () => goToDevelopmentView() } >
                                                 <td className="col-id">{ keys[index] }</td>
                                                 <td className="col date-started">{ value.date_started  }</td>
                                                 <td className="col client">{ value.client }</td>

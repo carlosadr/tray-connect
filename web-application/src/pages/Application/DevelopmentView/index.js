@@ -3,6 +3,7 @@ import api from '../../../services/api';
 
 import {
     FiCheckCircle,
+    FiExternalLink,
     FiPauseCircle,
     FiPlayCircle,
     FiXCircle
@@ -113,10 +114,30 @@ export default function DevelopmentView ( key ) {
                             justifyContent: 'space-evenly'
                         }}
                     >
-                        <FiPlayCircle className="btn-play" size={ 24 } />
-                        <FiPauseCircle className="btn-pause" size={ 24 } />
-                        <FiCheckCircle className="btn-conclusion" size={ 24 } />
-                        <FiXCircle className="btn-cancel" size={ 24 } />
+                        <button className="btn btn-play">
+                            <div className="float-text">
+                                Iniciar
+                            </div>
+                            <FiPlayCircle size={ 24 } />
+                        </button>
+                        <button className="btn btn-pause">
+                            <div className="float-text">
+                                Pausar
+                            </div>
+                            <FiPauseCircle size={ 24 } />
+                        </button>
+                        <button className="btn btn-conclusion">
+                            <div className="float-text">
+                                Finalizar
+                            </div>
+                            <FiCheckCircle size={ 24 } />
+                        </button>
+                        <button className="btn btn-cancel">
+                            <div className="float-text">
+                                Cancelar
+                            </div>
+                            <FiXCircle size={ 24 } />
+                        </button>
                     </div>
                 </div>
 
@@ -128,8 +149,17 @@ export default function DevelopmentView ( key ) {
                         }}
                     >
                         <div className="button-image">
-                            <a href={ development.urlImage } target="_blank" without rel="noreferrer">
-                                Abrir em uma nova guia
+                            <div>
+                                Imagem Principal
+                            </div>
+                            <a
+                                className="btn-link"
+                                href={ development.urlImage } 
+                                target="_blank"
+                                without 
+                                rel="noreferrer"
+                            >
+                                Abrir em uma nova guia <FiExternalLink size={16} style={{ marginLeft: 8 }} />
                             </a>
                         </div>
                     </div>
@@ -140,8 +170,17 @@ export default function DevelopmentView ( key ) {
                         }}
                     >
                         <div className="button-image">
-                            <a href={ development.urlImageRef } target="_blank" without rel="noreferrer">
-                                Abrir em uma nova guia
+                            <div>
+                                Imagem de referência
+                            </div>
+                            <a
+                                className="btn-link"
+                                href={ development.urlImage } 
+                                target="_blank"
+                                without 
+                                rel="noreferrer"
+                            >
+                                Abrir em uma nova guia <FiExternalLink size={16} style={{ marginLeft: 8 }} />
                             </a>
                         </div>
                     </div>

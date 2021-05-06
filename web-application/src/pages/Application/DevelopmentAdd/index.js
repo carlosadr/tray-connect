@@ -29,11 +29,11 @@ export default function DevelopmentAdd () {
         
         api('request_development').push({
             date_started : new Date().toLocaleString(),
-            type_development : typeDevelopment,
-            priority : priority,
-            client : client,
-            observation : observation,
-            state : "aguardando",
+            type_development : typeDevelopment.toUpperCase(),
+            priority : priority.toUpperCase(),
+            client : client.toUpperCase(),
+            observation : observation.toUpperCase(),
+            state : "AGUARDANDO",
             designer : null,
         }).then( response => {
             key = response.key
@@ -82,9 +82,9 @@ export default function DevelopmentAdd () {
 
                             let response = window.confirm("Deseja continuar á adicionar novos desenvolvimentos?\n> Clique em 'OK' para continuar\n> ou em 'Cancel' para voltar á pagina anterior;");
                             if ( response ){
-                                history.go("/add-development")
+                                history.go()
                             } else {
-                                history.go("/development")
+                                history.push("/development")
                             }
                         }, 1000)
                     }
@@ -112,8 +112,8 @@ export default function DevelopmentAdd () {
                             onChange={ event => setTypeDevelopment( event.target.value ) }
                             options={(
                                 <>
-                                    <option value="client" >Cliente</option>
-                                    <option value="interger" >Interno</option>
+                                    <option value="cliente" >Cliente</option>
+                                    <option value="interno" >Interno</option>
                                 </>
                             )}
                         />
