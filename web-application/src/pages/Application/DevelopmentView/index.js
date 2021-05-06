@@ -11,10 +11,8 @@ import {
 
 import {
     Header, 
+    Inputs
     // Dropdown, 
-    Inputs, 
-    Separator, 
-    Button
 } from '../../../components'
 
 import './styles.css';
@@ -22,7 +20,6 @@ import './styles.css';
 export default function DevelopmentView ( key ) {
     const [ keyDevelopment ] = useState( key.location.state );
     const [ development, setDevelopment ] = useState({});
-    const [ state /*, setState*/ ] = useState("");
     const [ designer, setDesigner ] = useState("");
     
     useEffect ( () => {
@@ -31,11 +28,70 @@ export default function DevelopmentView ( key ) {
         })
     }, [ keyDevelopment ])
 
-    function handleSave () {
-        api('request_development').child( key ).update({
-            state : state,
-            designer : designer,
-        })
+    function handleState ( button ) {
+        let exist;
+        let ref = api('request_development').child( keyDevelopment )
+        console.log( button );
+        
+        switch ( button ){
+            case "play" : 
+                ref.once('value', snapshot => {
+                    exist = snapshot.child("date_paused").exists()
+                })
+
+                if( !exist ){
+                    ref.update({
+                        state : "EM ANDAMENTO",
+                        date_initial : new Date().toLocaleString(),
+                        designer : designer,
+                    })
+                } else {
+                    ref.update({
+                        state : "EM ANDAMENTO",
+                        date_returned : new Date().toLocaleString(),
+                        designer : designer,
+                    })
+                }
+            break;
+
+            case "pause" : 
+                ref.update({
+                    state : "PAUSADO",
+                    date_paused : new Date().toLocaleString(),
+                    designer : designer,
+                })
+            break;
+
+            case "cancel" :
+                ref.once('value', snapshot => {
+                    exist = snapshot.child("date_finished").exists()
+                })
+
+                if ( exist ) {
+                    alert( "Esse desenvolvimento já foi finalizado, devido a isso não pode mais ser cancelado." )
+                }else{
+                    ref.update({
+                        state : null,
+                        date_initial : null,
+                        date_paused : null,
+                        date_returned : null,
+                        designer : null,
+                    })
+                }
+            break;
+
+            case "finish" :
+                ref.update({
+                    state : "FINALIZADO",
+                    date_finished : new Date().toLocaleString(),
+                    designer : null,
+                })
+            break;
+
+            default: break
+        }
+
+        
     }
     
     return (
@@ -91,7 +147,7 @@ export default function DevelopmentView ( key ) {
                         type="text"
                         // value={ reference }
                         // onChange={ event => setDesigner( event.target.value ) }
-                        placeholder="ex: Designer"
+                        // placeholder="ex: Designer"
                         marginHorizontal={ "8px" }
                         marginVertical={ "8px" }
                     />
@@ -114,25 +170,25 @@ export default function DevelopmentView ( key ) {
                             justifyContent: 'space-evenly'
                         }}
                     >
-                        <button className="btn btn-play">
+                        <button className="btn btn-play" onClick={ () => handleState( "play" ) }>
                             <div className="float-text">
                                 Iniciar
                             </div>
                             <FiPlayCircle size={ 24 } />
                         </button>
-                        <button className="btn btn-pause">
+                        <button className="btn btn-pause" onClick={ () => handleState( "pause" ) }>
                             <div className="float-text">
                                 Pausar
                             </div>
                             <FiPauseCircle size={ 24 } />
                         </button>
-                        <button className="btn btn-conclusion">
+                        <button className="btn btn-finish" onClick={ () => handleState( "finish" ) }>
                             <div className="float-text">
                                 Finalizar
                             </div>
                             <FiCheckCircle size={ 24 } />
                         </button>
-                        <button className="btn btn-cancel">
+                        <button className="btn btn-cancel" onClick={ () => handleState( "cancel" ) }>
                             <div className="float-text">
                                 Cancelar
                             </div>
@@ -184,18 +240,6 @@ export default function DevelopmentView ( key ) {
                             </a>
                         </div>
                     </div>
-                </div>
-
-                <Separator marginVertical={ "16px" } />
-
-                <div style={{ alignItems: 'center', maxHeight: '51px' }}>
-                    <Button
-                        marginHorizontal={'8px'}
-                        marginVertical={'16px'}
-                        onClick={ () => handleSave() }
-                    >
-                        Salvar
-                    </Button>
                 </div>
             </div>
         </>

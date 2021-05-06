@@ -67,13 +67,18 @@
     color: #FAFAFC;
 }
 
+.btn .float-text:hover {
+    visibility: hidden;
+    opacity: 0;
+}
+
 .btn-play :hover, .btn-pause :hover {
     transition: linear 0.2s;
     color : #009DF5;
     cursor: pointer;
 }
 
-.btn-conclusion :hover {
+.btn-finish :hover {
     transition: linear 0.2s;
     color : #A7F500;
     cursor: pointer

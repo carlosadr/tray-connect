@@ -282,7 +282,7 @@ export default function Development () {
                                 { values.map(( value, index ) => { 
                                     if(value.state === 'FINALIZADO') {
                                         return (
-                                            <tr key={index} className="table-rows" onClick={ () => goToDevelopmentView() } >
+                                            <tr key={index} className="table-rows" onClick={ () => goToDevelopmentView( keys[index] ) } >
                                                 <td className="col-id">{ keys[index] }</td>
                                                 <td className="col date-started">{ value.date_started  }</td>
                                                 <td className="col client">{ value.client }</td>
