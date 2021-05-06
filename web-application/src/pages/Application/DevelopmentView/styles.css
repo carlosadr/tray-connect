@@ -15,7 +15,72 @@
 .button-image {
     position: absolute;
     bottom: 0px;
-    background: #fafafc8c;
+    background: #fafafccc;
     width: 100%;
     padding: 15px;
+    backdrop-filter: blur(8px);
+    border-radius: 0 0 8px 8px;
+}
+
+.button-image .btn-link {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-image .btn-link:hover {
+    transition: linear 0.2s;
+    color: #009DF5;
+}
+
+.btn {
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.btn .float-text {
+    visibility: hidden;
+    width: fit-content;
+    padding: 4px 10px;
+    background-color: #44475ade;
+    color: #FAFAFC;
+    text-align: center;
+    border-radius: 6px;
+    opacity: 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    top: -30px;
+    z-index: 1;
+
+    transition: linear 0.2s;
+}
+
+.btn:hover .float-text {
+    visibility: visible;
+    opacity: 1;
+    color: #FAFAFC;
+}
+
+.btn-play :hover, .btn-pause :hover {
+    transition: linear 0.2s;
+    color : #009DF5;
+    cursor: pointer;
+}
+
+.btn-conclusion :hover {
+    transition: linear 0.2s;
+    color : #A7F500;
+    cursor: pointer
+}
+
+.btn-cancel :hover {
+    transition: linear 0.2s;
+    color : tomato;
+    cursor: pointer
 }
