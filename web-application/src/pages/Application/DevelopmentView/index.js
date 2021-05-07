@@ -20,12 +20,14 @@ import './styles.css';
 export default function DevelopmentView ( key ) {
     const [ keyDevelopment ] = useState( key.location.state );
     const [ development, setDevelopment ] = useState({});
-    const [ designer, setDesigner ] = useState("");
+    const [ reference /*, setReference*/ ] = useState();
+    const [ designer, setDesigner ] = useState();
     
     useEffect ( () => {
         api("request_development").child( keyDevelopment ).on('value', snapshot => {
             setDevelopment( snapshot.val() )
         })
+
     }, [ keyDevelopment ])
 
     function handleState ( button ) {
@@ -102,9 +104,7 @@ export default function DevelopmentView ( key ) {
             />
 
             <div className="body">
-                <div 
-                    className="container-inputs"
-                >
+                <div className="container-inputs" >
                     <div>
                         <Inputs 
                             label="Tipo do Desenvolvimento"
@@ -122,7 +122,6 @@ export default function DevelopmentView ( key ) {
                             label="Cliente"
                             type="text"
                             value={ development.client }
-                            // onChange={ event => setClient( event.target.value ) }
                             placeholder="ex: Tray Connect"
                             marginHorizontal={ "8px" }
                             marginVertical={ "8px" }
@@ -133,6 +132,7 @@ export default function DevelopmentView ( key ) {
                             label="Observação"
                             type="textarea"
                             value={ development.observation }
+                            disabled={ true }
                             // onChange={ event => setObservation( event.target.value ) }
                             placeholder="ex: Desenvolver com elementos desenhados a mão."
                             marginHorizontal={ "8px" }
@@ -145,7 +145,7 @@ export default function DevelopmentView ( key ) {
                     <Inputs
                         label="Referência"
                         type="text"
-                        // value={ reference }
+                        value={ reference }
                         // onChange={ event => setDesigner( event.target.value ) }
                         // placeholder="ex: Designer"
                         marginHorizontal={ "8px" }
@@ -154,6 +154,7 @@ export default function DevelopmentView ( key ) {
                     <Inputs
                         label="Designer"
                         type="text"
+                        disabled={ true }
                         value={ designer }
                         onChange={ event => setDesigner( event.target.value ) }
                         placeholder="ex: Designer"

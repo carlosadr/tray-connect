@@ -148,7 +148,7 @@ export default function Development () {
 
                             <tbody id="development" className="container-table-body">
                             { values.map(( value, index ) => {
-                                    if( value.length !== 0 ) {
+                                    if( value.length !== 0 && value.state !=="FINALIZADO" ) {
                                         return (
                                             <tr key={index} className="table-rows" onClick={ () => goToDevelopmentView( keys[index] ) } >
                                                 <td className="col-id">{ keys[index] }</td>
@@ -192,7 +192,7 @@ export default function Development () {
 
                             <tbody id="development" className="container-table-body">
                                 { values.map(( value, index ) => {
-                                    if( value.type_development === 'CLIENTE' ) {
+                                    if( value.type_development === 'CLIENTE' && value.state !=="FINALIZADO" ) {
                                         return (
                                             <tr key={index} className="table-rows" onClick={ () => goToDevelopmentView( keys[index] ) } >
                                                 <td className="col-id">{ keys[index] }</td>
@@ -236,7 +236,7 @@ export default function Development () {
 
                             <tbody id="development" className="container-table-body">
                                 { values.map(( value, index ) => { 
-                                    if( value.type_development === 'INTERNO' ) {
+                                    if( value.type_development === 'INTERNO' && value.state !=="FINALIZADO" ) {
                                         return (
                                             <tr key={index} className="table-rows" onClick={ () => goToDevelopmentView( keys[index] ) } >
                                                 <td className="col-id">{ keys[index] }</td>

@@ -7,6 +7,7 @@ function TextButton ({
     to,
     text,
     center,
+    alignText,
     onClick,
     marginVertical,
     marginHorizontal,
@@ -16,11 +17,12 @@ function TextButton ({
             <Link 
                 className="container-link-button"
                 style={{
+                    justifyContent : alignText === "right" ? "flex-end" : null,
                     marginTop : marginVertical,
                     marginBottom : marginVertical,
                     marginLeft : marginHorizontal,
                     marginRight : marginHorizontal,
-                    margin : center ? 'auto' : '0',
+                    margin : center ? '0 auto' : '0',
                 }}
                 to={ to ? to : "" }
                 onClick={ onClick }

@@ -238,11 +238,11 @@ export default function StorageAdd () {
                     </tbody>
                 </table>
 
-                <div style={{ alignItems: 'center', maxHeight: 'fit-content' }}>
+                <div style={{ flex: 0, alignItems: 'center', maxHeight: 'fit-content' }}>
                     <TextButton
                         center
-                        marginHorizontal={'8px'}
-                        marginVertical={'16px'}
+                        marginHorizontal={8}
+                        marginVertical={16}
                         text={(
                             <>
                                 <FiPrinter size={18} style={{ marginRight: "22px" }} />
@@ -252,8 +252,8 @@ export default function StorageAdd () {
                     />
                     
                     <Button
-                        marginHorizontal={'8px'}
-                        marginVertical={'16px'}
+                        marginHorizontal={8}
+                        marginVertical={16}
                         onClick={ () => handleSave() }
                     >
                         Salvar

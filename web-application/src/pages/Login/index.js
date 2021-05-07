@@ -40,7 +40,7 @@ export default function Login () {
                         type="email"
                         value={ email }
                         placeholder="ex: email@exemplo.com.br"
-                        marginVertical="20px"
+                        marginVertical={16}
                         onChange={ e => setEmail( e.target.value ) }
                     />
 
@@ -49,20 +49,21 @@ export default function Login () {
                         type="password"
                         value={ password }
                         placeholder="insira sua senha."
-                        marginVertical="20px"
+                        marginVertical={16}
                         onChange={ e => setPassword( e.target.value ) }
                     />
 
-                    <TextButton 
+                    <TextButton
                         to="#"
+                        alignText="right"
                         onClick={ () => handleResetPassword() }
                         text="Esqueci minha senha." 
                     />
 
-                    <Separator marginVertical={"20px"} />
+                    <Separator marginVertical={16} />
 
                     <Button 
-                        marginVertical="20px"
+                        marginVertical={16}
                         to="/"
                         onClick={ () => handleLogin() }
                     >

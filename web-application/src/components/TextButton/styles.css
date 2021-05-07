@@ -1,14 +1,14 @@
 .container-link-button {
+    display: flex;
     color: #009DF5;
     transition: linear 0.2s;
-    justify-content: center;
 }
 
 .container-link-button .contant {
     max-width: fit-content;
     max-height: fit-content;
     align-items: center;
-    margin: auto;
+    justify-content: center;
 }
 
 .container-link-button:hover {

@@ -55,6 +55,7 @@
 
 .table-rows:hover {
     color: #009DF5;
+    cursor: pointer;
 }
 
 .col {

@@ -10,6 +10,7 @@ import Storage from './Storage';
 import StorageAdd from './StorageAdd';
 import Production from './Production';
 import Financial from './Financial';
+import Profile from './Profile';
 
 import { MenuGlobal, Footer } from '../../components';
 
@@ -30,6 +31,7 @@ function Application () {
                     <Route path="/add-storage" component={ StorageAdd } />
                     <Route path="/production" component={ Production } />
                     <Route path="/financial" component={ Financial } />
+                    <Route path="/profile" component={ Profile } />
                 </Switch>
 
                 <Footer />

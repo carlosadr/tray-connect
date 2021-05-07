@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import version from '../../../package.json';
 
+import api from '../../services/api'
 import firebase from 'firebase'
-import 'firebase/auth'
 
 import { Separator, TextButton } from '../';
 
 import './styles.css';
 
 function Footer() {
-    const uid = firebase.auth().currentUser.uid;
+    const [ uid ] = useState(firebase.auth().currentUser.uid)
     const [user, setUser] = useState("")
 
     async function getUserData() {
-        await firebase.database().ref(`superusers/${uid}`)
-        .once('value')
-        .then( snapshot => setUser( snapshot.child('displayName').val()))
-        .catch( error => console.error( error ) )
+        api('users').once('value', snapshot => {
+            setUser( snapshot.child( uid ).child('displayName').val() )
+        })
     }
 
     useEffect(() =>{
@@ -33,7 +32,7 @@ function Footer() {
                             © 2020 - 2021 | Tray Connect Inc.
                         </div>
                         <div className="container-user">
-                            <TextButton to="#" text={ user } />
+                            <TextButton to="profile" text={ user } />
                         </div>
                     </div>
                     <div className="container-right">

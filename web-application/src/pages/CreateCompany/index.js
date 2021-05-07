@@ -6,8 +6,6 @@ import { Inputs, Button, Separator } from '../../components';
 
 import logomarca from '../../assets/images/logo-marca.png';
 
-// import './styles.css';
-
 export default function CreateCompany () {
 
     const [ companyName, setCompanyName ] = useState("");
@@ -16,18 +14,30 @@ export default function CreateCompany () {
     const [ contact, setContact ] = useState("");
     
     async function handleSingup () {
-        const uid = firebase.auth().currentUser.uid;
+        const user = firebase.auth().currentUser ;
+        const displayName = !user.displayName ? localStorage.getItem('displayName') : user.displayName;
+        const ref = firebase.database().ref().child("superusers").child(user.uid).child("company").child(companyName)
 
-        firebase.database().ref().child("superusers").child(uid).child("company").child(companyName).set({
-            company_data : {
-                cnpj : cnpj,
-                name_cnpj : businessName,
-                contact : contact
-            }
-        }).then(() => {
+        try {
+            ref.child("company_data").set({
+                    cnpj : cnpj,
+                    name_cnpj : businessName,
+                }
+            )
+            ref.child(`users/${user.uid}`).set({
+                    displayName : displayName,
+                    contact : contact,
+                    permissions : {
+                        all : true
+                    }
+                }
+            )
+        }
+        finally {
             firebase.auth().signOut()
+            localStorage.removeItem('displayName')
             alert("Parabens!\n\nCadastro realizado com sucesso, seja bem-vindo á Tray Connect.\n\nEfetue seu login e comece já o gerenciamento de sua empresa.")
-        })
+        }
     }
 
     return (
@@ -41,7 +51,7 @@ export default function CreateCompany () {
                         type="text"
                         value={ companyName }
                         placeholder="ex: Tray Connect"
-                        marginVertical="20px"
+                        marginVertical={16}
                         onChange={ e => setCompanyName( e.target.value ) }
                     />
 
@@ -49,7 +59,7 @@ export default function CreateCompany () {
                         label="CNPJ"
                         value={ cnpj }
                         placeholder="ex: 99.999.999/9999-99"
-                        marginVertical="20px"
+                        marginVertical={16}
                         onChange={ e => setCnpj( e.target.value ) }
                     />
 
@@ -58,7 +68,7 @@ export default function CreateCompany () {
                         type="text"
                         value={ businessName }
                         placeholder="ex: Tray Connect Inc. LTDA"
-                        marginVertical="20px"
+                        marginVertical={16}
                         onChange={ e => setBusinessName( e.target.value ) }
                     />
 
@@ -66,12 +76,12 @@ export default function CreateCompany () {
                         label="Contato"
                         type="tel"
                         value={ contact }
-                        placeholder="ex: Tray Connect Inc. LTDA"
-                        marginVertical="20px"
+                        placeholder="ex: (99) 99999-0000"
+                        marginVertical={16}
                         onChange={ e => setContact( e.target.value ) }
                     />
 
-                    <Separator marginVertical="20px" />
+                    <Separator marginVertical={16} />
 
                     <Button
                         to="/"

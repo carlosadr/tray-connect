@@ -6,6 +6,7 @@ function Inputs ({
     label,
     type,
     value,
+    disabled,
     placeholder,
     onChange,
     marginVertical,
@@ -29,6 +30,7 @@ function Inputs ({
                         type={ type }
                         value={ value }
                         placeholder={ placeholder }
+                        disabled={ disabled }
                         onChange={ onChange }
                     />
                 :
@@ -37,6 +39,7 @@ function Inputs ({
                         type={ type }
                         value={ value }
                         placeholder={ placeholder }
+                        disabled={ disabled }
                         onChange={ onChange }
                     />
                 }
