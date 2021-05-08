@@ -23,9 +23,10 @@ function Inputs ({
                     marginRight : marginHorizontal,
                 }}
             >
-                <label className="label">{ label }</label>
+                <label className="label" htmlFor={ `input-${label}` }>{ label }</label>
                 {type !== "textarea" ? 
                     <input 
+                        id={ `input-${label}` }
                         className="input inner-shadow"
                         type={ type }
                         value={ value }
@@ -35,6 +36,7 @@ function Inputs ({
                     />
                 :
                     <textarea 
+                        id={ `input-${label}` }
                         className="input-textarea inner-shadow"
                         type={ type }
                         value={ value }

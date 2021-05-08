@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import api from '../../../services/api';
+import api, { user } from '../../../services/api';
 
 import {
     FiCheckCircle,
@@ -21,27 +21,38 @@ export default function DevelopmentView ( key ) {
     const [ keyDevelopment ] = useState( key.location.state );
     const [ development, setDevelopment ] = useState({});
     const [ reference /*, setReference*/ ] = useState();
-    const [ designer, setDesigner ] = useState();
+    const [ designer, setDesigner ] = useState("");
     
     useEffect ( () => {
         api("request_development").child( keyDevelopment ).on('value', snapshot => {
             setDevelopment( snapshot.val() )
-        })
 
-    }, [ keyDevelopment ])
+            if ( !snapshot.child('designer').val() ){
+                api(`users/${ user().uid }`).once('value', snapshotItem => {
+                    setDesigner( snapshotItem.child("displayName").val() )
+                })
+            } else {
+                setDesigner( snapshot.child('designer').val() )
+            }
+        })
+    }, [ keyDevelopment, designer ])
 
     function handleState ( button ) {
-        let exist;
+        let isStarted, isPaused, isFinished;
         let ref = api('request_development').child( keyDevelopment )
-        console.log( button );
-        
+
         switch ( button ){
             case "play" : 
                 ref.once('value', snapshot => {
-                    exist = snapshot.child("date_paused").exists()
+                    isStarted = snapshot.child("date_initial").exists()
+                    isPaused = snapshot.child("date_paused").exists()
                 })
 
-                if( !exist ){
+                if( isStarted && !isPaused ){
+                    alert("Esse desenvolvimento já foi inicializado." +
+                    "\nCaso deseje recomeçar é necessário cancela-lo.")
+
+                } else if( !isStarted && !isPaused ){
                     ref.update({
                         state : "EM ANDAMENTO",
                         date_initial : new Date().toLocaleString(),
@@ -60,16 +71,15 @@ export default function DevelopmentView ( key ) {
                 ref.update({
                     state : "PAUSADO",
                     date_paused : new Date().toLocaleString(),
-                    designer : designer,
                 })
             break;
 
             case "cancel" :
                 ref.once('value', snapshot => {
-                    exist = snapshot.child("date_finished").exists()
+                    isFinished = snapshot.child("date_finished").exists()
                 })
 
-                if ( exist ) {
+                if ( isFinished ) {
                     alert( "Esse desenvolvimento já foi finalizado, devido a isso não pode mais ser cancelado." )
                 }else{
                     ref.update({
@@ -83,11 +93,18 @@ export default function DevelopmentView ( key ) {
             break;
 
             case "finish" :
-                ref.update({
-                    state : "FINALIZADO",
-                    date_finished : new Date().toLocaleString(),
-                    designer : null,
+                ref.once('value', snapshot => {
+                    isFinished = snapshot.child("date_initial").exists()
                 })
+
+                if ( isFinished ) {
+                    alert( "Este desenvolvimento precisa ser iniciado para ser finalizado." )
+                } else {
+                    ref.update({
+                        state : "FINALIZADO",
+                        date_finished : new Date().toLocaleString(),
+                    })
+                }
             break;
 
             default: break
@@ -156,7 +173,6 @@ export default function DevelopmentView ( key ) {
                         type="text"
                         disabled={ true }
                         value={ designer }
-                        onChange={ event => setDesigner( event.target.value ) }
                         placeholder="ex: Designer"
                         marginHorizontal={ "8px" }
                         marginVertical={ "8px" }
@@ -213,7 +229,7 @@ export default function DevelopmentView ( key ) {
                                 className="btn-link"
                                 href={ development.urlImage } 
                                 target="_blank"
-                                without 
+                                without="true"
                                 rel="noreferrer"
                             >
                                 Abrir em uma nova guia <FiExternalLink size={16} style={{ marginLeft: 8 }} />
@@ -234,7 +250,7 @@ export default function DevelopmentView ( key ) {
                                 className="btn-link"
                                 href={ development.urlImage } 
                                 target="_blank"
-                                without 
+                                without="true"
                                 rel="noreferrer"
                             >
                                 Abrir em uma nova guia <FiExternalLink size={16} style={{ marginLeft: 8 }} />

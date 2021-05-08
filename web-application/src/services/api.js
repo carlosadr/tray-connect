@@ -37,3 +37,7 @@ export function storage ( value ) {
     // Retorna função para utilizaçao do realtime-database;
     return ref.child(companyName).child(value)
 }
+
+export function user () {
+    return firebase.auth().currentUser ;
+}
