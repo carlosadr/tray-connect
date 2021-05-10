@@ -22,6 +22,7 @@ export default function DevelopmentView ( key ) {
     const [ development, setDevelopment ] = useState({});
     const [ reference /*, setReference*/ ] = useState();
     const [ designer, setDesigner ] = useState("");
+    const [ visibleButtons, setVisibleButtons ] = useState([]);
     
     useEffect ( () => {
         api("request_development").child( keyDevelopment ).on('value', snapshot => {
@@ -34,11 +35,23 @@ export default function DevelopmentView ( key ) {
             } else {
                 setDesigner( snapshot.child('designer').val() )
             }
+
+            let isPlay     =   snapshot.child('date_initial').exists()
+            let isPaused   =   snapshot.child('date_paused').exists()
+            let isReturned =   snapshot.child('date_returned').exists()
+            let isFinish   =   snapshot.child('date_finished').exists()
+
+            setVisibleButtons([
+                !isPlay || ( isPaused && !isReturned ),  //Botão Iniciar
+                !isPaused && !isFinish && ( isPlay || isReturned ),   //Botão Pausar
+                !isFinish && ( isPlay || isPaused || isReturned ),   //Botão Finalizar
+                ( isPlay || isPaused || isReturned ) && !isFinish,    //Botão Cancelar
+            ])
         })
-    }, [ keyDevelopment, designer ])
+    }, [ keyDevelopment ])
 
     function handleState ( button ) {
-        let isStarted, isPaused, isFinished;
+        let isStarted, isPaused, isReturned, isFinished;
         let ref = api('request_development').child( keyDevelopment )
 
         switch ( button ){
@@ -83,7 +96,7 @@ export default function DevelopmentView ( key ) {
                     alert( "Esse desenvolvimento já foi finalizado, devido a isso não pode mais ser cancelado." )
                 }else{
                     ref.update({
-                        state : null,
+                        state : "AGUARDANDO",
                         date_initial : null,
                         date_paused : null,
                         date_returned : null,
@@ -95,9 +108,13 @@ export default function DevelopmentView ( key ) {
             case "finish" :
                 ref.once('value', snapshot => {
                     isFinished = snapshot.child("date_initial").exists()
+                    isReturned = snapshot.child("date_returned").exists()
                 })
 
-                if ( isFinished ) {
+                console.log( isFinished )
+                console.log( isReturned )
+
+                if ( !isFinished || !isReturned ) {
                     alert( "Este desenvolvimento precisa ser iniciado para ser finalizado." )
                 } else {
                     ref.update({
@@ -177,7 +194,7 @@ export default function DevelopmentView ( key ) {
                         marginHorizontal={ "8px" }
                         marginVertical={ "8px" }
                     />
-                    { /* TODO: Botoes de açoes para cada atividade.*/ }
+
                     <div
                         style={{
                             display: 'flex',
@@ -187,30 +204,58 @@ export default function DevelopmentView ( key ) {
                             justifyContent: 'space-evenly'
                         }}
                     >
-                        <button className="btn btn-play" onClick={ () => handleState( "play" ) }>
-                            <div className="float-text">
-                                Iniciar
-                            </div>
-                            <FiPlayCircle size={ 24 } />
-                        </button>
-                        <button className="btn btn-pause" onClick={ () => handleState( "pause" ) }>
-                            <div className="float-text">
-                                Pausar
-                            </div>
-                            <FiPauseCircle size={ 24 } />
-                        </button>
-                        <button className="btn btn-finish" onClick={ () => handleState( "finish" ) }>
-                            <div className="float-text">
-                                Finalizar
-                            </div>
-                            <FiCheckCircle size={ 24 } />
-                        </button>
-                        <button className="btn btn-cancel" onClick={ () => handleState( "cancel" ) }>
-                            <div className="float-text">
-                                Cancelar
-                            </div>
-                            <FiXCircle size={ 24 } />
-                        </button>
+                        { !visibleButtons[0] && !visibleButtons[1] && !visibleButtons[2] && !visibleButtons[3]  ? "FINALIZADO" : (
+                            <>
+                                <button 
+                                    style={{ 
+                                        display : visibleButtons[0] ? 'flex' : 'none',
+                                        opacity : visibleButtons[0] ? 1 : 0,
+                                        transition : 'linear 1s'
+                                    }} 
+                                    className="btn btn-play" onClick={ () => handleState( "play" ) }>
+                                    <div className="float-text">
+                                        Iniciar
+                                    </div>
+                                    <FiPlayCircle size={ 24 } />
+                                </button>
+                                <button 
+                                    style={{ 
+                                        display : visibleButtons[1] ? 'flex' : 'none',
+                                        opacity : visibleButtons[1] ? 1 : 0,
+                                        transition : 'linear 0.2s' 
+                                    }} 
+                                    className="btn btn-pause" onClick={ () => handleState( "pause" ) }>
+                                    <div className="float-text">
+                                        Pausar
+                                    </div>
+                                    <FiPauseCircle size={ 24 } />
+                                </button>
+                                <button 
+                                    style={{ 
+                                        display : visibleButtons[2] ? 'flex' : 'none',
+                                        opacity : visibleButtons[2] ? 1 : 0,
+                                        transition : 'linear 0.2s' 
+                                    }} 
+                                    className="btn btn-finish" onClick={ () => handleState( "finish" ) }>
+                                    <div className="float-text">
+                                        Finalizar
+                                    </div>
+                                    <FiCheckCircle size={ 24 } />
+                                </button>
+                                <button 
+                                    style={{ 
+                                        display : visibleButtons[3] ? 'flex' : 'none',
+                                        opacity : visibleButtons[3] ? 1 : 0,
+                                        transition : 'linear 0.2s' 
+                                    }} 
+                                    className="btn btn-cancel" onClick={ () => handleState( "cancel" ) }>
+                                    <div className="float-text">
+                                        Cancelar
+                                    </div>
+                                    <FiXCircle size={ 24 } />
+                                </button>
+                            </>
+                        )}
                     </div>
                 </div>
 
