@@ -82,7 +82,6 @@ export default function Development () {
     }
 
     function handleDelete( key ) {
-        console.log( key )
         const response = window.confirm('Deseja excluir este desenvolvimento?')
 
         if( response ) {
