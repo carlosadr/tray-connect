@@ -107,20 +107,18 @@ export default function DevelopmentView ( key ) {
 
             case "finish" :
                 ref.once('value', snapshot => {
-                    isFinished = snapshot.child("date_initial").exists()
+                    isStarted = snapshot.child("date_initial").exists()
+                    isPaused = snapshot.child("date_paused").exists()
                     isReturned = snapshot.child("date_returned").exists()
                 })
 
-                console.log( isFinished )
-                console.log( isReturned )
-
-                if ( !isFinished || !isReturned ) {
-                    alert( "Este desenvolvimento precisa ser iniciado para ser finalizado." )
-                } else {
+                if ( ( isStarted && isPaused && isReturned ) || ( isStarted && !isPaused && !isReturned ) ) {
                     ref.update({
                         state : "FINALIZADO",
                         date_finished : new Date().toLocaleString(),
                     })
+                } else {
+                    alert( "Este desenvolvimento precisa ser iniciado para ser finalizado." )
                 }
             break;
 
@@ -142,19 +140,22 @@ export default function DevelopmentView ( key ) {
                     <div>
                         <Inputs 
                             label="Tipo do Desenvolvimento"
+                            disabled={ true }
+                            value={ development.type_development }
                             marginHorizontal={ "8px" }
                             marginVertical={ "8px" }
-                            value={ development.type_development }
                         />
                         <Inputs 
                             label="Prioridade"
+                            disabled={ true }
+                            value={ development.priority }
                             marginHorizontal={ "8px" }
                             marginVertical={ "8px" }
-                            value={ development.priority }
                         />
                         <Inputs 
                             label="Cliente"
                             type="text"
+                            disabled={ true }
                             value={ development.client }
                             placeholder="ex: Tray Connect"
                             marginHorizontal={ "8px" }
@@ -165,8 +166,8 @@ export default function DevelopmentView ( key ) {
                         <Inputs 
                             label="Observação"
                             type="textarea"
-                            value={ development.observation }
                             disabled={ true }
+                            value={ development.observation }
                             // onChange={ event => setObservation( event.target.value ) }
                             placeholder="ex: Desenvolver com elementos desenhados a mão."
                             marginHorizontal={ "8px" }
@@ -179,9 +180,10 @@ export default function DevelopmentView ( key ) {
                     <Inputs
                         label="Referência"
                         type="text"
+                        disabled={ true }
                         value={ reference }
+                        placeholder="Automatico."
                         // onChange={ event => setDesigner( event.target.value ) }
-                        // placeholder="ex: Designer"
                         marginHorizontal={ "8px" }
                         marginVertical={ "8px" }
                     />

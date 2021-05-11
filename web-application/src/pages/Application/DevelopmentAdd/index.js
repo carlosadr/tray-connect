@@ -109,7 +109,7 @@ export default function DevelopmentAdd () {
                             label="Tipo do Desenvolvimento"
                             marginHorizontal={ "8px" }
                             marginVertical={ "8px" }
-                            // onChange={ event => setTypeDevelopment( event.target.value ) }
+                            onChange={ event => setTypeDevelopment( event.target.value ) }
                             options={(
                                 <>
                                     <option value="cliente" >Cliente</option>
@@ -121,7 +121,7 @@ export default function DevelopmentAdd () {
                             label="Prioridade"
                             marginHorizontal={ "8px" }
                             marginVertical={ "8px" }
-                            // onChange={ event => setPriority( event.target.value ) }
+                            onChange={ event => setPriority( event.target.value ) }
                             options={(
                                 <>
                                     <option value="normal" >Normal</option>

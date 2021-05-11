@@ -38,6 +38,11 @@ button, a, input, input::placeholder, select, textarea {
     background: none;
 }
 
+.trash:hover {
+    color: tomato !important;
+    cursor: pointer;
+}
+
 progress[value] {
     -webkit-appearance: none !important;
     appearance: none !important;

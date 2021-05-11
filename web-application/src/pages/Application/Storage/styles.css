@@ -28,7 +28,3 @@
 .container-storage .actions button:hover {
     color: #009DF5;
 }
-
-.container-storage .actions .trash:hover {
-    color: tomato !important;
-}

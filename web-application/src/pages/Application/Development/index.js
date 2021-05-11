@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FiTrash2 } from 'react-icons/fi';
 import { useHistory } from 'react-router';
 
 import { 
@@ -80,6 +81,22 @@ export default function Development () {
         }
     }
 
+    function handleDelete( key ) {
+        console.log( key )
+        const response = window.confirm('Deseja excluir este desenvolvimento?')
+
+        if( response ) {
+            api('request_development').child( key ).remove()
+            .then ( () => {
+                alert( "Objeto removido com sucesso!" )
+                setLoadPage( true )
+            })
+            .catch ( err => {
+                alert( "Ocorreu um erro ao tentar excluir o objeto. \n \n Erro: " + err )
+            })
+        }
+    }
+
     function goToDevelopmentView( key ) {
         history.push( {
             pathname : 'view-development',
@@ -128,7 +145,7 @@ export default function Development () {
                                     <td className="col-id">
                                         ID
                                     </td>
-                                    <td className="col date-started">
+                                    <td  className="col date-started">
                                         Data de entrada
                                     </td>
                                     <td className="col client">
@@ -143,6 +160,7 @@ export default function Development () {
                                     <td className="col designer">
                                         Designer
                                     </td>
+                                    <td style={{ flex: 0, width: 120 }} className="col actions"/>
                                 </tr>
                             </thead>
 
@@ -150,13 +168,18 @@ export default function Development () {
                             { values.map(( value, index ) => {
                                     if( value.length !== 0 && value.state !=="FINALIZADO" ) {
                                         return (
-                                            <tr key={index} className="table-rows" onClick={ () => goToDevelopmentView( keys[index] ) } >
-                                                <td className="col-id">{ keys[index] }</td>
-                                                <td className="col date-started">{ value.date_started  }</td>
-                                                <td className="col client">{ value.client }</td>
-                                                <td className="col description">{ value.observation }</td>
-                                                <td className="col status">{ value.state }</td>
-                                                <td className="col designer">{ value.designer }</td>
+                                            <tr key={index} className="table-rows" >
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col-id">{ keys[index] }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col date-started">{ value.date_started  }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col client">{ value.client }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col description">{ value.observation }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col status">{ value.state }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col designer">{ value.designer }</td>
+                                                <td style={{ flex: 0, width: 120 }} className="col actions">
+                                                    <button className="trash" onClick={ () => handleDelete( keys[index] )} >
+                                                        <FiTrash2 size={ 18 } />
+                                                    </button>
+                                                </td>
                                             </tr>
                                         )
                                     }
@@ -172,7 +195,7 @@ export default function Development () {
                                     <td className="col-id">
                                         ID
                                     </td>
-                                    <td className="col date-started">
+                                    <td  className="col date-started">
                                         Data de entrada
                                     </td>
                                     <td className="col client">
@@ -187,6 +210,7 @@ export default function Development () {
                                     <td className="col designer">
                                         Designer
                                     </td>
+                                    <td style={{ flex: 0, width: 120 }} className="col actions"/>
                                 </tr>
                             </thead>
 
@@ -194,13 +218,18 @@ export default function Development () {
                                 { values.map(( value, index ) => {
                                     if( value.type_development === 'CLIENTE' && value.state !=="FINALIZADO" ) {
                                         return (
-                                            <tr key={index} className="table-rows" onClick={ () => goToDevelopmentView( keys[index] ) } >
-                                                <td className="col-id">{ keys[index] }</td>
-                                                <td className="col date-started">{ value.date_started  }</td>
-                                                <td className="col client">{ value.client }</td>
-                                                <td className="col description">{ value.observation }</td>
-                                                <td className="col status">{ value.state }</td>
-                                                <td className="col designer">{ value.designer }</td>
+                                            <tr key={index} className="table-rows" >
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col-id">{ keys[index] }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col date-started">{ value.date_started  }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col client">{ value.client }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col description">{ value.observation }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col status">{ value.state }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col designer">{ value.designer }</td>
+                                                <td style={{ flex: 0, width: 120 }} className="col actions">
+                                                    <button className="trash" onClick={ () => handleDelete( keys[index] )} >
+                                                        <FiTrash2 size={ 18 } />
+                                                    </button>
+                                                </td>
                                             </tr>
                                         )
                                     }
@@ -216,7 +245,7 @@ export default function Development () {
                                     <td className="col-id">
                                         ID
                                     </td>
-                                    <td className="col date-started">
+                                    <td  className="col date-started">
                                         Data de entrada
                                     </td>
                                     <td className="col client">
@@ -231,6 +260,7 @@ export default function Development () {
                                     <td className="col designer">
                                         Designer
                                     </td>
+                                    <td style={{ flex: 0, width: 120 }} className="col actions"/>
                                 </tr>
                             </thead>
 
@@ -238,13 +268,18 @@ export default function Development () {
                                 { values.map(( value, index ) => { 
                                     if( value.type_development === 'INTERNO' && value.state !=="FINALIZADO" ) {
                                         return (
-                                            <tr key={index} className="table-rows" onClick={ () => goToDevelopmentView( keys[index] ) } >
-                                                <td className="col-id">{ keys[index] }</td>
-                                                <td className="col date-started">{ value.date_started  }</td>
-                                                <td className="col client">{ value.client }</td>
-                                                <td className="col description">{ value.observation }</td>
-                                                <td className="col status">{ value.state }</td>
-                                                <td className="col designer">{ value.designer }</td>
+                                            <tr key={index} className="table-rows" >
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col-id">{ keys[index] }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col date-started">{ value.date_started  }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col client">{ value.client }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col description">{ value.observation }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col status">{ value.state }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col designer">{ value.designer }</td>
+                                                <td style={{ flex: 0, width: 120 }} className="col actions">
+                                                    <button className="trash" onClick={ () => handleDelete( keys[index] )} >
+                                                        <FiTrash2 size={ 18 } />
+                                                    </button>
+                                                </td>
                                             </tr>
                                         )
                                     }
@@ -260,7 +295,7 @@ export default function Development () {
                                     <td className="col-id">
                                         ID
                                     </td>
-                                    <td className="col date-started">
+                                    <td  className="col date-started">
                                         Data de entrada
                                     </td>
                                     <td className="col client">
@@ -282,13 +317,13 @@ export default function Development () {
                                 { values.map(( value, index ) => { 
                                     if(value.state === 'FINALIZADO') {
                                         return (
-                                            <tr key={index} className="table-rows" onClick={ () => goToDevelopmentView( keys[index] ) } >
-                                                <td className="col-id">{ keys[index] }</td>
-                                                <td className="col date-started">{ value.date_started  }</td>
-                                                <td className="col client">{ value.client }</td>
-                                                <td className="col description">{ value.observation }</td>
-                                                <td className="col status">{ value.state }</td>
-                                                <td className="col designer">{ value.designer }</td>
+                                            <tr key={index} className="table-rows" >
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col-id">{ keys[index] }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col date-started">{ value.date_started  }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col client">{ value.client }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col description">{ value.observation }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col status">{ value.state }</td>
+                                                <td onClick={ () => goToDevelopmentView( keys[ index ] ) } className="col designer">{ value.designer }</td>
                                             </tr>
                                         )
                                     }
