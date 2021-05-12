@@ -120,7 +120,7 @@ export default function Commercial () {
                     )}
                 />
 
-                <Button to="/add-order">
+                <Button to="/add-orders">
                     Adicionar
                 </Button>
             </div>

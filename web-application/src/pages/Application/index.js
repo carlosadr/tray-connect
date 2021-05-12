@@ -6,6 +6,7 @@ import Development from './Development';
 import DevelopmentAdd from './DevelopmentAdd';
 import DevelopmentView from './DevelopmentView';
 import Commercial from './Commercial';
+import CommercialAdd from './CommercialAdd';
 import Storage from './Storage';
 import StorageAdd from './StorageAdd';
 import Production from './Production';
@@ -27,6 +28,7 @@ function Application () {
                     <Route path="/add-development" component={ DevelopmentAdd } />
                     <Route path="/view-development" component={ DevelopmentView } />
                     <Route path="/commercial" component={ Commercial } />
+                    <Route path="/add-orders" component={ CommercialAdd } />
                     <Route path="/storage" component={ Storage } />
                     <Route path="/add-storage" component={ StorageAdd } />
                     <Route path="/production" component={ Production } />
