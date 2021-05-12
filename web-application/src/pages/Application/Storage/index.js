@@ -183,7 +183,8 @@ export default function Storage () {
                             </thead>
 
                             <tbody id="storage" className="container-table-body">
-                                { values.map(( value, index ) => { return (
+                            { values.map(( value, index ) => { 
+                                if ( value.length !== 0 ) { return (
                                     <tr key={index} className="table-rows" >
                                         <td className="col-id">{keys[index]}</td>
                                         <td className="col started">{value.num_started}</td>
@@ -212,8 +213,10 @@ export default function Storage () {
                                             </button>
                                         </td>
                                     </tr>
-                                )})
-                                }
+                                )}
+                                return null;
+                                })
+                            }
                             </tbody>
                         </table>
                     </TabContant>

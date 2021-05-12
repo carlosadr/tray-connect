@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import version from '../../../package.json';
+import packageJson from '../../../package.json';
 
 import api from '../../services/api'
 import firebase from 'firebase'
@@ -10,7 +10,7 @@ import './styles.css';
 
 function Footer() {
     const [ uid ] = useState(firebase.auth().currentUser.uid)
-    const [user, setUser] = useState("")
+    const [ user, setUser ] = useState("")
 
     async function getUserData() {
         api('users').once('value', snapshot => {
@@ -29,7 +29,7 @@ function Footer() {
                 <div style={{ width : "100%", justifyContent: "space-between" }} >
                     <div className="container-left">
                         <div className="container-copyright">
-                            © 2020 - 2021 | Tray Connect Inc.
+                            © 2020 - { new Date().getFullYear() } | Tray Connect Inc.
                         </div>
                         <div className="container-user">
                             <TextButton to="profile" text={ user } />
@@ -37,7 +37,7 @@ function Footer() {
                     </div>
                     <div className="container-right">
                         <div className="container-version">
-                            Versão{"  "}{ version.version }
+                            Versão{"  "}{ packageJson.version }
                         </div>
                     </div>
                 </div>
