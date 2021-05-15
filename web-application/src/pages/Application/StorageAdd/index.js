@@ -15,7 +15,9 @@ import {
 import './styles.css';
 import { useHistory } from 'react-router';
 
-export default function StorageAdd () {
+export default function StorageAdd ( ) {
+    const [ batch ] = useState( parseInt(localStorage.getItem( "lastBatch" ), 10) );
+    
     const [ count, setCount ] = useState(1);
     const [ line, setLine ] = useState([]);
 
@@ -25,6 +27,8 @@ export default function StorageAdd () {
     const [ typeUnit, setTypeUnit ] = useState('');
     const [ typeFabric, setTypeFabric ] = useState('');
     const [ colorFabric, setColorFabric ] = useState('');
+    
+    console.log( batch )
 
     const history = useHistory()
 
@@ -43,6 +47,7 @@ export default function StorageAdd () {
             const select = value.getElementsByTagName('select')
 
             api('storage').push({
+                batch : batch ? batch+1 : 99,
                 date_started : new Date().toLocaleString(),
                 type_service : typeService,
                 client : client.toUpperCase(),
@@ -171,9 +176,9 @@ export default function StorageAdd () {
                         </tr>
                     </thead>
                     <tbody id='tbody' className="add-storage container-table-body">
-                        { line.map( ( value, index ) => {
+                        { line.map( ( value ) => {
                             return (
-                                <tr id="dataRows" name="dataRows" class="table-rows" >
+                                <tr id="dataRows" name="dataRows" className="table-rows" >
                                     <td className="col roll">
                                         <input
                                             value={ value }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import api from '../../../services/api';
 
 import { FiEdit, FiTrash2 } from 'react-icons/fi';
@@ -20,6 +21,8 @@ export default function Storage () {
     const [ values, setValues ] = useState( new Array([]) );
     const [ loadPage, setLoadPage ] = useState( true );
 
+    const history = useHistory()
+
     useEffect ( () => {
         if( loadPage ){
             let dataKeys = new Array([])
@@ -31,12 +34,15 @@ export default function Storage () {
                 snapshot.forEach( item => {
                     // Recupera o ID unico do Firebase do Objeto X
                     key = item.key;
+
                     // Recupera o Objeto do ID;
                     value = item.val()
-                    
+
                     dataKeys[i] = key
                     dataValues[i] = value
                     
+                    localStorage.setItem( "lastBatch", item.child("batch").val() )
+
                     i++
                 })
                 setKeys( dataKeys )
@@ -51,7 +57,7 @@ export default function Storage () {
     // Funçao para deletar um objeto do firebase;
     function handleDelete( value ) {
         const response = window.confirm(`Deseja excluir este rolo?\n
-        > Entrada: ${value.num_started ? value.num_started : "#" } - Rolo: ${value.roll} - Metragem: ${value.quant}`)
+        > Entrada: ${value._started ? value.batch : "#" } - Rolo: ${value.roll} - Metragem: ${value.quant}`)
 
         if( response ) {
             api('storage').child( value.key ).remove()
@@ -96,6 +102,12 @@ export default function Storage () {
         }
     }
 
+    function goToAddStorage( ) {
+        history.push( {
+            pathname : 'add-storage'
+        })
+    }
+
     return (
         <div className="body container-storage" >
 
@@ -110,7 +122,6 @@ export default function Storage () {
                         onClick={ () => handleFilter() }
                         renderOptions={(
                             <>
-                                <option value="num_started" >Numero de Entrada</option>
                                 <option value="client" >Clientes</option>
                                 <option value="reference" >Referência</option>
                                 <option value="type_fabric" >Tipo de Tecido</option>
@@ -119,7 +130,7 @@ export default function Storage () {
                         )}
                     />
 
-                    <Button to="/add-storage">
+                    <Button onClick={ () => goToAddStorage( ) }>
                         Adicionar
                     </Button>
                     
@@ -137,11 +148,8 @@ export default function Storage () {
                         <table className="container-table" >
                             <thead>
                                 <tr className="header-table">
-                                    <td className="col-id">
-                                        ID
-                                    </td>
                                     <td className="col started">
-                                        Entrada
+                                        Lote
                                     </td>
                                     <td className="col roll">
                                         Rolo
@@ -185,27 +193,50 @@ export default function Storage () {
                             <tbody id="storage" className="container-table-body">
                             { values.map(( value, index ) => { 
                                 if ( value.length !== 0 ) { return (
-                                    <tr key={index} className="table-rows" >
-                                        <td className="col-id">{keys[index]}</td>
-                                        <td className="col started">{value.num_started}</td>
-                                        <td className="col roll">{value.roll}</td>
-                                        <td className="col date-started">{value.date_started}</td>
-                                        <td className="col client">{value.client}</td>
-                                        <td className="col reference">{value.reference}</td>
-                                        <td className="col description">{value.description}</td>
-                                        <td className="col type">{value.type_unit}</td>
-                                        <td className="col type-fabtic">{value.type_fabric}</td>
-                                        <td className="col color-fabric">{value.color_fabric}</td>
-                                        <td className="col width-grid">{value.width_grid}</td>
-                                        <td className="col metric-unid">{value.metric_unid}</td>
-                                        <td className="col review">{value.review}</td>
+                                    <tr key={ keys[index] } className="table-rows" >
+                                        <td className="col started">
+                                            { value.batch }
+                                        </td>
+                                        <td className="col roll">
+                                            { value.roll }
+                                        </td>
+                                        <td className="col date-started">
+                                            { value.date_started }
+                                        </td>
+                                        <td className="col client">
+                                            { value.client }
+                                        </td>
+                                        <td className="col reference">
+                                            { value.reference }
+                                        </td>
+                                        <td className="col description">
+                                            { value.description }
+                                        </td>
+                                        <td className="col type">
+                                            { value.type_unit }
+                                        </td>
+                                        <td className="col type-fabtic">
+                                            { value.type_fabric }
+                                        </td>
+                                        <td className="col color-fabric">
+                                            { value.color_fabric }
+                                        </td>
+                                        <td className="col width-grid">
+                                            { value.width_grid }
+                                        </td>
+                                        <td className="col metric-unid">
+                                            { value.metric_unid }
+                                        </td>
+                                        <td className="col review">
+                                            { value.review }
+                                        </td>
                                         <td className="col actions">
                                             <button>
                                                 <FiEdit size={ 18 } />
                                             </button>
                                             <button className="trash" onClick={ () => handleDelete({ 
                                                 key : keys[index],
-                                                num_started : value.num_started,
+                                                batch : value.batch,
                                                 roll : value.roll,
                                                 quant : value.metric_unid
                                                 } ) }>
@@ -225,11 +256,8 @@ export default function Storage () {
                         <table className="container-table" >
                             <thead>
                                 <tr className="header-table">
-                                    <td className="col-id">
-                                        ID
-                                    </td>
                                     <td className="col started">
-                                        Entrada
+                                        Lote
                                     </td>
                                     <td className="col roll">
                                         Rolo
@@ -274,9 +302,8 @@ export default function Storage () {
                                 { values.map( ( value, index ) => {
                                     if( value.type_service === 'service' ) {
                                         return (
-                                            <tr key={index} className="table-rows" >
-                                                <td className="col-id">{keys[index]}</td>
-                                                <td className="col started">{value.num_started}</td>
+                                            <tr key={ keys[index] } className="table-rows" >
+                                                <td className="col started">{value.batch}</td>
                                                 <td className="col roll">{value.roll}</td>
                                                 <td className="col date-started">{value.date_started}</td>
                                                 <td className="col client">{value.client}</td>
@@ -309,11 +336,8 @@ export default function Storage () {
                         <table className="container-table">
                             <thead>
                                 <tr className="header-table">
-                                    <td className="col-id">
-                                        ID
-                                    </td>
                                     <td className="col started">
-                                        Entrada
+                                        Lote
                                     </td>
                                     <td className="col roll">
                                         Rolo
@@ -358,9 +382,8 @@ export default function Storage () {
                             { values.map( ( value, index ) => {
                                     if( value.type_service === 'fabric' ) {
                                         return (
-                                            <tr key={index} className="table-rows" >
-                                                <td className="col-id">{keys[index]}</td>
-                                                <td className="col started">{value.num_started}</td>
+                                            <tr key={ keys[index] } className="table-rows" >
+                                                <td className="col started">{value.batch}</td>
                                                 <td className="col roll">{value.roll}</td>
                                                 <td className="col date-started">{value.date_started}</td>
                                                 <td className="col client">{value.client}</td>
