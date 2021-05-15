@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { FiPrinter, FiTrash2 } from 'react-icons/fi';
+import { FiPrinter } from 'react-icons/fi';
 import { Button, Dropdown, Header, Inputs, Separator, TextButton } from '../../../components';
 
 import './styles.css';
 
 export default function CommercialAdd () {
-    const [ line, setLine ] = useState([]);
+    const [ line/*, setLine*/ ] = useState([]);
 
     return (
         <>
