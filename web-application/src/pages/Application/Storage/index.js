@@ -28,7 +28,7 @@ export default function Storage () {
             let dataKeys = new Array([])
             let dataValues = new Array([])
                         
-            api('storage').once('value', snapshot => {
+            api('storage').on('value', snapshot => {
                 let key, value, i = 0;
                 // Funçao para montar os objetos na tela;
                 snapshot.forEach( item => {
@@ -54,10 +54,12 @@ export default function Storage () {
         }
     }, [ keys, values, loadPage ] )
 
+    api('storage').once('child_changed').then(() => { setLoadPage( true ) })
+
     // Funçao para deletar um objeto do firebase;
     function handleDelete( value ) {
         const response = window.confirm(`Deseja excluir este rolo?\n
-        > Entrada: ${value._started ? value.batch : "#" } - Rolo: ${value.roll} - Metragem: ${value.quant}`)
+        > Entrada: ${ value.batch } - Rolo: ${value.roll} - Metragem: ${value.quant}`)
 
         if( response ) {
             api('storage').child( value.key ).remove()

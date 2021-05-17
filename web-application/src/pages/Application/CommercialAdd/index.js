@@ -1,15 +1,33 @@
 import React, { useState } from 'react';
-import { FiPrinter } from 'react-icons/fi';
-import { Button, Dropdown, Header, Inputs, Separator, TextButton } from '../../../components';
+import { FiPlus, FiPrinter } from 'react-icons/fi';
+
+import { 
+    Button, 
+    Dropdown, 
+    Header, 
+    Inputs, 
+    Modal, 
+    Separator, 
+    TextButton 
+} from '../../../components';
 
 import './styles.css';
 
 export default function CommercialAdd () {
     const [ line/*, setLine*/ ] = useState([]);
+    const [ modal, setModal ] = useState(false);
 
     return (
         <>
             <Header title="Adicionar ordens" goBack />
+
+            <Modal
+                title="Adicionar Rolos"
+                showModal={ modal }
+                onClick={ () => setModal( !modal ) }
+            >
+                
+            </Modal>
 
             <div className="body">
                 <div 
@@ -37,47 +55,6 @@ export default function CommercialAdd () {
                             marginHorizontal={ "8px" }
                             marginVertical={ "8px" }
                         />
-                        <Inputs 
-                            label="OC / Nota Fiscal"
-                            type="text"
-                            // value={ note }
-                            // onChange={ event => setNote( event.target.value ) }
-                            placeholder="ex: 1450022"
-                            marginHorizontal={ "8px" }
-                            marginVertical={ "8px" }
-                        />
-                    </div>
-                    <div>
-                        <Dropdown 
-                            label="Unidade"
-                            marginHorizontal={ "8px" }
-                            marginVertical={ "8px" }
-                            // onChange={ event => setTypeUnit( event.target.value ) }
-                            options={(
-                                <>
-                                    <option value="mt" >Metros</option>
-                                    <option value="unit" >Peças</option>
-                                </>
-                            )}
-                        />
-                        <Inputs 
-                            label="Nome do Tecido"
-                            type="text"
-                            // value={ typeFabric }
-                            // onChange={ event => setTypeFabric( event.target.value ) }
-                            placeholder="ex: Tactel"
-                            marginHorizontal={ "8px" }
-                            marginVertical={ "8px" }
-                        />
-                        <Inputs 
-                            label="Cor do Tecido"
-                            type="text"
-                            // value={ colorFabric }
-                            // onChange={ event => setColorFabric( event.target.value ) }
-                            placeholder="ex: Branco"
-                            marginHorizontal={ "8px" }
-                            marginVertical={ "8px" }
-                        />
                     </div>
                 </div>
 
@@ -85,18 +62,27 @@ export default function CommercialAdd () {
 
                 <table className="container-table inner-shadow">
                     <thead>
-                        <tr className="add-storage header-table">
+                        <tr className="add-order header-table">
+                            <td className="col batch">
+                                Lote
+                            </td>
                             <td className="col roll">
                                 Rolo
                             </td>
+                            <td className="col roll">
+                                OC / Nota Fiscal
+                            </td>
                             <td className="col reference">
-                                Referencia
+                                Referência
                             </td>
                             <td className="col description">
                                 Descrição
                             </td>
                             <td className="col type-fabric">
                                 Nome do tecido
+                            </td>
+                            <td className="col width-grid">
+                                Tipo
                             </td>
                             <td className="col width-grid">
                                 Largura / Grade
@@ -169,6 +155,19 @@ export default function CommercialAdd () {
                             <>
                                 <FiPrinter size={18} style={{ marginRight: "22px" }} />
                                 Imprimir folhas
+                            </>
+                        )}
+                    />
+
+                    <TextButton
+                        center
+                        marginHorizontal={8}
+                        marginVertical={16}
+                        onClick={ () => setModal( !modal ) }
+                        text={(
+                            <>
+                                <FiPlus size={18} style={{ marginRight: "22px" }} />
+                                Adicionar rolos
                             </>
                         )}
                     />

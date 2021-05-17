@@ -1,0 +1,30 @@
+.add-order .batch, .add-order .reference,
+.add-order .roll, .add-order .type,
+.add-order .width-grid,.add-order .metric-unid,
+.add-order .review {
+    max-width: 70px;
+}
+
+.add-order .description {
+    flex: 2 !important;
+}
+
+.add-order .actions {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-order .actions button {
+    margin: 0 4px;
+    max-width: fit-content;
+    transition: linear 0.2s;
+    cursor: pointer;
+}
+
+.add-order .actions button:hover {
+    color: #009DF5;
+}
