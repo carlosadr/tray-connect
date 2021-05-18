@@ -81,3 +81,23 @@
     height: fit-content;
     max-height: 51px;
 }
+
+/* Class table */
+.batch, .reference,
+.roll, .type,
+.width-grid,.metric-unid,
+.review {
+    max-width: 170px !important;
+    text-align: center;
+}
+
+.review select, .review select option {
+    width: max-content;
+    box-sizing: content-box;
+    padding : 0 16px;
+}
+
+.description {
+    flex: 2 !important;
+    text-align: center;
+}

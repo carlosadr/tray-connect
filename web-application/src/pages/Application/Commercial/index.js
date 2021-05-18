@@ -126,7 +126,7 @@ export default function Commercial () {
             </div>
 
             <div className="contant-body inner-shadow">
-                <table className="container-table" >
+                <table>
                     <thead>
                         <tr className="header-table">
                             <td  className="col date-started">
@@ -147,7 +147,7 @@ export default function Commercial () {
                         </tr>
                     </thead>
 
-                    <tbody className="container-table-body">
+                    <tbody>
                     { values.map(( value, index ) => {
                             if( value.length !== 0 && value.state !=="FINALIZADO" ) {
                                 return (

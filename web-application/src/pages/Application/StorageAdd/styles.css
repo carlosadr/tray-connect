@@ -9,25 +9,6 @@
     max-height: 40vh !important;
 }
 
-.add-storage .started, .add-storage .reference,
-.add-storage .roll, .add-storage .type,
-.add-storage .width-grid,.add-storage .metric-unid,
-.add-storage .review {
-    max-width: 170px !important;
-    text-align: center;
-}
-
-.add-storage .review select, .add-storage .review select option {
-    width: max-content;
-    box-sizing: content-box;
-    padding : 0 16px;
-}
-
-.add-storage .description {
-    flex: 2 !important;
-    text-align: center;
-}
-
 .add-storage button:hover {
     transition: linear 0.2s;
     color: tomato;

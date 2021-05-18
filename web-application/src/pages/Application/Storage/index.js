@@ -147,7 +147,7 @@ export default function Storage () {
                     </>
                 }>
                     <TabContant id="Todos" >
-                        <table className="container-table" >
+                        <table>
                             <thead>
                                 <tr className="header-table">
                                     <td className="col started">
@@ -192,11 +192,11 @@ export default function Storage () {
                                 </tr>
                             </thead>
 
-                            <tbody id="storage" className="container-table-body">
+                            <tbody>
                             { values.map(( value, index ) => { 
                                 if ( value.length !== 0 ) { return (
                                     <tr key={ keys[index] } className="table-rows" >
-                                        <td className="col started">
+                                        <td className="col batch">
                                             { value.batch }
                                         </td>
                                         <td className="col roll">
@@ -255,7 +255,7 @@ export default function Storage () {
                     </TabContant>
 
                     <TabContant id="Clientes" >
-                        <table className="container-table" >
+                        <table>
                             <thead>
                                 <tr className="header-table">
                                     <td className="col started">
@@ -300,7 +300,7 @@ export default function Storage () {
                                 </tr>
                             </thead>
 
-                            <tbody id="storageClient" className="container-table-body">
+                            <tbody>
                                 { values.map( ( value, index ) => {
                                     if( value.type_service === 'service' ) {
                                         return (
@@ -335,7 +335,7 @@ export default function Storage () {
                     </TabContant>
 
                     <TabContant id="Fabrica">
-                        <table className="container-table">
+                        <table>
                             <thead>
                                 <tr className="header-table">
                                     <td className="col started">
@@ -380,7 +380,7 @@ export default function Storage () {
                                 </tr>
                             </thead>
 
-                            <tbody id="storageFabric" className="container-table-body">
+                            <tbody>
                             { values.map( ( value, index ) => {
                                     if( value.type_service === 'fabric' ) {
                                         return (

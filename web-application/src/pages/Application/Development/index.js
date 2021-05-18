@@ -138,7 +138,7 @@ export default function Development () {
                     </>
                 }>
                     <TabContant id="Todos">
-                        <table className="container-table" >
+                        <table>
                             <thead>
                                 <tr className="header-table">
                                     <td className="col-id">
@@ -163,7 +163,7 @@ export default function Development () {
                                 </tr>
                             </thead>
 
-                            <tbody id="development" className="container-table-body">
+                            <tbody>
                             { values.map(( value, index ) => {
                                     if( value.length !== 0 && value.state !=="FINALIZADO" ) {
                                         return (
@@ -188,7 +188,7 @@ export default function Development () {
                         </table>
                     </TabContant>
                     <TabContant id="Clientes">
-                        <table className="container-table" >
+                        <table>
                             <thead>
                                 <tr className="header-table">
                                     <td className="col-id">
@@ -213,7 +213,7 @@ export default function Development () {
                                 </tr>
                             </thead>
 
-                            <tbody id="development" className="container-table-body">
+                            <tbody>
                                 { values.map(( value, index ) => {
                                     if( value.type_development === 'CLIENTE' && value.state !=="FINALIZADO" ) {
                                         return (
@@ -238,7 +238,7 @@ export default function Development () {
                         </table>
                     </TabContant>
                     <TabContant id="Studio / Interno">
-                        <table className="container-table" >
+                        <table>
                             <thead>
                                 <tr className="header-table">
                                     <td className="col-id">
@@ -263,7 +263,7 @@ export default function Development () {
                                 </tr>
                             </thead>
 
-                            <tbody id="development" className="container-table-body">
+                            <tbody>
                                 { values.map(( value, index ) => { 
                                     if( value.type_development === 'INTERNO' && value.state !=="FINALIZADO" ) {
                                         return (
@@ -288,7 +288,7 @@ export default function Development () {
                         </table>
                     </TabContant>
                     <TabContant id="Finalizados">
-                        <table className="container-table" >
+                        <table>
                             <thead>
                                 <tr className="header-table">
                                     <td className="col-id">
@@ -312,7 +312,7 @@ export default function Development () {
                                 </tr>
                             </thead>
 
-                            <tbody id="development" className="container-table-body">
+                            <tbody>
                                 { values.map(( value, index ) => { 
                                     if(value.state === 'FINALIZADO') {
                                         return (

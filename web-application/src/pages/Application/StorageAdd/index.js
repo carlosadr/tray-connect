@@ -149,7 +149,7 @@ export default function StorageAdd ( ) {
 
                 <Separator marginVertical={ "16px" } />
 
-                <table className="container-table inner-shadow">
+                <table className="inner-shadow">
                     <thead>
                         <tr className="add-storage header-table">
                             <td className="col roll">
@@ -175,7 +175,7 @@ export default function StorageAdd ( ) {
                             </td>
                         </tr>
                     </thead>
-                    <tbody id='tbody' className="add-storage container-table-body">
+                    <tbody>
                         { line.map( ( value ) => {
                             return (
                                 <tr id="dataRows" name="dataRows" className="table-rows" >
