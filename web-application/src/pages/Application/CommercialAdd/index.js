@@ -58,6 +58,9 @@ export default function CommercialAdd() {
                     <option>Lote</option>
                     <option>Cliente</option>
                 </Search>
+
+                <Separator marginVertical={16} />
+                
                 <table>
                     <thead>
                         <tr className="header-table">
