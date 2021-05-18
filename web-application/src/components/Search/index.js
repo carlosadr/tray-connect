@@ -2,13 +2,13 @@ import React from 'react';
 import { FiChevronDown, FiSearch } from 'react-icons/fi';
 import './styles.css';
 
-export default function Search ({ renderOptions, onChangeSelect, onChangeInput, onClick }) {
+export default function Search ({ children, onChangeSelect, onChangeInput, onClick }) {
     return (
         <section className="component-search bg-white inner-shadow" >
             <select defaultValue="" onChange={ onChangeSelect } className="search-select" >
                 <option value="" disabled> Selecione tipo de filtro </option>
                 <option value="---" disabled > ------------------------------------ </option>
-                { renderOptions }
+                { children }
             </select>
             <FiChevronDown size={20} color={"#44475A"} className="search-select-chevron" />
 
