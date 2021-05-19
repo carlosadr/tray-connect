@@ -16,12 +16,15 @@ import api from '../../../services/api';
 import './styles.css';
 
 export default function CommercialAdd() {
-    const [ line/*, setLine*/ ] = useState([]);
     const [ modal, setModal ] = useState(false);
 
-    // Data values and keys
+    // Data values and keys Storage
     const [ keys, setKeys ] = useState(new Array([]));
     const [ values, setValues ] = useState(new Array([]));
+
+    // Data objects in Order
+    const [ dataOrders, setDataOrders ] = useState(new Array([]));
+    const [ keysOrders, setKeysOrders ] = useState(new Array([]));
 
     // Campos para filtragem
     const [ campo, setCampo ] = useState("");
@@ -54,6 +57,8 @@ export default function CommercialAdd() {
             let dataKeys = new Array([])
             let dataValues = new Array([])
             let i = 0;
+
+            console.log( snapshot.exportVal() )
             
             // Funçao para montar os objetos na tela;
             snapshot.forEach( item => {
@@ -73,6 +78,15 @@ export default function CommercialAdd() {
             }
         )
     }, [ campo, text ])
+
+    function addRollsInOrder ( ) {
+        console.log( keysOrders )
+        console.log( dataOrders )
+        dataOrders.forEach( ( item, index ) => {
+            api(`orders/${keysOrders[index]}` ).set( item )
+            api(`orders/${keysOrders[index]}` ).remove()
+        })
+    }
 
     return (
         <>
@@ -181,8 +195,13 @@ export default function CommercialAdd() {
                                             {value.review}
                                         </td>
                                         <td className="col actions">
-                                            <button className="plus" onClick={() => { }}>
-                                                <FiPlus size={18} />
+                                            <button 
+                                                className="plus" 
+                                                onClick={ () => {
+                                                    setKeysOrders( dataOrders[0].length < 1  ? [ keys[index] ] : [ ...keysOrders, keys[index] ])
+                                                    setDataOrders( dataOrders[0].length < 1  ? [ value ] : [ ...dataOrders, value ])
+                                                }}>
+                                                <FiPlus size={22} />
                                             </button>
                                         </td>
                                     </tr>
@@ -193,6 +212,12 @@ export default function CommercialAdd() {
                         }
                     </tbody>
                 </table>
+
+                <div style={{ alignItems : 'center' }} >
+                    <TextButton onClick={ () => {} }  text="Cancelar" center/>
+                    <Button onClick={ () => addRollsInOrder() }> Adicionar </Button>
+                </div>
+                
             </Modal>
 
             <div className="body">
@@ -259,57 +284,57 @@ export default function CommercialAdd() {
                         </tr>
                     </thead>
                     <tbody>
-                        {line.map((value) => {
-                            return (
-                                <tr id="dataRows" name="dataRows" class="table-rows" >
-                                    <td className="col roll">
-                                        <input
-                                            value={value}
-                                            name={`input-${value}`}
-                                            className="col roll"
-                                            type="number"
-                                            disabled
-                                        />
-                                    </td>
-                                    <td className="col reference">
-                                        <input
-                                            name={`input-${value}`}
-                                            className="col reference"
-                                            type="text"
-                                        />
-                                    </td>
-                                    <td className="col description">
-                                        <input
-                                            name={`input-${value}`}
-                                            className="col description"
-                                            type="text"
-                                        />
-                                    </td>
-                                    <td className="col type-fabric">
-                                        <input
-                                            name={`input-${value}`}
-                                            className="col type-fabric"
-                                            type="number"
-                                        />
-                                    </td>
-                                    <td className="col width-grid">
-                                        <input
-                                            name={`input-${value}`}
-                                            className="col width-grid"
-                                            type="number"
-                                        />
-                                    </td>
-                                    <td className="col metric-unid">
-                                        <input
-                                            name={`input-${value}`}
-                                            className="col metric-unid"
-                                            type="number"
-                                        />
-                                    </td>
-                                </tr>
-                            )
+                        {/* {valuesOrders.map((value, index) => {
+                            if (value.length !== 0) {
+                                return (
+                                    <tr key={keysOrders[index]} className="table-rows" >
+                                        <td className="col started">
+                                            {value.batch}
+                                        </td>
+                                        <td className="col roll">
+                                            {value.roll}
+                                        </td>
+                                        <td className="col date-started">
+                                            {value.date_started}
+                                        </td>
+                                        <td className="col client">
+                                            {value.client}
+                                        </td>
+                                        <td className="col reference">
+                                            {value.reference}
+                                        </td>
+                                        <td className="col description">
+                                            {value.description}
+                                        </td>
+                                        <td className="col type">
+                                            {value.type_unit}
+                                        </td>
+                                        <td className="col type-fabtic">
+                                            {value.type_fabric}
+                                        </td>
+                                        <td className="col color-fabric">
+                                            {value.color_fabric}
+                                        </td>
+                                        <td className="col width-grid">
+                                            {value.width_grid}
+                                        </td>
+                                        <td className="col metric-unid">
+                                            {value.metric_unid}
+                                        </td>
+                                        <td className="col review">
+                                            {value.review}
+                                        </td>
+                                        <td className="col actions">
+                                            <button className="plus" onClick={() => { }}>
+                                                <FiPlus size={18} />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                )
+                            }
+                            return null;
                         })
-                        }
+                        } */}
                     </tbody>
                 </table>
 
