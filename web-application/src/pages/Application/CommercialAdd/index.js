@@ -28,45 +28,26 @@ export default function CommercialAdd() {
     const [ text, setText ] = useState("");
 
     useEffect(() => {
-        let dataKeys = new Array([])
-        let dataValues = new Array([])
-
-        api('storage').on('value', snapshot => {
-            let key, value, i = 0;
-            // Funçao para montar os objetos na tela;
-            snapshot.forEach(item => {
-                // Recupera o ID unico do Firebase do Objeto X
-                key = item.key;
-
-                // Recupera o Objeto do ID;
-                value = item.val()
-
-                dataKeys[i] = key
-                dataValues[i] = value
-
-                i++
-            })}
-        )
-        setKeys(dataKeys)
-        setValues(dataValues)
-
-    }, [ ])
-
-    // Filtro de Pesquisa
-    function handleFilter( ) {
         let ref;
 
-        switch ( campo ) {
-            case "batch" : 
-            ref = api('storage').orderByChild( campo )
-            .startAt( parseInt( text ) )
-            .endAt( parseInt( text ) )
-            break;
-
-            default : 
-            ref = api('storage').orderByChild( campo )
-            .startAt( `${text.toUpperCase()}` )
-            .endAt( `${text.toUpperCase()}\uf8ff` )
+        if( text !== "" ) {
+            switch ( campo ) {
+                case "batch" :
+                ref = api('storage').orderByChild( "batch" )
+                .startAt( parseInt( text ) )
+                .endAt( parseInt( text ) )
+                break;
+    
+                case "client": 
+                ref = api('storage').orderByChild( campo )
+                .startAt( `${ text.toUpperCase() }` )
+                .endAt( `${ text.toUpperCase() }\uf8ff` )
+                break
+    
+                default : return;
+            }
+        } else {
+            ref = api('storage')
         }
 
         ref.once("value", snapshot => {
@@ -91,7 +72,7 @@ export default function CommercialAdd() {
             setValues( dataValues )
             }
         )
-    }
+    }, [ campo, text ])
 
     return (
         <>
@@ -103,9 +84,9 @@ export default function CommercialAdd() {
                 onClick={() => setModal(!modal)}>
 
                 <Search 
-                    onChangeSelect={ e => setCampo( e.target.value ) }
+                    type={ campo === 'batch' ? "number" : "text" }
+                    onChangeSelect={ e => { setCampo( e.target.value ); setText("") } }
                     onChangeInput={ e => setText( e.target.value ) }
-                    onClick={ () => handleFilter() }
                 >
                     <option value="batch">Lote</option>
                     <option value="client">Cliente</option>

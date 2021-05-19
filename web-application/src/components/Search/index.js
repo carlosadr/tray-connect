@@ -4,6 +4,7 @@ import './styles.css';
 
 export default function Search(
     { 
+        type,
         children, 
         onChangeSelect, 
         onChangeInput, 
@@ -21,7 +22,7 @@ export default function Search(
             
             <FiChevronDown size={20} color={"#44475A"} className="search-select-chevron" />
 
-            <input className="search-input" type="text" onChange={onChangeInput} placeholder="Pesquise aqui." />
+            <input className="search-input" type={ type } onChange={onChangeInput} placeholder="Pesquise aqui." />
 
             <button className="search-button" onClick={onClick}>
                 <FiSearch size={18} color={"#FAFAFC"} />
