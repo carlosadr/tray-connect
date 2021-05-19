@@ -1,0 +1,8 @@
+.body-data {
+    max-height: 58vh;
+}
+
+.plus:hover, .table-rows:hover {
+    color: green !important;
+    cursor: pointer;
+}

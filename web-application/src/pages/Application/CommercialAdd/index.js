@@ -16,10 +16,16 @@ import api from '../../../services/api';
 import './styles.css';
 
 export default function CommercialAdd() {
-    const [line/*, setLine*/] = useState([]);
-    const [modal, setModal] = useState(false);
-    const [keys, setKeys] = useState(new Array([]));
-    const [values, setValues] = useState(new Array([]));
+    const [ line/*, setLine*/ ] = useState([]);
+    const [ modal, setModal ] = useState(false);
+
+    // Data values and keys
+    const [ keys, setKeys ] = useState(new Array([]));
+    const [ values, setValues ] = useState(new Array([]));
+
+    // Campos para filtragem
+    const [ campo, setCampo ] = useState("");
+    const [ text, setText ] = useState("");
 
     useEffect(() => {
         let dataKeys = new Array([])
@@ -39,11 +45,53 @@ export default function CommercialAdd() {
                 dataValues[i] = value
 
                 i++
+            })}
+        )
+        setKeys(dataKeys)
+        setValues(dataValues)
+
+    }, [ ])
+
+    // Filtro de Pesquisa
+    function handleFilter( ) {
+        let ref;
+
+        switch ( campo ) {
+            case "batch" : 
+            ref = api('storage').orderByChild( campo )
+            .startAt( parseInt( text ) )
+            .endAt( parseInt( text ) )
+            break;
+
+            default : 
+            ref = api('storage').orderByChild( campo )
+            .startAt( `${text.toUpperCase()}` )
+            .endAt( `${text.toUpperCase()}\uf8ff` )
+        }
+
+        ref.once("value", snapshot => {
+            let dataKeys = new Array([])
+            let dataValues = new Array([])
+            let i = 0;
+            
+            // Funçao para montar os objetos na tela;
+            snapshot.forEach( item => {
+                // Recupera o ID unico do Firebase do Objeto X
+                let key = item.key;
+                dataKeys[i] = key
+
+                // Recupera o Objeto do ID;
+                let value = item.val()
+                dataValues[i] = value
+
+                i++
             })
-            setKeys(dataKeys)
-            setValues(dataValues)
-        })
-    }, [keys, values])
+
+            setKeys( dataKeys )
+            setValues( dataValues )
+            }
+        )
+    }
 
     return (
         <>
@@ -52,16 +100,20 @@ export default function CommercialAdd() {
             <Modal
                 title="Adicionar Rolos"
                 showModal={modal}
-                onClick={() => setModal(!modal)}
-            >
-                <Search>
-                    <option>Lote</option>
-                    <option>Cliente</option>
+                onClick={() => setModal(!modal)}>
+
+                <Search 
+                    onChangeSelect={ e => setCampo( e.target.value ) }
+                    onChangeInput={ e => setText( e.target.value ) }
+                    onClick={ () => handleFilter() }
+                >
+                    <option value="batch">Lote</option>
+                    <option value="client">Cliente</option>
                 </Search>
 
                 <Separator marginVertical={16} />
                 
-                <table>
+                <table className="body-data inner-shadow">
                     <thead>
                         <tr className="header-table">
                             <td className="col started">
@@ -148,7 +200,7 @@ export default function CommercialAdd() {
                                             {value.review}
                                         </td>
                                         <td className="col actions">
-                                            <button className="trash" onClick={() => { }}>
+                                            <button className="plus" onClick={() => { }}>
                                                 <FiPlus size={18} />
                                             </button>
                                         </td>
