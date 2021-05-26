@@ -6,6 +6,7 @@ import './styles.css';
 export default function Modal ({
     title,
     children,
+    buttons,
     showModal,
     onClick
 }) {
@@ -29,9 +30,14 @@ export default function Modal ({
                         <FiX size={22} />
                     </button>
                 </section>
+
                 <span className="modal-body">
                     { children }
                 </span>
+
+                <section className="container-buttons-modal">
+                    { buttons }
+                </section>
             </span>
             
             <div 

@@ -175,7 +175,7 @@ export default function StorageAdd ( ) {
                             </td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
                         { line.map( ( value ) => {
                             return (
                                 <tr id="dataRows" name="dataRows" className="table-rows" >

@@ -16,6 +16,7 @@ import api from '../../../services/api';
 import './styles.css';
 
 export default function CommercialAdd() {
+    const [ key ] = useState(localStorage.getItem( "lastOrder" ));
     const [ modal, setModal ] = useState(false);
 
     // Data values and keys Storage
@@ -79,13 +80,37 @@ export default function CommercialAdd() {
         )
     }, [ campo, text ])
 
-    function addRollsInOrder ( ) {
-        console.log( keysOrders )
-        console.log( dataOrders )
-        dataOrders.forEach( ( item, index ) => {
-            api(`orders/${keysOrders[index]}` ).set( item )
-            api(`orders/${keysOrders[index]}` ).remove()
-        })
+    function handleSelect ( key, value ) {
+        setKeysOrders( dataOrders[0].length < 1  ? [ key ] : [ ...keysOrders, key ])
+        setDataOrders( dataOrders[0].length < 1  ? [ value ] : [ ...dataOrders, value ])
+
+        // api(`storage/${keysOrders[index]}` ).remove()
+    }
+
+    function handleAddOrder ( ) {
+        let price = 6.70,
+            total_metric = 0,
+            total_price = 0;
+        
+        api('orders').push({
+            order : key+1,
+        }).then( response => {
+            // Incrementa os rolos dentro da ordem gerada anteriormente;
+            dataOrders.forEach( ( item, index ) => {
+                api(`orders/${ response.key }/rolls/${ keysOrders[index] }` ).set( item )
+
+                // Soma e armazena o total de metros da ordem;
+                total_metric += item.metric_unid;
+            })
+            api(`orders/${ response.key }`).update({ 
+                type_service : dataOrders[0].type_service,
+                client : dataOrders[0].client,
+                price : price,
+                total_price : total_price,
+                total_metric : total_metric
+            })
+        } )
+
     }
 
     return (
@@ -95,7 +120,14 @@ export default function CommercialAdd() {
             <Modal
                 title="Adicionar Rolos"
                 showModal={modal}
-                onClick={() => setModal(!modal)}>
+                onClick={() => setModal(!modal)}
+                buttons={
+                    <div style={{ alignItems : 'center', marginTop : 16 }} >
+                        <TextButton onClick={ () => {} }  text="Cancelar" center/>
+                        <Button onClick={ () => handleAddOrder() }> Adicionar </Button>
+                    </div>
+                }
+                >
 
                 <Search 
                     type={ campo === 'batch' ? "number" : "text" }
@@ -197,10 +229,7 @@ export default function CommercialAdd() {
                                         <td className="col actions">
                                             <button 
                                                 className="plus" 
-                                                onClick={ () => {
-                                                    setKeysOrders( dataOrders[0].length < 1  ? [ keys[index] ] : [ ...keysOrders, keys[index] ])
-                                                    setDataOrders( dataOrders[0].length < 1  ? [ value ] : [ ...dataOrders, value ])
-                                                }}>
+                                                onClick={ () => handleSelect( keys[index], value ) }>
                                                 <FiPlus size={22} />
                                             </button>
                                         </td>
@@ -212,12 +241,6 @@ export default function CommercialAdd() {
                         }
                     </tbody>
                 </table>
-
-                <div style={{ alignItems : 'center' }} >
-                    <TextButton onClick={ () => {} }  text="Cancelar" center/>
-                    <Button onClick={ () => addRollsInOrder() }> Adicionar </Button>
-                </div>
-                
             </Modal>
 
             <div className="body">

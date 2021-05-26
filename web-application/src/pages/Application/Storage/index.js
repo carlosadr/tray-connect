@@ -192,7 +192,7 @@ export default function Storage () {
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody id="tbody">
                             { values.map(( value, index ) => { 
                                 if ( value.length !== 0 ) { return (
                                     <tr key={ keys[index] } className="table-rows" >

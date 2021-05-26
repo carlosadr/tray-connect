@@ -1,6 +1,7 @@
 .body-data {
-    max-height: 54vh;
-    margin-bottom: 16px ;
+    display: flex;
+    flex : 1 ;
+    height: 100vh;
 }
 
 .plus:hover, .table-rows:hover {

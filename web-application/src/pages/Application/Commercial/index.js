@@ -26,18 +26,20 @@ export default function Commercial () {
             let dataValues = new Array([])
                         
             api('orders').once('value', snapshot => {
-                let key, value, i = 0;
                 // Funçao para montar os objetos na tela;
-                snapshot.forEach( item => {
+                snapshot.forEach(( item, index ) => {
+                    let key, value;
                     // Recupera o ID unico do Firebase do Objeto X
                     key = item.key;
                     // Recupera o Objeto do ID;
                     value = item.val()
                     
-                    dataKeys[i] = key
-                    dataValues[i] = value
+                    dataKeys[index] = key
+                    dataValues[index] = value
+
+                    console.log( key )
                     
-                    i++
+                    localStorage.setItem( "lastOrder", key ? key : 0 )
                 })
                 setKeys( dataKeys )
                 setValues( dataValues )
@@ -45,7 +47,7 @@ export default function Commercial () {
 
             setLoadPage( false )
         }
-    }, [ keys, values, loadPage ] )
+    }, [ loadPage ] )
 
     // Filtro de Pesquisa
     function handleFilter( text ) {
@@ -129,6 +131,9 @@ export default function Commercial () {
                 <table>
                     <thead>
                         <tr className="header-table">
+                            <td  className="col orders roll">
+                                Pedido
+                            </td>
                             <td  className="col date-started">
                                 Data de liberação
                             </td>
@@ -152,11 +157,36 @@ export default function Commercial () {
                             if( value.length !== 0 && value.state !=="FINALIZADO" ) {
                                 return (
                                     <tr key={index} className="table-rows" >
-                                        <td onClick={ () => goToOrder( keys[ index ] ) } className="col date-started">{ value.date_started  }</td>
-                                        <td onClick={ () => goToOrder( keys[ index ] ) } className="col client">{ value.client }</td>
-                                        <td onClick={ () => goToOrder( keys[ index ] ) } className="col description">{ value.observation }</td>
-                                        <td onClick={ () => goToOrder( keys[ index ] ) } className="col status">{ value.state }</td>
-                                        <td onClick={ () => goToOrder( keys[ index ] ) } className="col designer">{ value.designer }</td>
+                                        <td 
+                                            onClick={ () => goToOrder( keys[ index ] ) } 
+                                            className="col orders roll">
+                                            { value.order  }
+                                        </td>
+                                        <td 
+                                            onClick={ () => goToOrder( keys[ index ] ) } 
+                                            className="col date-started">
+                                            { value.date_started  }
+                                        </td>
+                                        <td 
+                                            onClick={ () => goToOrder( keys[ index ] ) } 
+                                            className="col client">
+                                            { value.client }
+                                        </td>
+                                        <td 
+                                            onClick={ () => goToOrder( keys[ index ] ) } 
+                                            className="col description">
+                                            { value.observation }
+                                        </td>
+                                        <td 
+                                            onClick={ () => goToOrder( keys[ index ] ) } 
+                                            className="col status">
+                                            { value.state }
+                                        </td>
+                                        <td 
+                                            onClick={ () => goToOrder( keys[ index ] ) } 
+                                            className="col designer">
+                                            { value.designer }
+                                        </td>
                                         <td style={{ flex: 0, width: 120 }} className="col actions">
                                             <button className="trash" onClick={ () => handleDelete( keys[index] )} >
                                                 <FiTrash2 size={ 18 } />
